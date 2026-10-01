@@ -40,11 +40,50 @@ export const GET_MEMBER = gql`
 			memberImage
 			memberType
 			memberSellerStatus
+			memberBio
+			memberLocation
 			memberAvgRating
 			memberReviewCount
 			memberSalesCount
 			memberFollowers
+			memberFollowings
+			memberLikes
+			memberViews
 			createdAt
+			meLiked {
+				memberId
+				likeRefId
+				myFavorite
+			}
+			meFollowed {
+				followingId
+				followerId
+				myFollowing
+			}
+		}
+	}
+`;
+
+export const GET_REVIEWS = gql`
+	query GetReviews($input: ReviewsInquiry!) {
+		getReviews(input: $input) {
+			list {
+				_id
+				orderId
+				buyerId
+				sellerId
+				reviewRating
+				reviewText
+				createdAt
+				buyerData {
+					_id
+					memberNick
+					memberImage
+				}
+			}
+			metaCounter {
+				total
+			}
 		}
 	}
 `;

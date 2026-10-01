@@ -166,5 +166,15 @@
 	"{{count}} reviews": "{{count}} reviews",
 	"No reviews yet": "No reviews yet",
 	"Views": "Views",
-	"View profile": "View profile"
+	"View profile": "View profile",
+	"Trusted seller": "Trusted seller",
+	"Follow": "Follow",
+	"Following": "Following",
+	"Followed": "Followed",
+	"Unfollowed": "Unfollowed",
+	"Likes": "Likes",
+	"Reviews": "Reviews",
+	"Joined {{date}}": "Joined {{date}}",
+	"Seller not found": "Seller not found",
+	"This member is not a seller": "This member is not a seller"
 }

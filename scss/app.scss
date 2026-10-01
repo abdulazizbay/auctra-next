@@ -8,6 +8,7 @@
 @use 'lot/detail';
 @use 'mypage/mypage';
 @use 'seller/seller';
+@use 'seller/detail' as seller-detail;
 
 a {
 	text-decoration: none;
