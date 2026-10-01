@@ -4,20 +4,26 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import React, { useState } from 'react';
 import { light } from '../scss/MaterialTheme';
+import { ApolloProvider } from '@apollo/client';
+import { useApollo } from '../apollo/client';
+import { appWithTranslation } from 'next-i18next';
 import '../scss/app.scss';
 
 const App = (props: AppProps) => {
 	const { Component, pageProps } = props;
 	const [theme] = useState(createTheme(light));
+	const client = useApollo(pageProps.initialApolloState);
 
 	return (
 		<AppCacheProvider {...props}>
-			<ThemeProvider theme={theme}>
-				<CssBaseline />
-				<Component {...pageProps} />
-			</ThemeProvider>
+			<ApolloProvider client={client}>
+				<ThemeProvider theme={theme}>
+					<CssBaseline />
+					<Component {...pageProps} />
+				</ThemeProvider>
+			</ApolloProvider>
 		</AppCacheProvider>
 	);
 };
 
-export default App;
+export default appWithTranslation(App);
