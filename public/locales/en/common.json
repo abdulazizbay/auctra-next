@@ -184,5 +184,19 @@
 	"Write": "Write",
 	"Search articles": "Search articles",
 	"Most viewed": "Most viewed",
-	"No articles found": "No articles found"
+	"No articles found": "No articles found",
+	"Delete": "Delete",
+	"Delete this article?": "Delete this article?",
+	"Article deleted": "Article deleted",
+	"Article not found": "Article not found",
+	"View related lot": "View related lot",
+	"Login to comment": "Login to comment",
+	"Comment": "Comment",
+	"Comment added": "Comment added",
+	"Delete this comment?": "Delete this comment?",
+	"Comment deleted": "Comment deleted",
+	"Comment updated": "Comment updated",
+	"Update comment": "Update comment",
+	"Cancel": "Cancel",
+	"Update": "Update"
 }

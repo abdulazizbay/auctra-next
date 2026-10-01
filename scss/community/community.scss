@@ -1,32 +1,32 @@
 @use '../variables' as *;
 
-#community-list-page {
-	padding: 32px 0 80px;
+.category-tabs {
+	min-height: 0;
+	margin-bottom: 28px;
+	border-bottom: 1px solid $border;
 
-	.category-tabs {
+	.MuiTab-root {
 		min-height: 0;
-		margin-bottom: 28px;
-		border-bottom: 1px solid $border;
+		padding: 12px 18px;
+		font-size: 14px;
+		font-weight: 700;
+		text-transform: none;
+		color: $text-secondary;
 
-		.MuiTab-root {
-			min-height: 0;
-			padding: 12px 18px;
-			font-size: 14px;
-			font-weight: 700;
-			text-transform: none;
-			color: $text-secondary;
-
-			&.Mui-selected {
-				color: $primary;
-			}
-		}
-
-		.MuiTabs-indicator {
-			height: 3px;
-			border-radius: 3px 3px 0 0;
-			background: $accent;
+		&.Mui-selected {
+			color: $primary;
 		}
 	}
+
+	.MuiTabs-indicator {
+		height: 3px;
+		border-radius: 3px 3px 0 0;
+		background: $accent;
+	}
+}
+
+#community-list-page {
+	padding: 32px 0 80px;
 
 	.board-head {
 		display: flex;

@@ -10,6 +10,7 @@
 @use 'seller/seller';
 @use 'seller/detail' as seller-detail;
 @use 'community/community';
+@use 'community/detail' as community-detail;
 
 a {
 	text-decoration: none;

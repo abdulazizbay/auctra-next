@@ -184,5 +184,19 @@
 	"Write": "글쓰기",
 	"Search articles": "게시글 검색",
 	"Most viewed": "조회 많은 순",
-	"No articles found": "게시글이 없습니다"
+	"No articles found": "게시글이 없습니다",
+	"Delete": "삭제",
+	"Delete this article?": "이 게시글을 삭제하시겠습니까?",
+	"Article deleted": "게시글이 삭제되었습니다",
+	"Article not found": "게시글을 찾을 수 없습니다",
+	"View related lot": "관련 경매품 보기",
+	"Login to comment": "로그인 후 댓글을 남길 수 있습니다",
+	"Comment": "댓글 작성",
+	"Comment added": "댓글이 등록되었습니다",
+	"Delete this comment?": "이 댓글을 삭제하시겠습니까?",
+	"Comment deleted": "댓글이 삭제되었습니다",
+	"Comment updated": "댓글이 수정되었습니다",
+	"Update comment": "댓글 수정",
+	"Cancel": "취소",
+	"Update": "수정"
 }

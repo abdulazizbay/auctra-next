@@ -263,6 +263,36 @@ export const GET_SELLERS = gql`
  *        ARTICLE         *
  *************************/
 
+export const GET_ARTICLE = gql`
+	query GetArticle($input: String!) {
+		getArticle(articleId: $input) {
+			_id
+			articleCategory
+			articleStatus
+			articleTitle
+			articleContent
+			articleImages
+			lotId
+			articleViews
+			articleLikes
+			articleComments
+			memberId
+			createdAt
+			updatedAt
+			meLiked {
+				memberId
+				likeRefId
+				myFavorite
+			}
+			memberData {
+				_id
+				memberNick
+				memberImage
+			}
+		}
+	}
+`;
+
 export const GET_ARTICLES = gql`
 	query GetArticles($input: ArticlesInquiry!) {
 		getArticles(input: $input) {

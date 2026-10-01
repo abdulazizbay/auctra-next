@@ -174,6 +174,18 @@ export const LIKE_TARGET_ARTICLE = gql`
 	}
 `;
 
+export const UPDATE_ARTICLE = gql`
+	mutation UpdateArticle($input: ArticleUpdate!) {
+		updateArticle(input: $input) {
+			_id
+			articleCategory
+			articleStatus
+			articleTitle
+			updatedAt
+		}
+	}
+`;
+
 /**************************
  *         COMMENT        *
  *************************/
@@ -187,6 +199,17 @@ export const CREATE_COMMENT = gql`
 			commentRefId
 			memberId
 			createdAt
+		}
+	}
+`;
+
+export const UPDATE_COMMENT = gql`
+	mutation UpdateComment($input: CommentUpdate!) {
+		updateComment(input: $input) {
+			_id
+			commentStatus
+			commentText
+			updatedAt
 		}
 	}
 `;
