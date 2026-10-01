@@ -65,3 +65,16 @@ export const LOGIN = gql`
 		}
 	}
 `;
+
+/**************************
+ *          LOT           *
+ *************************/
+
+export const WATCH_TARGET_LOT = gql`
+	mutation WatchTargetLot($input: String!) {
+		watchTargetLot(lotId: $input) {
+			_id
+			lotWatchers
+		}
+	}
+`;

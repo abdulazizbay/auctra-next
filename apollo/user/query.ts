@@ -31,3 +31,41 @@ export const GET_ME = gql`
 		}
 	}
 `;
+
+/**************************
+ *          LOT           *
+ *************************/
+
+export const GET_LOTS = gql`
+	query GetLots($input: LotsInquiry!) {
+		getLots(input: $input) {
+			list {
+				_id
+				memberId
+				lotName
+				lotImages
+				lotCategory
+				lotCondition
+				lotStatus
+				lotStartPrice
+				lotCurrentPrice
+				lotCeilingPrice
+				lotMinIncrement
+				lotBids
+				lotWatchers
+				lotViews
+				lotStartsAt
+				lotEndsAt
+				createdAt
+				meWatched {
+					memberId
+					lotId
+					myWatch
+				}
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
