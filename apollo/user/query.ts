@@ -324,3 +324,25 @@ export const GET_ARTICLES = gql`
 		}
 	}
 `;
+
+/**************************
+ *         NOTICE         *
+ *************************/
+
+export const GET_NOTICES = gql`
+	query GetNotices($input: NoticesInquiry!) {
+		getNotices(input: $input) {
+			list {
+				_id
+				noticeTitle
+				noticeContent
+				noticeType
+				noticeOrder
+				createdAt
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;

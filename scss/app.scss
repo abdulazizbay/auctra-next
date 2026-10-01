@@ -11,6 +11,7 @@
 @use 'seller/detail' as seller-detail;
 @use 'community/community';
 @use 'community/detail' as community-detail;
+@use 'cs/cs';
 
 a {
 	text-decoration: none;
