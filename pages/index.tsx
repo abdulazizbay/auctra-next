@@ -1,7 +1,12 @@
 import { NextPage } from 'next';
-import { Button, Stack, Typography } from '@mui/material';
+import { Stack } from '@mui/material';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import withLayoutMain from '../libs/components/layout/LayoutHome';
+import EndingSoonLots from '../libs/components/homepage/EndingSoonLots';
+import HotLots from '../libs/components/homepage/HotLots';
+import NewLots from '../libs/components/homepage/NewLots';
+import CommunityBoards from '../libs/components/homepage/CommunityBoards';
+import TopSellers from '../libs/components/homepage/TopSellers';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -12,16 +17,11 @@ export const getStaticProps = async ({ locale }: any) => ({
 const Home: NextPage = () => {
 	return (
 		<Stack className={'home-page'}>
-			<Stack className={'container'} sx={{ gap: 2, py: 6 }}>
-				<Typography variant={'h2'}>Auctra</Typography>
-				<Stack direction={'row'} sx={{ gap: 1 }}>
-					<Button variant={'contained'}>Place bid</Button>
-					<Button variant={'outlined'}>Watch</Button>
-					<Button variant={'contained'} color={'secondary'}>
-						Live
-					</Button>
-				</Stack>
-			</Stack>
+			<EndingSoonLots />
+			<HotLots />
+			<NewLots />
+			<CommunityBoards />
+			<TopSellers />
 		</Stack>
 	);
 };

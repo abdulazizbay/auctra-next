@@ -187,3 +187,60 @@ export const GET_COMMENTS = gql`
 		}
 	}
 `;
+
+/**************************
+ *         SELLER         *
+ *************************/
+
+export const GET_SELLERS = gql`
+	query GetSellers($input: SellersInquiry!) {
+		getSellers(input: $input) {
+			list {
+				_id
+				memberNick
+				memberImage
+				memberType
+				memberAvgRating
+				memberReviewCount
+				memberSalesCount
+				memberFollowers
+				memberLikes
+				createdAt
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+/**************************
+ *        ARTICLE         *
+ *************************/
+
+export const GET_ARTICLES = gql`
+	query GetArticles($input: ArticlesInquiry!) {
+		getArticles(input: $input) {
+			list {
+				_id
+				articleCategory
+				articleStatus
+				articleTitle
+				articleImages
+				articleViews
+				articleLikes
+				articleComments
+				memberId
+				createdAt
+				memberData {
+					_id
+					memberNick
+					memberImage
+				}
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
