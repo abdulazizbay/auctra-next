@@ -1,6 +1,7 @@
 /** IMPORTS **/
 @use 'variables' as *;
 @use 'reset';
+@use 'general';
 
 a {
 	text-decoration: none;
@@ -29,8 +30,9 @@ h6 {
 		width: 100%;
 		max-width: 1300px;
 		margin: 0 auto;
+		padding: 0 24px;
 
-		@include down(lg) {
+		@include down(sm) {
 			padding: 0 16px;
 		}
 	}

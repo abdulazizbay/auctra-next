@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import { Button, Stack, Typography } from '@mui/material';
-import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import withLayoutMain from '../libs/components/layout/LayoutHome';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -10,15 +10,10 @@ export const getStaticProps = async ({ locale }: any) => ({
 });
 
 const Home: NextPage = () => {
-	const { t } = useTranslation('common');
-
 	return (
-		<Stack id={'wrap'}>
+		<Stack className={'home-page'}>
 			<Stack className={'container'} sx={{ gap: 2, py: 6 }}>
 				<Typography variant={'h2'}>Auctra</Typography>
-				<Typography variant={'body1'} color={'text.secondary'}>
-					{t('Lots')} · {t('Sellers')} · {t('Community')}
-				</Typography>
 				<Stack direction={'row'} sx={{ gap: 1 }}>
 					<Button variant={'contained'}>Place bid</Button>
 					<Button variant={'outlined'}>Watch</Button>
@@ -31,4 +26,4 @@ const Home: NextPage = () => {
 	);
 };
 
-export default Home;
+export default withLayoutMain(Home);

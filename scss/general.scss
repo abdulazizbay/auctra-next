@@ -1,0 +1,236 @@
+@use 'variables' as *;
+
+#wrap {
+	#top {
+		position: sticky;
+		top: 0;
+		z-index: 100;
+	}
+
+	#main {
+		flex: 1;
+	}
+}
+
+.navbar {
+	background: $primary;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+	.container {
+		height: 72px;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.logo-box a {
+		font-family: $font-heading;
+		font-size: 28px;
+		font-weight: 600;
+		letter-spacing: 3px;
+		color: #fff;
+	}
+
+	.router-box {
+		display: flex;
+		flex-direction: row;
+		gap: 36px;
+
+		a {
+			font-size: 15px;
+			font-weight: 500;
+			color: rgba(255, 255, 255, 0.85);
+			transition: color 0.2s;
+
+			&:hover {
+				color: $accent;
+			}
+		}
+
+		@include down(md) {
+			display: none;
+		}
+	}
+
+	.user-box {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 8px;
+
+		.join-box {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			padding: 8px 16px;
+			border: 1px solid $accent;
+			border-radius: 6px;
+			color: $accent;
+			font-size: 14px;
+			font-weight: 600;
+
+			@include down(sm) {
+				padding: 6px;
+
+				span {
+					display: none;
+				}
+			}
+		}
+
+		.icon-btn {
+			color: #fff;
+		}
+
+		.login-user {
+			width: 36px;
+			height: 36px;
+			background: $accent;
+			color: $primary;
+			font-weight: 600;
+		}
+
+		.btn-lang {
+			color: #fff;
+			font-weight: 600;
+		}
+
+		.menu-btn {
+			display: none;
+			color: #fff;
+
+			@include down(md) {
+				display: inline-flex;
+			}
+		}
+	}
+}
+
+.nav-drawer .MuiDrawer-paper {
+	width: 260px;
+	padding: 24px;
+	background: $primary;
+
+	a {
+		display: block;
+		padding: 12px 0;
+		color: #fff;
+		font-size: 16px;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	}
+}
+
+.header-basic {
+	background: $primary;
+	padding: 72px 0;
+	color: #fff;
+
+	&.auth {
+		padding: 40px 0;
+	}
+
+	.container {
+		gap: 8px;
+	}
+
+	strong {
+		font-family: $font-heading;
+		font-size: 48px;
+		font-weight: 600;
+	}
+
+	span {
+		font-size: 18px;
+		color: rgba(255, 255, 255, 0.75);
+	}
+
+	@include down(md) {
+		padding: 40px 0;
+
+		strong {
+			font-size: 36px;
+		}
+
+		span {
+			font-size: 16px;
+		}
+	}
+}
+
+.footer-container {
+	background: $primary-dark;
+	padding: 56px 0 24px;
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 14px;
+
+	.main {
+		flex-direction: row;
+		justify-content: space-between;
+		gap: 40px;
+
+		@include down(md) {
+			flex-direction: column;
+		}
+	}
+
+	.left {
+		max-width: 360px;
+		gap: 16px;
+
+		.logo {
+			font-family: $font-heading;
+			font-size: 28px;
+			font-weight: 600;
+			letter-spacing: 3px;
+			color: #fff;
+		}
+
+		.media-box {
+			display: flex;
+			gap: 14px;
+
+			svg {
+				color: #fff;
+				cursor: pointer;
+				transition: color 0.2s;
+
+				&:hover {
+					color: $accent;
+				}
+			}
+		}
+	}
+
+	.right {
+		flex-direction: row;
+		gap: 80px;
+
+		div {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		strong {
+			color: #fff;
+			font-size: 13px;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+		}
+
+		a:hover {
+			color: $accent;
+		}
+
+		@include down(sm) {
+			gap: 40px;
+		}
+	}
+
+	.second {
+		margin-top: 40px;
+		padding-top: 20px;
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
+		font-size: 13px;
+	}
+}
