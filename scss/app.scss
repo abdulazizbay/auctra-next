@@ -2,6 +2,7 @@
 @use 'variables' as *;
 @use 'reset';
 @use 'general';
+@use 'account/join';
 
 a {
 	text-decoration: none;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter, withRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
@@ -10,7 +10,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Logout } from '@mui/icons-material';
 import { userVar } from '../../apollo/store';
-import { logOut } from '../auth';
+import { getJwtToken, logOut, requestUserInfo } from '../auth';
 import { REACT_APP_API_URL } from '../config';
 
 const Top = () => {
@@ -20,6 +20,12 @@ const Top = () => {
 	const [langAnchor, setLangAnchor] = useState<null | HTMLElement>(null);
 	const [logoutAnchor, setLogoutAnchor] = useState<null | HTMLElement>(null);
 	const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+
+	/** LIFECYCLES **/
+	useEffect(() => {
+		const jwt = getJwtToken();
+		if (jwt) requestUserInfo();
+	}, []);
 
 	/** HANDLERS **/
 	const langChoice = async (locale: string) => {

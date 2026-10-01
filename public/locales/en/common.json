@@ -25,5 +25,12 @@
 	"Support": "Support",
 	"Notices": "Notices",
 	"FAQ": "FAQ",
-	"All rights reserved.": "All rights reserved."
+	"All rights reserved.": "All rights reserved.",
+	"Nickname": "Nickname",
+	"Password": "Password",
+	"Phone": "Phone",
+	"Not registered yet?": "Not registered yet?",
+	"Have an account?": "Have an account?",
+	"Welcome back. Log in to bid and track your orders.": "Welcome back. Log in to bid and track your orders.",
+	"Create an account to start bidding.": "Create an account to start bidding."
 }

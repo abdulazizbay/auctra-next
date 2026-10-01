@@ -1,0 +1,81 @@
+@use '../variables' as *;
+
+.join-page {
+	padding: 64px 0;
+
+	.main {
+		flex-direction: row;
+		width: 100%;
+		max-width: 960px;
+		margin: 0 auto;
+		background: #fff;
+		border: 1px solid $border;
+		border-radius: 12px;
+		overflow: hidden;
+	}
+
+	.left {
+		flex: 1;
+		padding: 48px;
+		gap: 28px;
+
+		.info p {
+			margin-top: 8px;
+			color: $text-secondary;
+		}
+
+		.input-wrap {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+
+		.ask-info {
+			color: $text-secondary;
+
+			b {
+				margin-left: 6px;
+				color: $primary;
+				cursor: pointer;
+
+				&:hover {
+					color: $accent;
+				}
+			}
+		}
+
+		@include down(sm) {
+			padding: 32px 20px;
+		}
+	}
+
+	.right {
+		flex: 1;
+		justify-content: center;
+		align-items: center;
+		gap: 12px;
+		padding: 48px;
+		background: $primary;
+		text-align: center;
+
+		.logo {
+			font-family: $font-heading;
+			font-size: 44px;
+			font-weight: 600;
+			letter-spacing: 4px;
+			color: #fff;
+		}
+
+		p {
+			color: $accent;
+		}
+
+		@include down(md) {
+			display: none;
+		}
+	}
+
+	@include down(md) {
+		padding: 32px 0;
+	}
+}
