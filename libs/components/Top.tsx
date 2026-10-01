@@ -24,7 +24,7 @@ const Top = () => {
 	/** LIFECYCLES **/
 	useEffect(() => {
 		const jwt = getJwtToken();
-		if (jwt) requestUserInfo();
+		if (jwt && !userVar()._id) requestUserInfo();
 	}, []);
 
 	/** HANDLERS **/
