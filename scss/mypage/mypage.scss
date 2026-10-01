@@ -1,0 +1,419 @@
+@use '../variables' as *;
+
+#my-page {
+	padding: 48px 0 80px;
+
+	.my-page {
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 32px;
+
+		@include down(md) {
+			flex-direction: column;
+			align-items: stretch;
+		}
+	}
+
+	.left-config {
+		position: sticky;
+		top: 96px;
+		width: 260px;
+		flex-shrink: 0;
+
+		@include down(md) {
+			position: static;
+			width: 100%;
+		}
+	}
+
+	.main-config {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.no-data {
+		padding: 80px 16px;
+		text-align: center;
+		color: $text-secondary;
+		background: #fff;
+		border: 1px dashed $border;
+		border-radius: 16px;
+	}
+
+	.main-title-box {
+		margin-bottom: 24px;
+
+		.main-title {
+			font-family: $font-heading;
+			font-size: 32px;
+			font-weight: 600;
+			color: $text;
+		}
+
+		.sub-title {
+			font-size: 14px;
+			color: $text-secondary;
+		}
+	}
+}
+
+.my-menu {
+	padding: 24px;
+	background: #fff;
+	border: 1px solid $border;
+	border-radius: 16px;
+
+	.profile {
+		flex-direction: row;
+		align-items: center;
+		gap: 14px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid $border;
+
+		.profile-img {
+			width: 52px;
+			height: 52px;
+			background: $primary;
+			font-weight: 700;
+		}
+
+		.user-info {
+			min-width: 0;
+		}
+
+		.user-name {
+			font-size: 16px;
+			font-weight: 700;
+			color: $text;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.user-type {
+			font-size: 11px;
+			font-weight: 700;
+			letter-spacing: 0.4px;
+			color: $accent;
+		}
+	}
+
+	.section {
+		padding-top: 20px;
+
+		.title {
+			margin-bottom: 8px;
+			font-size: 12px;
+			font-weight: 700;
+			letter-spacing: 0.6px;
+			text-transform: uppercase;
+			color: $text-secondary;
+		}
+	}
+
+	.sub-section {
+		padding: 0;
+
+		li {
+			padding: 0;
+			margin-bottom: 4px;
+		}
+
+		a {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			width: 100%;
+			padding: 10px 12px;
+			border-radius: 8px;
+			color: $text;
+			transition: background 0.2s ease;
+
+			&:hover {
+				background: $bg;
+			}
+
+			svg {
+				font-size: 20px;
+				color: $text-secondary;
+			}
+		}
+
+		.sub-title {
+			font-size: 14px;
+			font-weight: 600;
+		}
+
+		.focus a {
+			background: $primary;
+			color: #fff;
+
+			svg {
+				color: $accent;
+			}
+		}
+	}
+}
+
+#my-lots-page {
+	.tab-name-box {
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-bottom: 16px;
+
+		p {
+			padding: 7px 14px;
+			border: 1px solid $border;
+			border-radius: 999px;
+			background: #fff;
+			font-size: 13px;
+			font-weight: 600;
+			color: $text-secondary;
+			cursor: pointer;
+		}
+
+		.active-tab-name {
+			background: $primary;
+			border-color: $primary;
+			color: #fff;
+		}
+	}
+
+	.list-box {
+		background: #fff;
+		border: 1px solid $border;
+		border-radius: 16px;
+		overflow: hidden;
+	}
+
+	.listing-title-box,
+	.my-lot-card {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 100px 100px 60px 90px;
+		align-items: center;
+		gap: 16px;
+		padding: 14px 20px;
+	}
+
+	.listing-title-box {
+		background: $bg;
+		border-bottom: 1px solid $border;
+
+		.title-text {
+			font-size: 12px;
+			font-weight: 700;
+			letter-spacing: 0.4px;
+			text-transform: uppercase;
+			color: $text-secondary;
+		}
+
+		@include down(sm) {
+			display: none;
+		}
+	}
+
+	.my-lot-card {
+		border-bottom: 1px solid $border;
+
+		&:last-of-type {
+			border-bottom: none;
+		}
+
+		.lot-box {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			min-width: 0;
+		}
+
+		.image-box {
+			width: 72px;
+			height: 56px;
+			flex-shrink: 0;
+			align-items: center;
+			justify-content: center;
+			border-radius: 8px;
+			background: $bg;
+			color: $text-secondary;
+			overflow: hidden;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+
+		.information-box {
+			min-width: 0;
+		}
+
+		.name {
+			font-size: 15px;
+			font-weight: 700;
+			color: $text;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.meta {
+			font-size: 12px;
+			color: $text-secondary;
+		}
+
+		.price {
+			font-size: 14px;
+			font-weight: 700;
+			color: $primary;
+		}
+
+		.date,
+		.bids {
+			font-size: 13px;
+			color: $text-secondary;
+		}
+
+		.status {
+			display: inline-block;
+			padding: 4px 8px;
+			border-radius: 6px;
+			background: rgba(15, 39, 66, 0.9);
+			color: #fff;
+			font-size: 11px;
+			font-weight: 700;
+			letter-spacing: 0.3px;
+			text-transform: uppercase;
+
+			&.live {
+				background: $accent;
+				color: $primary;
+			}
+		}
+
+		.action-box {
+			flex-direction: row;
+			gap: 4px;
+
+			svg {
+				font-size: 18px;
+			}
+		}
+
+		@include down(sm) {
+			grid-template-columns: repeat(3, auto) 1fr;
+			row-gap: 10px;
+
+			.lot-box {
+				grid-column: 1 / -1;
+			}
+
+			.action-box {
+				justify-content: flex-end;
+			}
+		}
+	}
+
+	.no-data {
+		border: none;
+		border-radius: 0;
+	}
+
+	.pagination-config {
+		align-items: center;
+		gap: 8px;
+		padding: 20px;
+		border-top: 1px solid $border;
+
+		.total-result {
+			font-size: 13px;
+			color: $text-secondary;
+		}
+	}
+}
+
+#add-lot-page {
+	.config {
+		gap: 20px;
+		padding: 28px;
+		background: #fff;
+		border: 1px solid $border;
+		border-radius: 16px;
+
+		@include down(sm) {
+			padding: 20px 16px;
+		}
+	}
+
+	.config-row {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 20px;
+
+		@include down(sm) {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+
+	.images-box {
+		gap: 12px;
+
+		.title {
+			font-size: 14px;
+			font-weight: 700;
+			color: $text;
+		}
+	}
+
+	.upload-box {
+		align-items: center;
+		gap: 10px;
+		padding: 28px 16px;
+		border: 1px dashed $border;
+		border-radius: 12px;
+		background: $bg;
+		text-align: center;
+
+		.upload-icon {
+			font-size: 40px;
+			color: $text-secondary;
+		}
+
+		.format-title {
+			font-size: 13px;
+			color: $text-secondary;
+		}
+	}
+
+	.gallery-box {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 12px;
+
+		@include down(sm) {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.image-box {
+			aspect-ratio: 4 / 3;
+			border-radius: 8px;
+			overflow: hidden;
+			background: $bg;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+	}
+
+	.buttons-row {
+		flex-direction: row;
+		justify-content: flex-end;
+
+		button {
+			min-width: 140px;
+		}
+	}
+}

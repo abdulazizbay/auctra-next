@@ -70,6 +70,41 @@ export const LOGIN = gql`
  *          LOT           *
  *************************/
 
+export const CREATE_LOT = gql`
+	mutation CreateLot($input: LotInput!) {
+		createLot(input: $input) {
+			_id
+			memberId
+			lotName
+			lotImages
+			lotStatus
+			lotStartPrice
+			lotCurrentPrice
+			lotStartsAt
+			lotEndsAt
+			createdAt
+		}
+	}
+`;
+
+export const UPDATE_LOT = gql`
+	mutation UpdateLot($input: LotUpdate!) {
+		updateLot(input: $input) {
+			_id
+			memberId
+			lotName
+			lotImages
+			lotStatus
+			lotStartPrice
+			lotCurrentPrice
+			lotStartsAt
+			lotEndsAt
+			lotClosedAt
+			createdAt
+		}
+	}
+`;
+
 export const WATCH_TARGET_LOT = gql`
 	mutation WatchTargetLot($input: String!) {
 		watchTargetLot(lotId: $input) {
