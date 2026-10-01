@@ -1,0 +1,256 @@
+@use '../variables' as *;
+
+#my-page,
+#member-page {
+	.card-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 20px;
+
+		@include down(lg) {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		@include down(sm) {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.no-data {
+			grid-column: 1 / -1;
+		}
+	}
+
+	.follow-list {
+		gap: 12px;
+	}
+
+	.pagination-box {
+		align-items: center;
+		padding-top: 24px;
+	}
+
+	.lot-card .buttons .static {
+		font-size: 20px;
+		color: $text-secondary;
+	}
+}
+
+.my-menu {
+	.sub-section a .count {
+		margin-left: auto;
+		padding: 1px 8px;
+		border-radius: 999px;
+		background: $bg;
+		font-size: 12px;
+		font-weight: 700;
+		color: $text-secondary;
+	}
+
+	.sub-section .focus a .count {
+		background: rgba(255, 255, 255, 0.16);
+		color: #fff;
+	}
+
+	.section + .section {
+		border-top: 1px solid $border;
+		margin-top: 12px;
+	}
+}
+
+.member-menu {
+	.member-profile {
+		align-items: center;
+		gap: 6px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid $border;
+		text-align: center;
+
+		.profile-img {
+			width: 88px;
+			height: 88px;
+			margin-bottom: 6px;
+			border: 4px solid #fff;
+			box-shadow: 0 10px 24px -12px rgba(15, 39, 66, 0.5);
+			background: $accent;
+			color: $primary;
+			font-size: 34px;
+			font-weight: 700;
+		}
+
+		.user-name {
+			font-size: 20px;
+			font-weight: 700;
+			color: $text;
+		}
+
+		.joined {
+			font-size: 12px;
+			color: $text-secondary;
+		}
+
+		.bio {
+			font-size: 13px;
+			line-height: 1.5;
+			color: $text;
+		}
+
+		.actions {
+			display: flex;
+			gap: 8px;
+			margin-top: 10px;
+		}
+
+		.seller-link {
+			margin-top: 6px;
+			font-size: 13px;
+			font-weight: 700;
+			color: $primary;
+			text-decoration: underline;
+			text-underline-offset: 3px;
+		}
+	}
+}
+
+.seller-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	width: fit-content;
+	padding: 3px 10px;
+	border-radius: 999px;
+	background: rgba(194, 163, 90, 0.18);
+	color: #8a6d2c;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.3px;
+	text-transform: uppercase;
+
+	svg {
+		font-size: 14px;
+	}
+}
+
+.member-menu,
+.follow-card {
+	.follow-button,
+	.like-button {
+		height: 38px;
+		padding: 0 16px;
+		border-radius: 12px;
+		font-size: 13px;
+		font-weight: 700;
+		transition: all 0.2s ease;
+	}
+
+	.follow-button {
+		background: $primary;
+		color: #fff;
+
+		&:hover {
+			background: $primary-dark;
+		}
+
+		&.following {
+			border: 1px solid $border;
+			background: #fff;
+			color: $primary;
+
+			&:hover {
+				border-color: $primary;
+			}
+		}
+	}
+
+	.like-button {
+		min-width: 64px;
+		border: 1px solid $border;
+		color: $text-secondary;
+
+		.MuiButton-startIcon {
+			margin-right: 4px;
+		}
+
+		&:hover {
+			border-color: #f1b5b8;
+			background: #fdf0f0;
+			color: #e5484d;
+		}
+
+		&.liked {
+			border-color: #e5484d;
+			background: #e5484d;
+			color: #fff;
+
+			&:hover {
+				background: #d63c41;
+			}
+		}
+	}
+}
+
+.follow-card {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto auto;
+	align-items: center;
+	gap: 20px;
+	padding: 16px 20px;
+	background: #fff;
+	border: 1px solid $border;
+	border-radius: 16px;
+	transition: box-shadow 0.2s ease;
+
+	&:hover {
+		box-shadow: 0 14px 30px -20px rgba(15, 39, 66, 0.35);
+	}
+
+	@include down(sm) {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 12px;
+	}
+
+	.info {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		min-width: 0;
+		cursor: pointer;
+	}
+
+	.avatar {
+		width: 48px;
+		height: 48px;
+		background: $accent;
+		color: $primary;
+		font-weight: 700;
+	}
+
+	.name-box {
+		gap: 4px;
+		min-width: 0;
+
+		strong {
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			font-size: 15px;
+			font-weight: 700;
+			color: $text;
+		}
+	}
+
+	.stats {
+		display: flex;
+		gap: 16px;
+		font-size: 13px;
+		color: $text-secondary;
+
+		b {
+			color: $primary;
+		}
+	}
+
+	.actions {
+		display: flex;
+		gap: 8px;
+	}
+}

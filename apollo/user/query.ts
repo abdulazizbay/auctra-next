@@ -346,3 +346,139 @@ export const GET_NOTICES = gql`
 		}
 	}
 `;
+
+/**************************
+ *         FOLLOW         *
+ *************************/
+
+export const GET_MEMBER_FOLLOWERS = gql`
+	query GetMemberFollowers($input: FollowInquiry!) {
+		getMemberFollowers(input: $input) {
+			list {
+				_id
+				followingId
+				followerId
+				createdAt
+				meLiked {
+					memberId
+					likeRefId
+					myFavorite
+				}
+				meFollowed {
+					followingId
+					followerId
+					myFollowing
+				}
+				followerData {
+					_id
+					memberNick
+					memberImage
+					memberType
+					memberFollowers
+					memberFollowings
+					memberLikes
+				}
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+export const GET_MEMBER_FOLLOWINGS = gql`
+	query GetMemberFollowings($input: FollowInquiry!) {
+		getMemberFollowings(input: $input) {
+			list {
+				_id
+				followingId
+				followerId
+				createdAt
+				meLiked {
+					memberId
+					likeRefId
+					myFavorite
+				}
+				meFollowed {
+					followingId
+					followerId
+					myFollowing
+				}
+				followingData {
+					_id
+					memberNick
+					memberImage
+					memberType
+					memberFollowers
+					memberFollowings
+					memberLikes
+				}
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+/**************************
+ *      WATCH / VIEW      *
+ *************************/
+
+export const GET_WATCHED_LOTS = gql`
+	query GetWatchedLots($input: OrdinaryInquiry!) {
+		getWatchedLots(input: $input) {
+			list {
+				_id
+				memberId
+				lotName
+				lotImages
+				lotCategory
+				lotCondition
+				lotStatus
+				lotStartPrice
+				lotCurrentPrice
+				lotCeilingPrice
+				lotMinIncrement
+				lotBids
+				lotWatchers
+				lotViews
+				lotStartsAt
+				lotEndsAt
+				createdAt
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+export const GET_VISITED_LOTS = gql`
+	query GetVisitedLots($input: OrdinaryInquiry!) {
+		getVisitedLots(input: $input) {
+			list {
+				_id
+				memberId
+				lotName
+				lotImages
+				lotCategory
+				lotCondition
+				lotStatus
+				lotStartPrice
+				lotCurrentPrice
+				lotCeilingPrice
+				lotMinIncrement
+				lotBids
+				lotWatchers
+				lotViews
+				lotStartsAt
+				lotEndsAt
+				createdAt
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;

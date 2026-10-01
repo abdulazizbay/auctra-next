@@ -1,22 +1,15 @@
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { NextPage } from 'next';
-import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Stack, Typography } from '@mui/material';
+import { Stack } from '@mui/material';
 import { useMutation, useReactiveVar } from '@apollo/client';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
-import MyMenu from '../../libs/components/mypage/MyMenu';
-import MyLots from '../../libs/components/mypage/MyLots';
-import AddNewLot from '../../libs/components/mypage/AddNewLot';
-import MyWatchlist from '../../libs/components/mypage/MyWatchlist';
-import RecentlyVisited from '../../libs/components/mypage/RecentlyVisited';
+import MemberMenu from '../../libs/components/member/MemberMenu';
 import MemberArticles from '../../libs/components/member/MemberArticles';
 import MemberFollowers from '../../libs/components/member/MemberFollowers';
 import MemberFollowings from '../../libs/components/member/MemberFollowings';
 import { userVar } from '../../apollo/store';
-import { getJwtToken, requestUserInfo } from '../../libs/auth';
-import { MemberType } from '../../libs/enums/member.enum';
 import { Message } from '../../libs/enums/common.enum';
 import {
 	LIKE_TARGET_MEMBER,
@@ -35,15 +28,11 @@ export const getStaticProps = async ({ locale }: any) => ({
 	},
 });
 
-const sellerCategories = ['addLot', 'myLots'];
-
-const MyPage: NextPage = () => {
-	const user = useReactiveVar(userVar);
+const MemberPage: NextPage = () => {
 	const router = useRouter();
-	const { t } = useTranslation('common');
-	const isSeller = user.memberType === MemberType.SELLER;
-	const category: any =
-		router.query?.category ?? (isSeller ? 'myLots' : 'watchlist');
+	const user = useReactiveVar(userVar);
+	const category: any = router.query?.category;
+	const memberId = router.query?.memberId as string;
 
 	/** APOLLO REQUESTS **/
 	const [subscribe] = useMutation(SUBSCRIBE);
@@ -52,12 +41,22 @@ const MyPage: NextPage = () => {
 
 	/** LIFECYCLES **/
 	useEffect(() => {
-		if (!getJwtToken()) router.push('/').then();
-	}, [user]);
-
-	useEffect(() => {
-		if (getJwtToken() && user._id) requestUserInfo().then();
-	}, []);
+		if (!router.isReady) return;
+		if (memberId && memberId === user?._id) {
+			router.replace('/mypage');
+			return;
+		}
+		if (!category) {
+			router.replace(
+				{
+					pathname: router.pathname,
+					query: { ...router.query, category: 'articles' },
+				},
+				undefined,
+				{ shallow: true },
+			);
+		}
+	}, [category, router, user?._id]);
 
 	/** HANDLERS **/
 	const subscribeHandler = async (id: string, refetch: any, query: any) => {
@@ -68,7 +67,6 @@ const MyPage: NextPage = () => {
 			await subscribe({ variables: { input: id } });
 			await sweetTopSmallSuccessAlert('Subscribed!', 800);
 			await refetch({ input: query });
-			await requestUserInfo();
 		} catch (err: any) {
 			sweetErrorHandling(err).then();
 		}
@@ -82,7 +80,6 @@ const MyPage: NextPage = () => {
 			await unsubscribe({ variables: { input: id } });
 			await sweetTopSmallSuccessAlert('Unsubscribed!', 800);
 			await refetch({ input: query });
-			await requestUserInfo();
 		} catch (err: any) {
 			sweetErrorHandling(err).then();
 		}
@@ -115,28 +112,19 @@ const MyPage: NextPage = () => {
 		}
 	};
 
-	if (!user._id) return null;
-
 	return (
-		<div id="my-page">
+		<div id="member-page">
 			<div className="container">
 				<Stack className={'my-page'}>
 					<Stack className={'left-config'}>
-						<MyMenu />
+						<MemberMenu
+							subscribeHandler={subscribeHandler}
+							unsubscribeHandler={unsubscribeHandler}
+							likeMemberHandler={likeMemberHandler}
+						/>
 					</Stack>
 					<Stack className="main-config">
-						{sellerCategories.includes(category) && !isSeller && (
-							<Stack className={'no-data'}>
-								<Typography>
-									{t('Only approved sellers can manage lots')}
-								</Typography>
-							</Stack>
-						)}
-						{category === 'addLot' && isSeller && <AddNewLot />}
-						{category === 'myLots' && isSeller && <MyLots />}
-						{category === 'watchlist' && <MyWatchlist />}
-						{category === 'recentlyVisited' && <RecentlyVisited />}
-						{category === 'myArticles' && <MemberArticles />}
+						{category === 'articles' && <MemberArticles />}
 						{category === 'followers' && (
 							<MemberFollowers
 								subscribeHandler={subscribeHandler}
@@ -160,4 +148,4 @@ const MyPage: NextPage = () => {
 	);
 };
 
-export default withLayoutBasic(MyPage);
+export default withLayoutBasic(MemberPage);

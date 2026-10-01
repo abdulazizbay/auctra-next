@@ -16,10 +16,13 @@ import { formatterStr } from '../../utils';
 interface LotCardType {
 	lot: Lot;
 	watchLotHandler?: any;
+	myWatched?: boolean;
+	recentlyVisited?: boolean;
 }
 
 const LotCard = (props: LotCardType) => {
-	const { lot, watchLotHandler } = props;
+	const { lot, watchLotHandler, myWatched, recentlyVisited } = props;
+	const isWatched = myWatched || !!lot?.meWatched?.[0]?.myWatch;
 	const user = useReactiveVar(userVar);
 	const { t } = useTranslation('common');
 	const image = lot?.lotImages[0];
@@ -80,24 +83,25 @@ const LotCard = (props: LotCardType) => {
 				<Stack className={'footer'}>
 					<Typography className={'time'}>{timeText}</Typography>
 					<Stack className={'buttons'}>
-						<Tooltip
-							title={
-								lot?.meWatched?.[0]?.myWatch
-									? t('Remove from watchlist')
-									: t('Add to watchlist')
-							}
-						>
-							<IconButton
-								size={'small'}
-								onClick={() => watchLotHandler(user, lot?._id)}
+						{recentlyVisited && <BookmarkBorderIcon className={'static'} />}
+						{!recentlyVisited && (
+							<Tooltip
+								title={
+									isWatched ? t('Remove from watchlist') : t('Add to watchlist')
+								}
 							>
-								{lot?.meWatched && lot?.meWatched[0]?.myWatch ? (
-									<BookmarkIcon className={'watched'} />
-								) : (
-									<BookmarkBorderIcon />
-								)}
-							</IconButton>
-						</Tooltip>
+								<IconButton
+									size={'small'}
+									onClick={() => watchLotHandler(user, lot?._id)}
+								>
+									{isWatched ? (
+										<BookmarkIcon className={'watched'} />
+									) : (
+										<BookmarkBorderIcon />
+									)}
+								</IconButton>
+							</Tooltip>
+						)}
 						<Typography className={'watch-count'}>{lot.lotWatchers}</Typography>
 					</Stack>
 				</Stack>

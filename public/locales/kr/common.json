@@ -205,5 +205,19 @@
 	"Title": "제목",
 	"Date": "날짜",
 	"No notices yet": "공지사항이 없습니다",
-	"No FAQs yet": "FAQ가 없습니다"
+	"No FAQs yet": "FAQ가 없습니다",
+	"Followings": "팔로잉",
+	"No followers yet": "아직 팔로워가 없습니다",
+	"No followings yet": "아직 팔로잉이 없습니다",
+	"My Articles": "내 게시글",
+	"Articles": "게시글",
+	"Member not found": "회원을 찾을 수 없습니다",
+	"View seller page": "판매자 페이지 보기",
+	"Activity": "활동",
+	"Watchlist": "관심 목록",
+	"Recently Viewed": "최근 본 경매품",
+	"Lots you are watching": "관심 등록한 경매품",
+	"Lots you opened recently": "최근에 본 경매품",
+	"No watched lots yet": "관심 등록한 경매품이 없습니다",
+	"No viewed lots yet": "최근 본 경매품이 없습니다"
 }
