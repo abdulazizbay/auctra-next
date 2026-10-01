@@ -1,0 +1,515 @@
+@use '../variables' as *;
+
+.detail-loading {
+	align-items: center;
+	justify-content: center;
+	height: 70vh;
+}
+
+#lot-detail-page {
+	padding: 40px 0 80px;
+
+	.lot-detail-config {
+		gap: 48px;
+	}
+
+	.lot-info-config {
+		gap: 24px;
+
+		.info {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: flex-end;
+			gap: 16px;
+
+			@include down(sm) {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+		}
+
+		.title-main {
+			font-family: $font-heading;
+			font-size: 40px;
+			font-weight: 600;
+			line-height: 1.15;
+
+			@include down(sm) {
+				font-size: 30px;
+			}
+		}
+
+		.top-box {
+			flex-direction: row;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 12px;
+			margin-top: 10px;
+			color: $text-secondary;
+			font-size: 14px;
+
+			.meta,
+			.date {
+				font-size: 14px;
+			}
+
+			.divider {
+				width: 1px;
+				height: 14px;
+				background: $border;
+			}
+		}
+
+		.status-badge {
+			padding: 4px 9px;
+			border-radius: 6px;
+			background: $primary;
+			color: #fff;
+			font-size: 11px;
+			font-weight: 700;
+			letter-spacing: 0.3px;
+			text-transform: uppercase;
+
+			&.live {
+				background: $accent;
+				color: $primary;
+			}
+		}
+
+		.buttons {
+			flex-direction: row;
+			gap: 16px;
+
+			.button-box {
+				flex-direction: row;
+				align-items: center;
+				gap: 4px;
+				color: $text-secondary;
+
+				p {
+					font-size: 14px;
+				}
+
+				.watched {
+					color: $accent;
+				}
+			}
+		}
+
+		.images {
+			gap: 12px;
+
+			.main-image {
+				aspect-ratio: 16 / 9;
+				max-height: 560px;
+				border-radius: 16px;
+				overflow: hidden;
+				background: $bg;
+				border: 1px solid $border;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: contain;
+					background: #fff;
+				}
+
+				.no-image {
+					height: 100%;
+					align-items: center;
+					justify-content: center;
+					color: $text-secondary;
+
+					svg {
+						font-size: 72px;
+					}
+				}
+			}
+
+			.sub-images {
+				flex-direction: row;
+				gap: 10px;
+				overflow-x: auto;
+
+				.sub-img-box {
+					flex-shrink: 0;
+					width: 96px;
+					height: 72px;
+					border-radius: 10px;
+					overflow: hidden;
+					border: 2px solid transparent;
+					cursor: pointer;
+					opacity: 0.75;
+					transition: opacity 0.2s, border-color 0.2s;
+
+					&.active,
+					&:hover {
+						opacity: 1;
+						border-color: $accent;
+					}
+
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+					}
+				}
+			}
+		}
+	}
+
+	.lot-desc-config {
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 40px;
+
+		@include down(md) {
+			flex-direction: column-reverse;
+			align-items: stretch;
+		}
+
+		.title {
+			margin-bottom: 12px;
+			font-family: $font-heading;
+			font-size: 24px;
+			font-weight: 600;
+		}
+	}
+
+	.left-config {
+		flex: 1;
+		min-width: 0;
+		gap: 40px;
+
+		.options-config {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 12px;
+
+			@include down(sm) {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			.option {
+				padding: 16px;
+				background: #fff;
+				border: 1px solid $border;
+				border-radius: 12px;
+
+				.title {
+					margin-bottom: 4px;
+					font-family: $font;
+					font-size: 11px;
+					font-weight: 700;
+					letter-spacing: 0.6px;
+					text-transform: uppercase;
+					color: $text-secondary;
+				}
+
+				.option-data {
+					font-size: 16px;
+					font-weight: 700;
+					font-variant-numeric: tabular-nums;
+				}
+			}
+		}
+
+		.lot-desc {
+			.desc {
+				margin-bottom: 20px;
+				color: $text-secondary;
+				line-height: 1.7;
+				white-space: pre-line;
+			}
+		}
+
+		.bids-config {
+			.empty {
+				color: $text-secondary;
+			}
+
+			.bid-list {
+				background: #fff;
+				border: 1px solid $border;
+				border-radius: 12px;
+				overflow: hidden;
+			}
+
+			.bid-row {
+				flex-direction: row;
+				align-items: center;
+				gap: 12px;
+				padding: 12px 16px;
+				border-bottom: 1px solid $border;
+
+				&:last-child {
+					border-bottom: none;
+				}
+
+				&.top {
+					background: rgba(194, 163, 90, 0.08);
+
+					.price {
+						color: $primary;
+					}
+				}
+
+				.avatar {
+					width: 32px;
+					height: 32px;
+					font-size: 14px;
+					cursor: pointer;
+				}
+
+				.nick {
+					flex: 1;
+					font-weight: 600;
+					cursor: pointer;
+
+					&:hover {
+						color: $accent;
+					}
+				}
+
+				.time {
+					font-size: 13px;
+					color: $text-secondary;
+				}
+
+				.price {
+					min-width: 120px;
+					text-align: right;
+					font-weight: 700;
+					font-variant-numeric: tabular-nums;
+					color: $text-secondary;
+				}
+			}
+
+			.pagination-box {
+				align-items: center;
+				margin-top: 16px;
+			}
+		}
+
+		.reviews-config {
+			.review-list {
+				gap: 16px;
+
+				.pagination-box {
+					display: flex;
+					justify-content: center;
+				}
+			}
+
+			.review-config {
+				gap: 10px;
+				padding: 16px;
+				background: #fff;
+				border: 1px solid $border;
+				border-radius: 12px;
+
+				.img-name-box {
+					flex-direction: row;
+					align-items: center;
+					gap: 12px;
+				}
+
+				.name {
+					font-weight: 600;
+					cursor: pointer;
+
+					&:hover {
+						color: $accent;
+					}
+				}
+
+				.date {
+					font-size: 12px;
+					color: $text-secondary;
+				}
+
+				.description {
+					color: $text;
+					line-height: 1.6;
+				}
+			}
+		}
+
+		.leave-review-config {
+			gap: 12px;
+
+			.submit-btn {
+				display: flex;
+				justify-content: flex-end;
+			}
+		}
+	}
+
+	.right-config {
+		position: sticky;
+		top: 96px;
+		width: 360px;
+		flex-shrink: 0;
+		gap: 16px;
+
+		@include down(md) {
+			position: static;
+			width: 100%;
+		}
+
+		.label {
+			font-size: 11px;
+			font-weight: 700;
+			letter-spacing: 0.6px;
+			text-transform: uppercase;
+			color: $text-secondary;
+		}
+
+		.bid-box,
+		.seller-box {
+			padding: 20px;
+			gap: 16px;
+			background: #fff;
+			border: 1px solid $border;
+			border-radius: 16px;
+			box-shadow: 0 6px 20px -18px rgba(15, 39, 66, 0.3);
+		}
+
+		.time-box {
+			padding-bottom: 16px;
+			border-bottom: 1px solid $border;
+
+			.countdown {
+				margin-top: 4px;
+				font-size: 28px;
+				font-weight: 700;
+				color: $primary;
+				font-variant-numeric: tabular-nums;
+			}
+		}
+
+		.price-box {
+			.price {
+				margin-top: 4px;
+				font-size: 32px;
+				font-weight: 700;
+				line-height: 1.1;
+				color: $primary;
+				font-variant-numeric: tabular-nums;
+			}
+
+			.bids {
+				margin-top: 4px;
+				font-size: 13px;
+				color: $text-secondary;
+			}
+		}
+
+		.notice {
+			padding: 12px;
+			border-radius: 10px;
+			background: $bg;
+			text-align: center;
+			font-size: 14px;
+			font-weight: 600;
+
+			&.highest {
+				background: rgba(194, 163, 90, 0.15);
+				color: $primary;
+			}
+		}
+
+		.bid-form {
+			gap: 10px;
+
+			.currency {
+				margin-right: 6px;
+				color: $text-secondary;
+			}
+
+			.ceiling-note {
+				font-size: 12px;
+				color: $text-secondary;
+				text-align: center;
+			}
+		}
+
+		.seller-info {
+			flex-direction: row;
+			align-items: center;
+			gap: 12px;
+
+			.avatar {
+				width: 48px;
+				height: 48px;
+				background: $accent;
+				color: $primary;
+				font-weight: 700;
+			}
+
+			.name {
+				display: flex;
+				align-items: center;
+				gap: 4px;
+				font-weight: 700;
+
+				.trusted {
+					font-size: 18px;
+					color: $accent;
+				}
+			}
+
+			.rating {
+				display: flex;
+				align-items: center;
+				gap: 2px;
+				font-size: 13px;
+				color: $text-secondary;
+
+				svg {
+					font-size: 16px;
+					color: $accent;
+				}
+			}
+		}
+	}
+
+	.similar-lots-config {
+		gap: 20px;
+
+		.title-pagination-box {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+
+			.main-title {
+				font-family: $font-heading;
+				font-size: 28px;
+				font-weight: 600;
+			}
+
+			.pagination-box {
+				flex-direction: row;
+				align-items: center;
+				gap: 10px;
+
+				svg {
+					cursor: pointer;
+					color: $text-secondary;
+
+					&:hover {
+						color: $primary;
+					}
+				}
+
+				.swiper-pagination-bullet-active {
+					background: $primary;
+				}
+			}
+		}
+
+		.similar-lots-slide {
+			width: 300px;
+		}
+	}
+}

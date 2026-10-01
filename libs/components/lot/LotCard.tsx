@@ -70,7 +70,7 @@ const LotCard = (props: LotCardType) => {
 							{t('Current price')}
 						</Typography>
 						<Typography className={'price'}>
-							₩{formatterStr(lot.lotCurrentPrice) || 0}
+							${formatterStr(lot.lotCurrentPrice) || 0}
 						</Typography>
 					</Stack>
 					<Typography className={'bids'}>

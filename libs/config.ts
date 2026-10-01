@@ -12,9 +12,9 @@ export const Messages = {
 export const lotPriceMax = 2147483647;
 
 export const lotPriceRanges = [
-	{ start: 0, end: 1000000 },
-	{ start: 1000000, end: 5000000 },
-	{ start: 5000000, end: 20000000 },
-	{ start: 20000000, end: 100000000 },
-	{ start: 100000000, end: lotPriceMax },
+	{ start: 0, end: 1000 },
+	{ start: 1000, end: 5000 },
+	{ start: 5000, end: 20000 },
+	{ start: 20000, end: 100000 },
+	{ start: 100000, end: lotPriceMax },
 ];

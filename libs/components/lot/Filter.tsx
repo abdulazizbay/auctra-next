@@ -286,10 +286,10 @@ const Filter = (props: FilterType) => {
 
 	const priceLabel = (range: { start: number; end: number }) => {
 		if (range.start === 0)
-			return t('Under {{price}}', { price: `₩${formatterStr(range.end)}` });
+			return t('Under {{price}}', { price: `$${formatterStr(range.end)}` });
 		if (range.end === lotPriceMax)
-			return t('Over {{price}}', { price: `₩${formatterStr(range.start)}` });
-		return `₩${formatterStr(range.start)} – ₩${formatterStr(range.end)}`;
+			return t('Over {{price}}', { price: `$${formatterStr(range.start)}` });
+		return `$${formatterStr(range.start)} – $${formatterStr(range.end)}`;
 	};
 
 	return (

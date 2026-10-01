@@ -1,5 +1,5 @@
 import { LotCategory, LotCondition, LotStatus } from '../../enums/lot.enum';
-import { TotalCounter } from '../member/member';
+import { Member, TotalCounter } from '../member/member';
 import { MeWatched } from '../watch/watch';
 
 export interface Lot {
@@ -27,6 +27,7 @@ export interface Lot {
 	createdAt: Date;
 	updatedAt: Date;
 	meWatched?: MeWatched[];
+	memberData?: Member;
 }
 
 export interface Lots {

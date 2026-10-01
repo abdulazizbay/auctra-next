@@ -78,3 +78,36 @@ export const WATCH_TARGET_LOT = gql`
 		}
 	}
 `;
+
+/**************************
+ *          BID           *
+ *************************/
+
+export const PLACE_BID = gql`
+	mutation PlaceBid($input: BidInput!) {
+		placeBid(input: $input) {
+			_id
+			lotId
+			memberId
+			bidPrice
+			createdAt
+		}
+	}
+`;
+
+/**************************
+ *         COMMENT        *
+ *************************/
+
+export const CREATE_COMMENT = gql`
+	mutation CreateComment($input: CommentInput!) {
+		createComment(input: $input) {
+			_id
+			commentGroup
+			commentText
+			commentRefId
+			memberId
+			createdAt
+		}
+	}
+`;
