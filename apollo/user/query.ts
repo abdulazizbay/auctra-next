@@ -205,7 +205,13 @@ export const GET_SELLERS = gql`
 				memberSalesCount
 				memberFollowers
 				memberLikes
+				memberViews
 				createdAt
+				meLiked {
+					memberId
+					likeRefId
+					myFavorite
+				}
 			}
 			metaCounter {
 				total

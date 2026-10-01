@@ -152,5 +152,19 @@
 	"Edit": "Edit",
 	"Cancel lot": "Cancel lot",
 	"Cancel this lot?": "Cancel this lot?",
-	"Lot cancelled": "Lot cancelled"
+	"Lot cancelled": "Lot cancelled",
+	"Search sellers": "Search sellers",
+	"Top rated": "Top rated",
+	"Most sales": "Most sales",
+	"Most followers": "Most followers",
+	"Most liked": "Most liked",
+	"Total {{count}} sellers": "Total {{count}} sellers",
+	"No sellers found": "No sellers found",
+	"Sales": "Sales",
+	"Followers": "Followers",
+	"Trusted": "Trusted",
+	"{{count}} reviews": "{{count}} reviews",
+	"No reviews yet": "No reviews yet",
+	"Views": "Views",
+	"View profile": "View profile"
 }

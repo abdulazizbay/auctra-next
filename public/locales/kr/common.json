@@ -152,5 +152,19 @@
 	"Edit": "수정",
 	"Cancel lot": "경매 취소",
 	"Cancel this lot?": "이 경매품을 취소하시겠습니까?",
-	"Lot cancelled": "경매품이 취소되었습니다"
+	"Lot cancelled": "경매품이 취소되었습니다",
+	"Search sellers": "판매자 검색",
+	"Top rated": "평점 높은 순",
+	"Most sales": "판매 많은 순",
+	"Most followers": "팔로워 많은 순",
+	"Most liked": "좋아요 많은 순",
+	"Total {{count}} sellers": "총 {{count}}명의 판매자",
+	"No sellers found": "판매자가 없습니다",
+	"Sales": "판매",
+	"Followers": "팔로워",
+	"Trusted": "신뢰",
+	"{{count}} reviews": "리뷰 {{count}}개",
+	"No reviews yet": "아직 리뷰가 없습니다",
+	"Views": "조회",
+	"View profile": "프로필 보기"
 }

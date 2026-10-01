@@ -66,6 +66,16 @@ export const LOGIN = gql`
 	}
 `;
 
+export const LIKE_TARGET_MEMBER = gql`
+	mutation LikeTargetMember($input: String!) {
+		likeTargetMember(memberId: $input) {
+			_id
+			memberNick
+			memberLikes
+		}
+	}
+`;
+
 /**************************
  *          LOT           *
  *************************/
