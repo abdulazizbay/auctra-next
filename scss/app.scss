@@ -1,3 +1,37 @@
+/** IMPORTS **/
+@use 'variables' as *;
+@use 'reset';
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
 body {
-	margin: 0;
+	font-family: $font;
+	color: $text;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $font-heading;
+}
+
+#wrap {
+	width: 100%;
+	min-height: 100vh;
+
+	.container {
+		width: 100%;
+		max-width: 1300px;
+		margin: 0 auto;
+
+		@include down(lg) {
+			padding: 0 16px;
+		}
+	}
 }

@@ -1,0 +1,27 @@
+/** VARIABLES **/
+@use 'sass:map';
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+
+$font: 'Manrope', sans-serif;
+$font-heading: 'Cormorant Garamond', serif;
+
+$primary: #0f2742;
+$accent: #c2a35a;
+$bg: #f6f7f9;
+$text: #14202e;
+$text-secondary: #5b6573;
+$border: #e3e6ea;
+
+$breakpoints: (
+	sm: 600px,
+	md: 900px,
+	lg: 1200px,
+	xl: 1536px,
+);
+
+@mixin down($bp) {
+	@media (max-width: map.get($breakpoints, $bp) - 0.02px) {
+		@content;
+	}
+}
