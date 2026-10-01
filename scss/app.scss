@@ -9,6 +9,7 @@
 @use 'mypage/mypage';
 @use 'seller/seller';
 @use 'seller/detail' as seller-detail;
+@use 'community/community';
 
 a {
 	text-decoration: none;

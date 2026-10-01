@@ -161,6 +161,20 @@ export const PLACE_BID = gql`
 `;
 
 /**************************
+ *         ARTICLE        *
+ *************************/
+
+export const LIKE_TARGET_ARTICLE = gql`
+	mutation LikeTargetArticle($input: String!) {
+		likeTargetArticle(articleId: $input) {
+			_id
+			articleTitle
+			articleLikes
+		}
+	}
+`;
+
+/**************************
  *         COMMENT        *
  *************************/
 

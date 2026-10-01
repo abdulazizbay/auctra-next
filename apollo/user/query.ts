@@ -277,6 +277,11 @@ export const GET_ARTICLES = gql`
 				articleComments
 				memberId
 				createdAt
+				meLiked {
+					memberId
+					likeRefId
+					myFavorite
+				}
 				memberData {
 					_id
 					memberNick
