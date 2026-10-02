@@ -66,6 +66,62 @@ export const LOGIN = gql`
 	}
 `;
 
+export const UPDATE_MEMBER = gql`
+	mutation UpdateMember($input: MemberUpdate!) {
+		updateMember(input: $input) {
+			_id
+			memberNick
+			memberPhone
+			memberEmail
+			memberType
+			memberStatus
+			memberSellerStatus
+			memberImage
+			memberFullName
+			memberBio
+			memberLocation
+			memberAddress
+			memberAvgRating
+			memberReviewCount
+			memberSalesCount
+			memberFollowers
+			memberFollowings
+			memberLikes
+			memberViews
+			createdAt
+			updatedAt
+		}
+	}
+`;
+
+export const APPLY_SELLER = gql`
+	mutation ApplySeller($input: SellerApply!) {
+		applySeller(input: $input) {
+			_id
+			memberNick
+			memberPhone
+			memberEmail
+			memberType
+			memberStatus
+			memberSellerStatus
+			memberImage
+			memberFullName
+			memberBio
+			memberLocation
+			memberAddress
+			memberAvgRating
+			memberReviewCount
+			memberSalesCount
+			memberFollowers
+			memberFollowings
+			memberLikes
+			memberViews
+			createdAt
+			updatedAt
+		}
+	}
+`;
+
 export const LIKE_TARGET_MEMBER = gql`
 	mutation LikeTargetMember($input: String!) {
 		likeTargetMember(memberId: $input) {
@@ -210,6 +266,33 @@ export const UPDATE_COMMENT = gql`
 			commentStatus
 			commentText
 			updatedAt
+		}
+	}
+`;
+
+/**************************
+ *      ORDER / REVIEW    *
+ *************************/
+
+export const UPDATE_ORDER = gql`
+	mutation UpdateOrder($input: OrderUpdate!) {
+		updateOrder(input: $input) {
+			_id
+			orderStatus
+			orderAddress
+			updatedAt
+		}
+	}
+`;
+
+export const CREATE_REVIEW = gql`
+	mutation CreateReview($input: ReviewInput!) {
+		createReview(input: $input) {
+			_id
+			orderId
+			reviewRating
+			reviewText
+			createdAt
 		}
 	}
 `;

@@ -11,6 +11,9 @@ import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+import ReceiptLongOutlinedIcon from '@mui/icons-material/ReceiptLongOutlined';
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import { userVar } from '../../../apollo/store';
 import { T } from '../../types/common';
 import { REACT_APP_API_URL } from '../../config';
@@ -35,6 +38,11 @@ const MyMenu = () => {
 								label: 'My Lots',
 								icon: <Inventory2OutlinedIcon />,
 							},
+							{
+								key: 'mySales',
+								label: 'My Sales',
+								icon: <LocalShippingOutlinedIcon />,
+							},
 						],
 					},
 			  ]
@@ -42,6 +50,11 @@ const MyMenu = () => {
 		{
 			title: 'Activity',
 			items: [
+				{
+					key: 'myOrders',
+					label: 'My Orders',
+					icon: <ReceiptLongOutlinedIcon />,
+				},
 				{
 					key: 'watchlist',
 					label: 'Watchlist',
@@ -73,6 +86,16 @@ const MyMenu = () => {
 					label: 'Followings',
 					icon: <PersonAddAltOutlinedIcon />,
 					count: user.memberFollowings,
+				},
+			],
+		},
+		{
+			title: 'Account',
+			items: [
+				{
+					key: 'myProfile',
+					label: 'My Profile',
+					icon: <ManageAccountsOutlinedIcon />,
 				},
 			],
 		},

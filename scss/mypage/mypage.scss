@@ -168,7 +168,8 @@
 	}
 }
 
-#my-lots-page {
+#my-lots-page,
+#my-orders-page {
 	.tab-name-box {
 		flex-direction: row;
 		flex-wrap: wrap;
@@ -201,7 +202,8 @@
 	}
 
 	.listing-title-box,
-	.my-lot-card {
+	.my-lot-card,
+	.my-order-card {
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) 100px 100px 60px 90px;
 		align-items: center;
@@ -226,7 +228,8 @@
 		}
 	}
 
-	.my-lot-card {
+	.my-lot-card,
+	.my-order-card {
 		border-bottom: 1px solid $border;
 
 		&:last-of-type {
@@ -346,7 +349,8 @@
 	}
 }
 
-#add-lot-page {
+#add-lot-page,
+#my-profile-page {
 	.config {
 		gap: 20px;
 		padding: 28px;
@@ -428,6 +432,79 @@
 
 		button {
 			min-width: 140px;
+		}
+	}
+}
+
+#my-orders-page {
+	.listing-title-box,
+	.my-order-card {
+		grid-template-columns: minmax(0, 1fr) 100px 130px 140px;
+	}
+
+	.my-order-card {
+		.meta {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.action-box {
+			justify-content: flex-end;
+
+			button {
+				white-space: nowrap;
+			}
+		}
+
+		@include down(sm) {
+			grid-template-columns: auto auto 1fr;
+		}
+	}
+}
+
+#my-profile-page {
+	.image-row {
+		flex-direction: row;
+		align-items: center;
+		gap: 20px;
+
+		.profile-img {
+			width: 80px;
+			height: 80px;
+			font-size: 32px;
+		}
+	}
+
+	.seller-box {
+		margin-top: 24px;
+		gap: 12px;
+
+		.title {
+			font-family: $font-heading;
+			font-size: 24px;
+			font-weight: 600;
+			color: $text;
+		}
+
+		.note {
+			font-size: 14px;
+			color: $text-secondary;
+
+			&.rejected {
+				color: #c0392b;
+			}
+		}
+
+		.doc-preview {
+			max-width: 240px;
+			border-radius: 8px;
+			border: 1px solid $border;
+		}
+
+		.buttons-row {
+			justify-content: flex-start;
+			gap: 12px;
 		}
 	}
 }

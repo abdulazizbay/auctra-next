@@ -11,6 +11,8 @@ import MyLots from '../../libs/components/mypage/MyLots';
 import AddNewLot from '../../libs/components/mypage/AddNewLot';
 import MyWatchlist from '../../libs/components/mypage/MyWatchlist';
 import RecentlyVisited from '../../libs/components/mypage/RecentlyVisited';
+import MyOrders from '../../libs/components/mypage/MyOrders';
+import MyProfile from '../../libs/components/mypage/MyProfile';
 import MemberArticles from '../../libs/components/member/MemberArticles';
 import MemberFollowers from '../../libs/components/member/MemberFollowers';
 import MemberFollowings from '../../libs/components/member/MemberFollowings';
@@ -35,7 +37,7 @@ export const getStaticProps = async ({ locale }: any) => ({
 	},
 });
 
-const sellerCategories = ['addLot', 'myLots'];
+const sellerCategories = ['addLot', 'myLots', 'mySales'];
 
 const MyPage: NextPage = () => {
 	const user = useReactiveVar(userVar);
@@ -134,6 +136,9 @@ const MyPage: NextPage = () => {
 						)}
 						{category === 'addLot' && isSeller && <AddNewLot />}
 						{category === 'myLots' && isSeller && <MyLots />}
+						{category === 'mySales' && isSeller && <MyOrders sales />}
+						{category === 'myOrders' && <MyOrders />}
+						{category === 'myProfile' && <MyProfile />}
 						{category === 'watchlist' && <MyWatchlist />}
 						{category === 'recentlyVisited' && <RecentlyVisited />}
 						{category === 'myArticles' && <MemberArticles />}

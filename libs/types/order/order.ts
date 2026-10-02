@@ -23,6 +23,7 @@ export interface Order {
 	updatedAt: Date;
 	orderItems?: OrderItem[];
 	lotData?: Lot[];
+	orderReviewed?: boolean;
 }
 
 export interface Orders {

@@ -482,3 +482,64 @@ export const GET_VISITED_LOTS = gql`
 		}
 	}
 `;
+
+/**************************
+ *         ORDER          *
+ *************************/
+
+export const GET_MY_ORDERS = gql`
+	query GetMyOrders($input: OrdersInquiry!) {
+		getMyOrders(input: $input) {
+			list {
+				_id
+				buyerId
+				sellerId
+				orderTotal
+				orderStatus
+				orderAddress
+				orderPaymentDueAt
+				orderReviewed
+				createdAt
+				updatedAt
+				lotData {
+					_id
+					lotName
+					lotImages
+					lotCategory
+					lotCondition
+				}
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+export const GET_MY_SALES = gql`
+	query GetMySales($input: OrdersInquiry!) {
+		getMySales(input: $input) {
+			list {
+				_id
+				buyerId
+				sellerId
+				orderTotal
+				orderStatus
+				orderAddress
+				orderPaymentDueAt
+				createdAt
+				updatedAt
+				lotData {
+					_id
+					lotName
+					lotImages
+					lotCategory
+					lotCondition
+				}
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;

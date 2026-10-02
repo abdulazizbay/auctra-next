@@ -6,3 +6,11 @@ export enum OrderStatus {
 	EXPIRED = 'EXPIRED',
 	CANCELLED = 'CANCELLED',
 }
+
+export const orderTabStatuses = [
+	OrderStatus.PENDING_PAYMENT,
+	OrderStatus.PAID,
+	OrderStatus.SHIPPED,
+	OrderStatus.COMPLETED,
+	OrderStatus.EXPIRED,
+];
