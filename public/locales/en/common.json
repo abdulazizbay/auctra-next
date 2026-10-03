@@ -302,5 +302,10 @@
 	"Please complete payment within 48 hours.": "Please complete payment within 48 hours.",
 	"Close": "Close",
 	"Pay now": "Pay now",
-	"{{lotName}} was cancelled by the admin": "{{lotName}} was cancelled by the admin"
+	"{{lotName}} was cancelled by the admin": "{{lotName}} was cancelled by the admin",
+	"Live chat": "Live chat",
+	"{{count}} online": "{{count}} online",
+	"Say hello!": "Say hello!",
+	"Guest": "Guest",
+	"Login to chat": "Login to chat"
 }

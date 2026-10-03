@@ -302,5 +302,10 @@
 	"Please complete payment within 48 hours.": "48시간 이내에 결제를 완료해 주세요.",
 	"Close": "닫기",
 	"Pay now": "지금 결제하기",
-	"{{lotName}} was cancelled by the admin": "{{lotName}} 경매가 관리자에 의해 취소되었습니다"
+	"{{lotName}} was cancelled by the admin": "{{lotName}} 경매가 관리자에 의해 취소되었습니다",
+	"Live chat": "실시간 채팅",
+	"{{count}} online": "{{count}}명 접속 중",
+	"Say hello!": "인사를 건네보세요!",
+	"Guest": "게스트",
+	"Login to chat": "로그인 후 채팅할 수 있습니다"
 }

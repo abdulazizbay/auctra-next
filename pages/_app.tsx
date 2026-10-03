@@ -7,6 +7,7 @@ import { light } from '../scss/MaterialTheme';
 import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '../apollo/client';
 import { appWithTranslation } from 'next-i18next';
+import Chat from '../libs/components/Chat';
 import '../scss/app.scss';
 
 const App = (props: AppProps) => {
@@ -20,6 +21,7 @@ const App = (props: AppProps) => {
 				<ThemeProvider theme={theme}>
 					<CssBaseline />
 					<Component {...pageProps} />
+					<Chat />
 				</ThemeProvider>
 			</ApolloProvider>
 		</AppCacheProvider>
