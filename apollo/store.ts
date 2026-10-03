@@ -22,3 +22,5 @@ export const userVar = makeVar<UserInfo>({
 	memberLikes: 0,
 	memberViews: 0,
 });
+
+export const socketVar = makeVar<WebSocket | null>(null);

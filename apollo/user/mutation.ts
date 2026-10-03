@@ -308,3 +308,22 @@ export const CREATE_REVIEW = gql`
 		}
 	}
 `;
+
+/**************************
+ *      NOTIFICATION      *
+ *************************/
+
+export const READ_NOTIFICATION = gql`
+	mutation ReadNotification($input: String!) {
+		readNotification(notificationId: $input) {
+			_id
+			notificationReadAt
+		}
+	}
+`;
+
+export const READ_ALL_NOTIFICATIONS = gql`
+	mutation ReadAllNotifications {
+		readAllNotifications
+	}
+`;

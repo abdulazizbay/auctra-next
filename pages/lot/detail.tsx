@@ -34,7 +34,8 @@ import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import withLayoutFull from '../../libs/components/layout/LayoutFull';
 import LotCard from '../../libs/components/lot/LotCard';
 import LotComment from '../../libs/components/lot/LotComment';
-import { userVar } from '../../apollo/store';
+import { socketVar, userVar } from '../../apollo/store';
+import { joinRoom } from '../../libs/socket';
 import { Lot } from '../../libs/types/lot/lot';
 import { Bid } from '../../libs/types/bid/bid';
 import { BidsInquiry } from '../../libs/types/bid/bid.input';
@@ -79,6 +80,7 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 	const router = useRouter();
 	const { t } = useTranslation('common');
 	const user = useReactiveVar(userVar);
+	const socket = useReactiveVar(socketVar);
 	const [lotId, setLotId] = useState<string | null>(null);
 	const [lot, setLot] = useState<Lot | null>(null);
 	const [slideImage, setSlideImage] = useState<string>('');
@@ -116,7 +118,6 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 		onCompleted: (data: T) => {
 			if (data?.getLot) setLot(data.getLot);
 			if (data?.getLot) setSlideImage(data.getLot?.lotImages[0]);
-			if (data?.getLot) setBidPrice(minBidPrice(data.getLot));
 		},
 	});
 
@@ -220,6 +221,46 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 		return () => clearInterval(timer);
 	}, []);
 
+	useEffect(() => {
+		if (!socket || !lotId) return;
+		const leaveRoom = joinRoom(socket, `lot:${lotId}`);
+		const bidHandler = (msg: MessageEvent) => {
+			const data = JSON.parse(msg.data);
+			if (data.event !== 'bid' || data.lotId !== lotId) return;
+			setLot((prev) =>
+				prev
+					? {
+							...prev,
+							lotCurrentPrice: data.bidPrice,
+							lotBids: data.lotBids,
+							lotHighestBidderId: data.memberId,
+							lotEndsAt: data.lotEndsAt,
+					  }
+					: prev,
+			);
+			getBidsRefetch();
+		};
+		socket.addEventListener('message', bidHandler);
+		return () => {
+			socket.removeEventListener('message', bidHandler);
+			leaveRoom();
+		};
+	}, [socket, lotId]);
+
+	useEffect(() => {
+		if (lot) setBidPrice(minBidPrice(lot));
+	}, [lot?._id, lot?.lotCurrentPrice]);
+
+	const lotEnded =
+		lot?.lotStatus === LotStatus.OPEN &&
+		new Date(lot?.lotEndsAt as Date).getTime() <= now;
+
+	useEffect(() => {
+		if (!lotEnded) return;
+		const timer = setInterval(() => getLotRefetch({ input: lotId }), 15000);
+		return () => clearInterval(timer);
+	}, [lotEnded]);
+
 	/** HANDLERS **/
 	const minBidPrice = (target: Lot) => {
 		const min =
@@ -278,8 +319,6 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 			await placeBid({
 				variables: { input: { lotId: lot._id, bidPrice: bidPrice } },
 			});
-			await getLotRefetch({ input: lotId });
-			await getBidsRefetch({ input: bidInquiry });
 			await sweetTopSmallSuccessAlert(t('Bid placed'), 800);
 		} catch (err: any) {
 			console.log('ERROR, placeBidHandler: ', err.message);

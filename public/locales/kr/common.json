@@ -276,5 +276,21 @@
 	"Article updated": "글이 수정되었습니다",
 	"Article published": "글이 게시되었습니다",
 	"You can only edit your own articles": "본인의 글만 수정할 수 있습니다",
-	"Write about this lot": "이 경매품에 대해 글쓰기"
+	"Write about this lot": "이 경매품에 대해 글쓰기",
+	"You were outbid on {{lotName}} ({{price}})": "{{lotName}} 경매에서 상회 입찰되었습니다 ({{price}})",
+	"{{lotName}} is ending soon": "{{lotName}} 경매가 곧 종료됩니다",
+	"You won {{lotName}} for {{price}}": "{{lotName}}을(를) {{price}}에 낙찰받았습니다",
+	"{{lotName}} sold to another bidder": "{{lotName}}이(가) 다른 입찰자에게 낙찰되었습니다",
+	"Payment due for your order ({{price}})": "주문 결제 기한이 다가옵니다 ({{price}})",
+	"Payment received ({{price}})": "결제가 완료되었습니다 ({{price}})",
+	"Your order has shipped": "주문이 발송되었습니다",
+	"Order completed ({{price}})": "주문이 완료되었습니다 ({{price}})",
+	"New comment: {{text}}": "새 댓글: {{text}}",
+	"New message: {{text}}": "새 메시지: {{text}}",
+	"New lot from a seller you follow: {{lotName}}": "팔로우한 판매자의 새 경매품: {{lotName}}",
+	"Your seller application was approved": "판매자 신청이 승인되었습니다",
+	"Your seller application was rejected": "판매자 신청이 거절되었습니다",
+	"Notifications": "알림",
+	"Mark all read": "모두 읽음",
+	"No notifications": "알림이 없습니다"
 }

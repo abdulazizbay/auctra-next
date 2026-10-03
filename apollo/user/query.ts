@@ -543,3 +543,31 @@ export const GET_MY_SALES = gql`
 		}
 	}
 `;
+
+/**************************
+ *      NOTIFICATION      *
+ *************************/
+
+export const GET_NOTIFICATIONS = gql`
+	query GetNotifications($input: NotificationsInquiry!) {
+		getNotifications(input: $input) {
+			list {
+				_id
+				memberId
+				notificationType
+				notificationRefId
+				notificationRefType
+				notificationPayload {
+					lotName
+					price
+					text
+				}
+				notificationReadAt
+				createdAt
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;

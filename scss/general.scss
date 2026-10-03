@@ -124,6 +124,56 @@
 	}
 }
 
+.notification-menu .MuiPaper-root {
+	width: 360px;
+	max-width: calc(100vw - 32px);
+	max-height: 480px;
+
+	.notification-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 8px 16px;
+		border-bottom: 1px solid $border;
+
+		.title {
+			font-family: $font-heading;
+			font-size: 20px;
+			font-weight: 700;
+			color: $primary;
+		}
+	}
+
+	.notification-empty {
+		padding: 24px 16px;
+		text-align: center;
+		color: $text-secondary;
+	}
+
+	.notification-item {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 2px;
+		padding: 10px 16px;
+		white-space: normal;
+		border-bottom: 1px solid $border;
+
+		&.unread {
+			background: rgba($accent, 0.12);
+		}
+
+		.text {
+			font-size: 14px;
+			color: $text;
+		}
+
+		.date {
+			font-size: 12px;
+			color: $text-secondary;
+		}
+	}
+}
+
 .header-basic {
 	background: $primary;
 	padding: 72px 0;

@@ -3,15 +3,25 @@ import { useRouter, withRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useReactiveVar } from '@apollo/client';
-import { Avatar, Box, Button, Drawer, IconButton, Menu, MenuItem, Stack } from '@mui/material';
+import {
+	Avatar,
+	Box,
+	Button,
+	Drawer,
+	IconButton,
+	Menu,
+	MenuItem,
+	Stack,
+} from '@mui/material';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Logout } from '@mui/icons-material';
 import { userVar } from '../../apollo/store';
 import { getJwtToken, logOut, requestUserInfo } from '../auth';
 import { REACT_APP_API_URL } from '../config';
+import { connectSocket } from '../socket';
+import NotificationBell from './NotificationBell';
 
 const Top = () => {
 	const user = useReactiveVar(userVar);
@@ -27,6 +37,10 @@ const Top = () => {
 		if (jwt && !userVar()._id) requestUserInfo();
 	}, []);
 
+	useEffect(() => {
+		connectSocket();
+	}, [user?._id]);
+
 	/** HANDLERS **/
 	const langChoice = async (locale: string) => {
 		setLangAnchor(null);
@@ -38,7 +52,9 @@ const Top = () => {
 			<Link href={'/'}>{t('Home')}</Link>
 			<Link href={'/lot'}>{t('Lots')}</Link>
 			<Link href={'/seller'}>{t('Sellers')}</Link>
-			<Link href={'/community?articleCategory=MARKET_TALK'}>{t('Community')}</Link>
+			<Link href={'/community?articleCategory=MARKET_TALK'}>
+				{t('Community')}
+			</Link>
 			{user?._id && <Link href={'/mypage'}>{t('My Page')}</Link>}
 			<Link href={'/cs'}>{t('CS')}</Link>
 		</>
@@ -56,18 +72,26 @@ const Top = () => {
 				<Box component={'div'} className={'user-box'}>
 					{user?._id ? (
 						<>
-							<IconButton className={'icon-btn'}>
-								<NotificationsOutlinedIcon />
-							</IconButton>
-							<IconButton onClick={(event: any) => setLogoutAnchor(event.currentTarget)}>
+							<NotificationBell />
+							<IconButton
+								onClick={(event: any) => setLogoutAnchor(event.currentTarget)}
+							>
 								<Avatar
 									className={'login-user'}
-									src={user?.memberImage ? `${REACT_APP_API_URL}/${user?.memberImage}` : undefined}
+									src={
+										user?.memberImage
+											? `${REACT_APP_API_URL}/${user?.memberImage}`
+											: undefined
+									}
 								>
 									{user?.memberNick?.[0]?.toUpperCase()}
 								</Avatar>
 							</IconButton>
-							<Menu anchorEl={logoutAnchor} open={Boolean(logoutAnchor)} onClose={() => setLogoutAnchor(null)}>
+							<Menu
+								anchorEl={logoutAnchor}
+								open={Boolean(logoutAnchor)}
+								onClose={() => setLogoutAnchor(null)}
+							>
 								<MenuItem onClick={() => logOut()}>
 									<Logout fontSize="small" sx={{ mr: 1 }} />
 									{t('Logout')}
@@ -93,18 +117,30 @@ const Top = () => {
 					>
 						{router.locale?.toUpperCase()}
 					</Button>
-					<Menu anchorEl={langAnchor} open={Boolean(langAnchor)} onClose={() => setLangAnchor(null)}>
+					<Menu
+						anchorEl={langAnchor}
+						open={Boolean(langAnchor)}
+						onClose={() => setLangAnchor(null)}
+					>
 						<MenuItem onClick={() => langChoice('en')}>English</MenuItem>
 						<MenuItem onClick={() => langChoice('kr')}>한국어</MenuItem>
 					</Menu>
 
-					<IconButton className={'menu-btn'} onClick={() => setDrawerOpen(true)}>
+					<IconButton
+						className={'menu-btn'}
+						onClick={() => setDrawerOpen(true)}
+					>
 						<MenuIcon />
 					</IconButton>
 				</Box>
 			</Stack>
 
-			<Drawer anchor={'right'} open={drawerOpen} onClose={() => setDrawerOpen(false)} className={'nav-drawer'}>
+			<Drawer
+				anchor={'right'}
+				open={drawerOpen}
+				onClose={() => setDrawerOpen(false)}
+				className={'nav-drawer'}
+			>
 				<Box component={'div'} onClick={() => setDrawerOpen(false)}>
 					{links}
 				</Box>

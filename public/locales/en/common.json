@@ -276,5 +276,21 @@
 	"Article updated": "Article updated",
 	"Article published": "Article published",
 	"You can only edit your own articles": "You can only edit your own articles",
-	"Write about this lot": "Write about this lot"
+	"Write about this lot": "Write about this lot",
+	"You were outbid on {{lotName}} ({{price}})": "You were outbid on {{lotName}} ({{price}})",
+	"{{lotName}} is ending soon": "{{lotName}} is ending soon",
+	"You won {{lotName}} for {{price}}": "You won {{lotName}} for {{price}}",
+	"{{lotName}} sold to another bidder": "{{lotName}} sold to another bidder",
+	"Payment due for your order ({{price}})": "Payment due for your order ({{price}})",
+	"Payment received ({{price}})": "Payment received ({{price}})",
+	"Your order has shipped": "Your order has shipped",
+	"Order completed ({{price}})": "Order completed ({{price}})",
+	"New comment: {{text}}": "New comment: {{text}}",
+	"New message: {{text}}": "New message: {{text}}",
+	"New lot from a seller you follow: {{lotName}}": "New lot from a seller you follow: {{lotName}}",
+	"Your seller application was approved": "Your seller application was approved",
+	"Your seller application was rejected": "Your seller application was rejected",
+	"Notifications": "Notifications",
+	"Mark all read": "Mark all read",
+	"No notifications": "No notifications"
 }
