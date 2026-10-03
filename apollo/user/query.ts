@@ -112,6 +112,7 @@ export const GET_LOTS = gql`
 				lotViews
 				lotStartsAt
 				lotEndsAt
+				lotHighestBidderId
 				createdAt
 				meWatched {
 					memberId

@@ -398,3 +398,31 @@
 		bottom: 16px;
 	}
 }
+
+#not-found-page {
+	padding: 80px 0 100px;
+
+	.container {
+		align-items: center;
+		gap: 16px;
+		text-align: center;
+	}
+
+	.code {
+		font-family: $font-heading;
+		font-size: 96px;
+		font-weight: 700;
+		line-height: 1;
+		color: $primary;
+	}
+
+	.text {
+		color: $text-secondary;
+	}
+
+	.buttons {
+		flex-direction: row;
+		gap: 12px;
+		margin-top: 8px;
+	}
+}

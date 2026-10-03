@@ -18,10 +18,11 @@ interface LotCardType {
 	watchLotHandler?: any;
 	myWatched?: boolean;
 	recentlyVisited?: boolean;
+	myBids?: boolean;
 }
 
 const LotCard = (props: LotCardType) => {
-	const { lot, watchLotHandler, myWatched, recentlyVisited } = props;
+	const { lot, watchLotHandler, myWatched, recentlyVisited, myBids } = props;
 	const isWatched = myWatched || !!lot?.meWatched?.[0]?.myWatch;
 	const user = useReactiveVar(userVar);
 	const { t } = useTranslation('common');
@@ -39,6 +40,16 @@ const LotCard = (props: LotCardType) => {
 			? `${t('Starts')} ${moment(lot.lotStartsAt).fromNow()}`
 			: `${t('Ended')} ${moment(lot.lotEndsAt).format('YYYY.MM.DD')}`;
 
+	const isHighest = !!user._id && lot.lotHighestBidderId === user._id;
+	const bidStatus =
+		lot.lotStatus === LotStatus.OPEN
+			? isHighest
+				? 'Winning'
+				: 'Outbid'
+			: isHighest
+			? 'Won'
+			: 'Lost';
+
 	return (
 		<Stack className="lot-card">
 			<Stack className="top">
@@ -54,10 +65,14 @@ const LotCard = (props: LotCardType) => {
 				<Box
 					component={'div'}
 					className={`status-badge ${
-						lot.lotStatus === LotStatus.OPEN ? 'live' : ''
+						myBids
+							? bidStatus.toLowerCase()
+							: lot.lotStatus === LotStatus.OPEN
+							? 'live'
+							: ''
 					}`}
 				>
-					{t(lot.lotStatus)}
+					{t(myBids ? bidStatus : lot.lotStatus)}
 				</Box>
 			</Stack>
 			<Stack className="bottom">

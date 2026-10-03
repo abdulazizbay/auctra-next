@@ -10,6 +10,7 @@ import MyMenu from '../../libs/components/mypage/MyMenu';
 import MyLots from '../../libs/components/mypage/MyLots';
 import AddNewLot from '../../libs/components/mypage/AddNewLot';
 import MyWatchlist from '../../libs/components/mypage/MyWatchlist';
+import MyBids from '../../libs/components/mypage/MyBids';
 import RecentlyVisited from '../../libs/components/mypage/RecentlyVisited';
 import MyOrders from '../../libs/components/mypage/MyOrders';
 import MyProfile from '../../libs/components/mypage/MyProfile';
@@ -140,6 +141,7 @@ const MyPage: NextPage = () => {
 						{category === 'mySales' && isSeller && <MyOrders sales />}
 						{category === 'myOrders' && <MyOrders />}
 						{category === 'myProfile' && <MyProfile />}
+						{category === 'myBids' && <MyBids />}
 						{category === 'watchlist' && <MyWatchlist />}
 						{category === 'recentlyVisited' && <RecentlyVisited />}
 						{category === 'writeArticle' && <WriteArticle />}

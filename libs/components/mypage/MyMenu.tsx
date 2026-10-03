@@ -14,6 +14,7 @@ import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import ReceiptLongOutlinedIcon from '@mui/icons-material/ReceiptLongOutlined';
+import GavelOutlinedIcon from '@mui/icons-material/GavelOutlined';
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import { userVar } from '../../../apollo/store';
 import { T } from '../../types/common';
@@ -51,6 +52,11 @@ const MyMenu = () => {
 		{
 			title: 'Activity',
 			items: [
+				{
+					key: 'myBids',
+					label: 'My Bids',
+					icon: <GavelOutlinedIcon />,
+				},
 				{
 					key: 'myOrders',
 					label: 'My Orders',

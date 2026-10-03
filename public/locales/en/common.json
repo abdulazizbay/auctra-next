@@ -308,5 +308,15 @@
 	"{{count}} online": "{{count}} online",
 	"Say hello!": "Say hello!",
 	"Guest": "Guest",
-	"Login to chat": "Login to chat"
+	"Login to chat": "Login to chat",
+	"My Bids": "My Bids",
+	"Lots you have bid on": "Lots you have bid on",
+	"Winning": "Winning",
+	"Outbid": "Outbid",
+	"Won": "Won",
+	"Lost": "Lost",
+	"Page not found": "Page not found",
+	"The page you are looking for does not exist": "The page you are looking for does not exist",
+	"Back to home": "Back to home",
+	"Browse lots": "Browse lots"
 }

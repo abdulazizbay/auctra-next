@@ -253,9 +253,18 @@
 			letter-spacing: 0.3px;
 			text-transform: uppercase;
 
-			&.live {
+			&.live,
+			&.winning {
 				background: $accent;
 				color: $primary;
+			}
+
+			&.outbid {
+				background: #b3261e;
+			}
+
+			&.won {
+				background: #2e7d32;
 			}
 		}
 	}

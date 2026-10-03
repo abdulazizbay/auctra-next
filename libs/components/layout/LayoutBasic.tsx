@@ -54,6 +54,9 @@ const withLayoutBasic = (Component: any) => {
 					desc = 'Welcome to Auctra';
 					auth = true;
 					break;
+				case '/404':
+					title = 'Page not found';
+					break;
 				default:
 					break;
 			}
