@@ -1,73 +1,242 @@
 @use '../variables' as *;
 
 .join-page {
-	padding: 64px 0;
+	padding: 56px 0 96px;
 
 	.main {
 		flex-direction: row;
 		width: 100%;
-		max-width: 960px;
+		max-width: 1040px;
 		margin: 0 auto;
-		background: #fff;
-		border: 1px solid $border;
-		border-radius: 12px;
 		overflow: hidden;
+		background: #fff;
+		border: 1px solid rgba(15, 39, 66, 0.08);
+		border-radius: 28px;
+		box-shadow: 0 40px 80px -48px rgba(7, 20, 35, 0.5);
 	}
 
 	.left {
 		flex: 1;
-		padding: 48px;
-		gap: 28px;
+		min-width: 0;
+		gap: 24px;
+		padding: 48px 52px;
 
-		.info p {
-			margin-top: 8px;
-			color: $text-secondary;
+		@include down(sm) {
+			padding: 28px 20px;
+		}
+
+		.view-tabs {
+			flex-direction: row;
+			align-self: flex-start;
+			gap: 4px;
+			padding: 4px;
+			border: 1px solid $border;
+			border-radius: 999px;
+			background: $bg;
+
+			p {
+				padding: 8px 22px;
+				border-radius: 999px;
+				font-size: 14px;
+				font-weight: 600;
+				color: $text-secondary;
+				cursor: pointer;
+				transition: all 0.25s ease;
+
+				&:hover {
+					color: $primary;
+				}
+
+				&.active {
+					background: $primary;
+					color: #fff;
+					box-shadow: 0 6px 16px -8px rgba(15, 39, 66, 0.6);
+				}
+			}
+		}
+
+		.info {
+			animation: join-fade 0.4s ease both;
+
+			h3 {
+				font-family: $font-heading;
+				font-size: 44px;
+				font-weight: 600;
+				line-height: 1.1;
+				color: $primary;
+
+				@include down(sm) {
+					font-size: 34px;
+				}
+			}
+
+			p {
+				margin-top: 8px;
+				font-size: 15px;
+				color: $text-secondary;
+			}
 		}
 
 		.input-wrap {
 			display: flex;
 			flex-direction: column;
 			gap: 16px;
+
+			.MuiOutlinedInput-root {
+				border-radius: 14px;
+				background: $bg;
+
+				.MuiOutlinedInput-notchedOutline {
+					border-color: transparent;
+				}
+
+				&:hover .MuiOutlinedInput-notchedOutline {
+					border-color: $border;
+				}
+
+				&.Mui-focused {
+					background: #fff;
+
+					.MuiOutlinedInput-notchedOutline {
+						border-width: 1px;
+						border-color: $accent;
+					}
+
+					.MuiInputAdornment-positionStart svg {
+						color: #8a6f2e;
+					}
+				}
+			}
+
+			.MuiInputAdornment-root svg {
+				font-size: 20px;
+				color: $text-secondary;
+				transition: color 0.2s ease;
+			}
+
+			.MuiInputLabel-root.Mui-focused {
+				color: #8a6f2e;
+			}
+
+			.phone-field {
+				animation: join-fade 0.35s ease both;
+			}
+
+			button[type='submit'] {
+				height: 54px;
+				margin-top: 6px;
+				border-radius: 999px;
+				background: linear-gradient(135deg, #e6cf8f, $accent);
+				color: $primary;
+				font-size: 16px;
+				font-weight: 700;
+				text-transform: none;
+				box-shadow: none;
+				transition: box-shadow 0.25s ease, transform 0.25s ease;
+
+				&:hover {
+					transform: translateY(-1px);
+					box-shadow: 0 16px 32px -14px rgba(194, 163, 90, 0.9);
+				}
+
+				&.Mui-disabled {
+					background: $border;
+					color: $text-secondary;
+				}
+			}
 		}
 
 		.ask-info {
+			font-size: 14px;
 			color: $text-secondary;
 
 			b {
 				margin-left: 6px;
 				color: $primary;
 				cursor: pointer;
+				border-bottom: 1px solid rgba(194, 163, 90, 0.6);
 
 				&:hover {
-					color: $accent;
+					color: #8a6f2e;
 				}
 			}
-		}
-
-		@include down(sm) {
-			padding: 32px 20px;
 		}
 	}
 
 	.right {
-		flex: 1;
-		justify-content: center;
+		position: relative;
+		flex: 0 0 44%;
 		align-items: center;
-		gap: 12px;
-		padding: 48px;
-		background: $primary;
+		justify-content: center;
+		gap: 10px;
+		padding: 48px 40px;
+		overflow: hidden;
 		text-align: center;
+		background: radial-gradient(
+				420px 260px at 80% 10%,
+				rgba(194, 163, 90, 0.3),
+				transparent 70%
+			),
+			linear-gradient(160deg, $primary, $primary-dark);
+		color: #fff;
+
+		&::before {
+			content: '';
+			position: absolute;
+			left: -120px;
+			bottom: -160px;
+			width: 380px;
+			height: 380px;
+			border-radius: 50%;
+			background: repeating-radial-gradient(
+				circle,
+				rgba(194, 163, 90, 0.16) 0 1px,
+				transparent 1px 24px
+			);
+		}
+
+		> * {
+			position: relative;
+		}
 
 		.logo {
 			font-family: $font-heading;
-			font-size: 44px;
+			font-size: 40px;
 			font-weight: 600;
-			letter-spacing: 4px;
-			color: #fff;
+			letter-spacing: 5px;
+
+			em {
+				font-style: normal;
+				color: $accent;
+			}
 		}
 
 		p {
-			color: $accent;
+			max-width: 280px;
+			font-size: 14px;
+			color: rgba(255, 255, 255, 0.65);
+		}
+
+		.visual {
+			width: 220px;
+			margin: 8px 0;
+		}
+
+		.perks {
+			gap: 10px;
+
+			div {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				font-size: 13px;
+				color: rgba(255, 255, 255, 0.75);
+			}
+
+			svg {
+				font-size: 18px;
+				color: $accent;
+			}
 		}
 
 		@include down(md) {
@@ -76,6 +245,17 @@
 	}
 
 	@include down(md) {
-		padding: 32px 0;
+		padding: 32px 0 64px;
+	}
+}
+
+@keyframes join-fade {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
 	}
 }

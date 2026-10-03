@@ -22,7 +22,11 @@ const Footer = () => {
 						<span className={'logo'}>
 							AUCTRA<em>.</em>
 						</span>
-						<p>{t('Live auctions for pre-owned luxury watches.')}</p>
+						<p>
+							{t(
+								'Live auctions for luxury watches, jewellery, art and collectibles.',
+							)}
+						</p>
 						<div className={'live-pill'}>
 							<span className={'live-dot'} />
 							{t('Live auctions every day')}

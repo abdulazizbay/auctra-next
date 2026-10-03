@@ -1,5 +1,16 @@
-import { Html, Head, Main, NextScript, DocumentContext, DocumentProps } from 'next/document';
-import { DocumentHeadTags, DocumentHeadTagsProps, documentGetInitialProps } from '@mui/material-nextjs/v14-pagesRouter';
+import {
+	Html,
+	Head,
+	Main,
+	NextScript,
+	DocumentContext,
+	DocumentProps,
+} from 'next/document';
+import {
+	DocumentHeadTags,
+	DocumentHeadTagsProps,
+	documentGetInitialProps,
+} from '@mui/material-nextjs/v14-pagesRouter';
 
 const Document = (props: DocumentProps & DocumentHeadTagsProps) => {
 	return (
@@ -9,11 +20,16 @@ const Document = (props: DocumentProps & DocumentHeadTagsProps) => {
 				<meta name="robots" content="index,follow" />
 
 				{/* SEO */}
-				<meta name="keyword" content={'auctra, watch auction, luxury watches, pre-owned watches, live bidding'} />
+				<meta
+					name="keyword"
+					content={
+						'auctra, live auction, luxury watches, jewellery, art, coins, collectibles, live bidding'
+					}
+				/>
 				<meta
 					name={'description'}
 					content={
-						'Live auctions for pre-owned luxury watches. Bid in real time on lots from verified sellers on Auctra.'
+						'Live auctions for luxury watches, jewellery, art and collectibles. Bid in real time on lots from verified sellers on Auctra.'
 					}
 				/>
 			</Head>

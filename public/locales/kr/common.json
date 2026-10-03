@@ -12,7 +12,7 @@
 	"Member Page": "회원 페이지",
 	"Community Detail": "커뮤니티 상세",
 	"Login / Signup": "로그인 / 회원가입",
-	"Bid on authenticated pre-owned watches": "정품 인증된 중고 시계에 입찰하세요",
+	"Bid on authenticated pieces from verified sellers": "검증된 판매자의 정품 경매품에 입찰하세요",
 	"Trusted sellers with verified sales": "검증된 판매 이력의 판매자",
 	"Lots, reviews and ratings": "출품작, 리뷰 및 평점",
 	"Your lots, bids and orders": "내 출품작, 입찰 및 주문",
@@ -20,7 +20,7 @@
 	"Stories, guides and market talk": "이야기, 가이드 및 시장 토크",
 	"Notices and frequently asked questions": "공지사항 및 자주 묻는 질문",
 	"Welcome to Auctra": "Auctra에 오신 것을 환영합니다",
-	"Live auctions for pre-owned luxury watches.": "중고 명품 시계 실시간 경매.",
+	"Live auctions for luxury watches, jewellery, art and collectibles.": "명품 시계, 주얼리, 미술품, 수집품 실시간 경매.",
 	"Marketplace": "마켓플레이스",
 	"Support": "고객지원",
 	"Notices": "공지사항",
@@ -103,8 +103,8 @@
 	"Place a bid of {{price}}?": "{{price}}에 입찰하시겠습니까?",
 	"Bid placed": "입찰 완료",
 	"Bid on timeless pieces": "시간을 초월한 명품에 입찰하세요",
-	"Live auctions for pre-owned luxury watches from verified sellers.": "검증된 판매자의 중고 명품 시계 실시간 경매.",
-	"Search watches, brands, models": "시계, 브랜드, 모델 검색",
+	"Live auctions for watches, jewellery, art and rare collectibles from verified sellers.": "검증된 판매자의 시계, 주얼리, 미술품, 희귀 수집품 실시간 경매.",
+	"Search watches, jewellery, art and more": "시계, 주얼리, 미술품 등 검색",
 	"All categories": "전체 카테고리",
 	"Search": "검색",
 	"Ending Soon": "마감 임박",
@@ -343,5 +343,8 @@
 	"{{count}} people viewed this lot_other": "{{count}}명이 이 경매품을 조회했습니다",
 	"{{count}} people are watching this lot": "{{count}}명이 이 경매품을 관심 등록했습니다",
 	"{{count}} people are watching this lot_other": "{{count}}명이 이 경매품을 관심 등록했습니다",
-	"Member": "회원"
+	"Member": "회원",
+	"Welcome back": "다시 오신 것을 환영합니다",
+	"Join Auctra": "Auctra 가입하기",
+	"Create account": "계정 만들기"
 }

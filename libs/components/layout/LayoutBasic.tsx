@@ -19,7 +19,7 @@ const withLayoutBasic = (Component: any) => {
 			switch (router.pathname) {
 				case '/lot':
 					title = 'Lots';
-					desc = 'Bid on authenticated pre-owned watches';
+					desc = 'Bid on authenticated pieces from verified sellers';
 					break;
 				case '/seller':
 					title = 'Sellers';

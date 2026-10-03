@@ -48,7 +48,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 			<OutlinedInput
 				className={'search-input'}
 				value={searchFilter?.search?.text ?? ''}
-				placeholder={t('Search watches, brands, models')}
+				placeholder={t('Search watches, jewellery, art and more')}
 				onChange={(e: any) =>
 					setSearchFilter({
 						...searchFilter,

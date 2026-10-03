@@ -12,7 +12,7 @@
 	"Member Page": "Member Page",
 	"Community Detail": "Community Detail",
 	"Login / Signup": "Login / Signup",
-	"Bid on authenticated pre-owned watches": "Bid on authenticated pre-owned watches",
+	"Bid on authenticated pieces from verified sellers": "Bid on authenticated pieces from verified sellers",
 	"Trusted sellers with verified sales": "Trusted sellers with verified sales",
 	"Lots, reviews and ratings": "Lots, reviews and ratings",
 	"Your lots, bids and orders": "Your lots, bids and orders",
@@ -20,7 +20,7 @@
 	"Stories, guides and market talk": "Stories, guides and market talk",
 	"Notices and frequently asked questions": "Notices and frequently asked questions",
 	"Welcome to Auctra": "Welcome to Auctra",
-	"Live auctions for pre-owned luxury watches.": "Live auctions for pre-owned luxury watches.",
+	"Live auctions for luxury watches, jewellery, art and collectibles.": "Live auctions for luxury watches, jewellery, art and collectibles.",
 	"Marketplace": "Marketplace",
 	"Support": "Support",
 	"Notices": "Notices",
@@ -103,8 +103,8 @@
 	"Place a bid of {{price}}?": "Place a bid of {{price}}?",
 	"Bid placed": "Bid placed",
 	"Bid on timeless pieces": "Bid on timeless pieces",
-	"Live auctions for pre-owned luxury watches from verified sellers.": "Live auctions for pre-owned luxury watches from verified sellers.",
-	"Search watches, brands, models": "Search watches, brands, models",
+	"Live auctions for watches, jewellery, art and rare collectibles from verified sellers.": "Live auctions for watches, jewellery, art and rare collectibles from verified sellers.",
+	"Search watches, jewellery, art and more": "Search watches, jewellery, art and more",
 	"All categories": "All categories",
 	"Search": "Search",
 	"Ending Soon": "Ending Soon",
@@ -343,5 +343,8 @@
 	"{{count}} people viewed this lot_other": "{{count}} people viewed this lot",
 	"{{count}} people are watching this lot_one": "{{count}} person is watching this lot",
 	"{{count}} people are watching this lot_other": "{{count}} people are watching this lot",
-	"Member": "Member"
+	"Member": "Member",
+	"Welcome back": "Welcome back",
+	"Join Auctra": "Join Auctra",
+	"Create account": "Create account"
 }

@@ -95,7 +95,7 @@ const HeroBanner = () => {
 					</Typography>
 					<Typography className={'hero-desc'}>
 						{t(
-							'Live auctions for pre-owned luxury watches from verified sellers.',
+							'Live auctions for watches, jewellery, art and rare collectibles from verified sellers.',
 						)}
 					</Typography>
 					<HeaderFilter />
