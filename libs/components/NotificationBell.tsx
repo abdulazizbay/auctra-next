@@ -98,6 +98,10 @@ const NotificationBell = () => {
 			case NotificationType.SELLER_APPROVED:
 			case NotificationType.SELLER_REJECTED:
 				return '/mypage?category=myProfile';
+			case NotificationType.LOT_CANCELLED:
+				return user.memberType === MemberType.SELLER
+					? '/mypage?category=myLots'
+					: '';
 		}
 		if (notification.notificationRefType === NotificationRefType.ARTICLE)
 			return `/community/detail?id=${notification.notificationRefId}`;
@@ -120,7 +124,8 @@ const NotificationBell = () => {
 				await readNotification({ variables: { input: notification._id } });
 				setUnreadCount((count) => Math.max(count - 1, 0));
 			}
-			await router.push(notificationLink(notification));
+			const link = notificationLink(notification);
+			if (link) await router.push(link);
 		} catch (err: any) {
 			sweetMixinErrorAlert(err.message).then();
 		}

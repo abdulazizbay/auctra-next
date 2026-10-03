@@ -33,4 +33,5 @@ export const notificationMessages: Record<string, string> = {
 	NEW_LOT_FROM_FOLLOWED: 'New lot from a seller you follow: {{lotName}}',
 	SELLER_APPROVED: 'Your seller application was approved',
 	SELLER_REJECTED: 'Your seller application was rejected',
+	LOT_CANCELLED: '{{lotName}} was cancelled by the admin',
 };

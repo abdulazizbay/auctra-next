@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -97,6 +97,7 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 	const [bidPrice, setBidPrice] = useState<number>(0);
 	const [now, setNow] = useState<number>(Date.now());
 	const [wonOpen, setWonOpen] = useState<boolean>(false);
+	const bidPage = useRef<number>(1);
 	const [commentInquiry, setCommentInquiry] =
 		useState<CommentsInquiry>(initialComment);
 	const [lotComments, setLotComments] = useState<Comment[]>([]);
@@ -213,6 +214,7 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 	}, [router]);
 
 	useEffect(() => {
+		bidPage.current = bidInquiry.page;
 		if (bidInquiry.search.lotId) {
 			getBidsRefetch({ input: bidInquiry });
 		}
@@ -247,7 +249,11 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 						  }
 						: prev,
 				);
-				getBidsRefetch();
+				if (bidPage.current !== 1) getBidsRefetch();
+				else {
+					setLotBids((prev) => [data.bid, ...prev].slice(0, initialBid.limit));
+					setBidTotal((prev) => prev + 1);
+				}
 			}
 			if (data.event === 'lotClosed') {
 				setLot((prev) =>

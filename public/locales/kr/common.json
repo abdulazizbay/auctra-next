@@ -301,5 +301,6 @@
 	"Congratulations, you won!": "축하합니다, 낙찰되었습니다!",
 	"Please complete payment within 48 hours.": "48시간 이내에 결제를 완료해 주세요.",
 	"Close": "닫기",
-	"Pay now": "지금 결제하기"
+	"Pay now": "지금 결제하기",
+	"{{lotName}} was cancelled by the admin": "{{lotName}} 경매가 관리자에 의해 취소되었습니다"
 }

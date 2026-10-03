@@ -301,5 +301,6 @@
 	"Congratulations, you won!": "Congratulations, you won!",
 	"Please complete payment within 48 hours.": "Please complete payment within 48 hours.",
 	"Close": "Close",
-	"Pay now": "Pay now"
+	"Pay now": "Pay now",
+	"{{lotName}} was cancelled by the admin": "{{lotName}} was cancelled by the admin"
 }
