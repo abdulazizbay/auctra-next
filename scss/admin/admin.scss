@@ -1,0 +1,162 @@
+@use '../variables' as *;
+
+$aside-width: 240px;
+
+.admin-menu {
+	width: $aside-width;
+	padding: 24px 12px;
+	gap: 4px;
+
+	a {
+		padding: 10px 16px;
+		border-radius: 8px;
+		color: $text;
+		font-weight: 500;
+
+		&:hover {
+			background: $bg;
+		}
+
+		&.active {
+			background: $primary;
+			color: #fff;
+		}
+	}
+
+	.logo {
+		margin-bottom: 16px;
+		font-family: $font-heading;
+		font-size: 26px;
+		font-weight: 700;
+		color: $primary;
+
+		&:hover {
+			background: none;
+		}
+	}
+}
+
+#admin-wrap {
+	min-height: 100vh;
+	background: $bg;
+
+	.admin-aside .MuiDrawer-paper {
+		width: $aside-width;
+	}
+
+	.admin-main {
+		margin-left: $aside-width;
+	}
+
+	.admin-top {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		height: 64px;
+		padding: 0 24px;
+		background: #fff;
+		border-bottom: 1px solid $border;
+
+		.menu-btn {
+			display: none;
+		}
+
+		.title {
+			flex: 1;
+			font-family: $font-heading;
+			font-size: 24px;
+			font-weight: 700;
+			color: $primary;
+		}
+
+		.nick {
+			font-weight: 600;
+		}
+	}
+
+	.admin-content {
+		padding: 24px;
+	}
+
+	@include down(md) {
+		.admin-aside {
+			display: none;
+		}
+
+		.admin-main {
+			margin-left: 0;
+		}
+
+		.admin-top {
+			padding: 0 16px;
+
+			.menu-btn {
+				display: inline-flex;
+			}
+
+			.nick {
+				display: none;
+			}
+		}
+
+		.admin-content {
+			padding: 16px;
+		}
+	}
+}
+
+.admin-page {
+	gap: 16px;
+
+	.admin-filter {
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+
+		.MuiTabs-root {
+			min-width: 0;
+		}
+	}
+
+	.admin-table {
+		background: #fff;
+		border: 1px solid $border;
+		border-radius: 12px;
+
+		th {
+			font-weight: 700;
+			color: $text-secondary;
+			white-space: nowrap;
+		}
+
+		td {
+			white-space: nowrap;
+		}
+
+		td a {
+			color: $primary;
+			font-weight: 600;
+		}
+
+		.actions {
+			button + button {
+				margin-left: 4px;
+			}
+		}
+	}
+}
+
+.admin-doc {
+	display: block;
+	max-width: 100%;
+	max-height: 70vh;
+}
+
+.admin-form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding-top: 8px !important;
+}

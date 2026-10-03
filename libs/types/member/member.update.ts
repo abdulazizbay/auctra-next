@@ -1,4 +1,8 @@
-import { MemberLocation, MemberSellerStatus } from '../../enums/member.enum';
+import {
+	MemberLocation,
+	MemberSellerStatus,
+	MemberStatus,
+} from '../../enums/member.enum';
 
 export interface MemberUpdate {
 	_id?: string;
@@ -11,6 +15,7 @@ export interface MemberUpdate {
 	memberBio?: string;
 	memberLocation?: MemberLocation;
 	memberAddress?: string;
+	memberStatus?: MemberStatus;
 }
 
 export interface SellerApply {

@@ -17,9 +17,11 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Logout } from '@mui/icons-material';
+import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 import { userVar } from '../../apollo/store';
 import { getJwtToken, logOut, requestUserInfo } from '../auth';
 import { REACT_APP_API_URL } from '../config';
+import { MemberType } from '../enums/member.enum';
 import { connectSocket } from '../socket';
 import NotificationBell from './NotificationBell';
 
@@ -92,6 +94,15 @@ const Top = () => {
 								open={Boolean(logoutAnchor)}
 								onClose={() => setLogoutAnchor(null)}
 							>
+								{user.memberType === MemberType.ADMIN && (
+									<MenuItem onClick={() => router.push('/_admin')}>
+										<AdminPanelSettingsOutlinedIcon
+											fontSize="small"
+											sx={{ mr: 1 }}
+										/>
+										{t('Admin')}
+									</MenuItem>
+								)}
 								<MenuItem onClick={() => logOut()}>
 									<Logout fontSize="small" sx={{ mr: 1 }} />
 									{t('Logout')}

@@ -45,6 +45,8 @@ import {
 	UPDATE_ARTICLE,
 	UPDATE_COMMENT,
 } from '../../apollo/user/mutation';
+import { REMOVE_COMMENT_BY_ADMIN } from '../../apollo/admin/mutation';
+import { MemberType } from '../../libs/enums/member.enum';
 import {
 	sweetConfirmAlert,
 	sweetMixinErrorAlert,
@@ -93,6 +95,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 	const [updateArticle] = useMutation(UPDATE_ARTICLE);
 	const [createComment] = useMutation(CREATE_COMMENT);
 	const [updateComment] = useMutation(UPDATE_COMMENT);
+	const [removeCommentByAdmin] = useMutation(REMOVE_COMMENT_BY_ADMIN);
 
 	const {
 		loading: getArticleLoading,
@@ -270,6 +273,18 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 		setUpdatedCommentId('');
 	};
 
+	const removeCommentHandler = async (commentId: string) => {
+		try {
+			if (!(await sweetConfirmAlert(t('Delete this comment?')))) return;
+			await removeCommentByAdmin({ variables: { input: commentId } });
+			await getArticleRefetch({ input: articleId });
+			await getCommentsRefetch({ input: searchFilter });
+			await sweetTopSmallSuccessAlert(t('Comment deleted'), 800);
+		} catch (err: any) {
+			sweetMixinErrorAlert(err.message).then();
+		}
+	};
+
 	const paginationHandler = (e: T, value: number) => {
 		setSearchFilter({ ...searchFilter, page: value });
 	};
@@ -284,6 +299,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 		);
 
 	const isAuthor = !!user?._id && article?.memberId === user?._id;
+	const isAdmin = user?.memberType === MemberType.ADMIN;
 	const isLiked = !!article?.meLiked?.[0]?.myFavorite;
 	const authorImage = imageUrl(article?.memberData?.memberImage);
 
@@ -478,6 +494,16 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 														CommentStatus.DELETED,
 													)
 												}
+											>
+												<DeleteOutlineRoundedIcon />
+											</IconButton>
+										</Box>
+									)}
+									{isAdmin && commentData?.memberId !== user?._id && (
+										<Box component={'div'} className={'buttons'}>
+											<IconButton
+												size={'small'}
+												onClick={() => removeCommentHandler(commentData?._id)}
 											>
 												<DeleteOutlineRoundedIcon />
 											</IconButton>

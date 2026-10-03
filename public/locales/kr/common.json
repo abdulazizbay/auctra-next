@@ -296,5 +296,6 @@
 	"Messages": "메시지",
 	"Load older": "이전 메시지 보기",
 	"No messages yet": "아직 메시지가 없습니다",
-	"Write a message": "메시지를 입력하세요"
+	"Write a message": "메시지를 입력하세요",
+	"Admin": "관리자"
 }

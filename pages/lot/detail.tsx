@@ -61,6 +61,8 @@ import {
 	PLACE_BID,
 	WATCH_TARGET_LOT,
 } from '../../apollo/user/mutation';
+import { REMOVE_COMMENT_BY_ADMIN } from '../../apollo/admin/mutation';
+import { MemberType } from '../../libs/enums/member.enum';
 import {
 	sweetConfirmAlert,
 	sweetErrorHandling,
@@ -104,6 +106,7 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 	const [watchTargetLot] = useMutation(WATCH_TARGET_LOT);
 	const [placeBid] = useMutation(PLACE_BID);
 	const [createComment] = useMutation(CREATE_COMMENT);
+	const [removeCommentByAdmin] = useMutation(REMOVE_COMMENT_BY_ADMIN);
 
 	const {
 		loading: getLotLoading,
@@ -322,6 +325,17 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 			await sweetTopSmallSuccessAlert(t('Bid placed'), 800);
 		} catch (err: any) {
 			console.log('ERROR, placeBidHandler: ', err.message);
+			sweetMixinErrorAlert(err.message).then();
+		}
+	};
+
+	const removeCommentHandler = async (commentId: string) => {
+		try {
+			if (!(await sweetConfirmAlert(t('Delete this comment?')))) return;
+			await removeCommentByAdmin({ variables: { input: commentId } });
+			await getCommentsRefetch({ input: commentInquiry });
+			await sweetTopSmallSuccessAlert(t('Comment deleted'), 800);
+		} catch (err: any) {
 			sweetMixinErrorAlert(err.message).then();
 		}
 	};
@@ -601,7 +615,15 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 									<Stack className={'review-list'}>
 										{lotComments?.map((comment: Comment) => {
 											return (
-												<LotComment comment={comment} key={comment?._id} />
+												<LotComment
+													comment={comment}
+													key={comment?._id}
+													removeHandler={
+														user?.memberType === MemberType.ADMIN
+															? removeCommentHandler
+															: undefined
+													}
+												/>
 											);
 										})}
 										<Box component={'div'} className={'pagination-box'}>

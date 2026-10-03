@@ -2,17 +2,19 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import Moment from 'react-moment';
 import { useReactiveVar } from '@apollo/client';
-import { Avatar, Stack, Typography } from '@mui/material';
+import { Avatar, IconButton, Stack, Typography } from '@mui/material';
+import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import { Comment } from '../../types/comment/comment';
 import { REACT_APP_API_URL } from '../../config';
 import { userVar } from '../../../apollo/store';
 
 interface LotCommentProps {
 	comment: Comment;
+	removeHandler?: (commentId: string) => void;
 }
 
 const LotComment = (props: LotCommentProps) => {
-	const { comment } = props;
+	const { comment, removeHandler } = props;
 	const router = useRouter();
 	const user = useReactiveVar(userVar);
 	const image = comment?.memberData?.memberImage;
@@ -45,6 +47,15 @@ const LotComment = (props: LotCommentProps) => {
 						<Moment format={'DD MMMM, YYYY'}>{comment.createdAt}</Moment>
 					</Typography>
 				</Stack>
+				{removeHandler && (
+					<IconButton
+						size={'small'}
+						className={'remove-btn'}
+						onClick={() => removeHandler(comment._id)}
+					>
+						<DeleteOutlineRoundedIcon />
+					</IconButton>
+				)}
 			</Stack>
 			<Typography className={'description'}>{comment.commentText}</Typography>
 		</Stack>
