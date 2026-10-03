@@ -5,6 +5,12 @@
 		position: sticky;
 		top: 0;
 		z-index: 100;
+		height: 80px;
+		pointer-events: none;
+
+		.navbar {
+			pointer-events: auto;
+		}
 	}
 
 	#main {
@@ -17,37 +23,84 @@
 }
 
 .navbar {
-	background: $primary;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	background: rgba(15, 39, 66, 0.82);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	border-bottom: 1px solid rgba(194, 163, 90, 0.18);
+	transition: background 0.35s ease, border-color 0.35s ease,
+		box-shadow 0.35s ease;
+
+	&.transparent {
+		background: transparent;
+		backdrop-filter: none;
+		-webkit-backdrop-filter: none;
+		border-bottom-color: transparent;
+	}
+
+	&.scrolled {
+		box-shadow: 0 12px 32px -20px rgba(0, 0, 0, 0.7);
+
+		.container {
+			height: 64px;
+		}
+	}
 
 	.container {
-		height: 72px;
+		height: 80px;
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
+		transition: height 0.35s ease;
 	}
 
 	.logo-box a {
 		font-family: $font-heading;
 		font-size: 28px;
 		font-weight: 600;
-		letter-spacing: 3px;
+		letter-spacing: 4px;
 		color: #fff;
+
+		span {
+			color: $accent;
+		}
 	}
 
 	.router-box {
 		display: flex;
 		flex-direction: row;
-		gap: 36px;
+		gap: 32px;
 
 		a {
+			position: relative;
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			padding: 6px 0;
 			font-size: 15px;
 			font-weight: 500;
-			color: rgba(255, 255, 255, 0.85);
-			transition: color 0.2s;
+			color: rgba(255, 255, 255, 0.72);
+			transition: color 0.25s ease;
 
-			&:hover {
-				color: $accent;
+			&::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				height: 2px;
+				border-radius: 2px;
+				background: linear-gradient(90deg, transparent, $accent, transparent);
+				transform: scaleX(0);
+				transition: transform 0.3s ease;
+			}
+
+			&:hover,
+			&.active {
+				color: #fff;
+
+				&::after {
+					transform: scaleX(1);
+				}
 			}
 		}
 
@@ -66,12 +119,20 @@
 			display: flex;
 			align-items: center;
 			gap: 8px;
-			padding: 8px 16px;
-			border: 1px solid $accent;
-			border-radius: 6px;
-			color: $accent;
+			padding: 8px 18px;
+			border: 1px solid transparent;
+			border-radius: 999px;
+			background: linear-gradient($primary, $primary) padding-box,
+				linear-gradient(135deg, #e6cf8f, $accent, #8a6f2e) border-box;
+			color: #f1e3bb;
 			font-size: 14px;
 			font-weight: 600;
+			transition: box-shadow 0.25s ease, transform 0.25s ease;
+
+			&:hover {
+				transform: translateY(-1px);
+				box-shadow: 0 8px 24px -10px rgba(194, 163, 90, 0.8);
+			}
 
 			@include down(sm) {
 				padding: 6px;
@@ -89,14 +150,23 @@
 		.login-user {
 			width: 36px;
 			height: 36px;
-			background: $accent;
+			background: linear-gradient(135deg, #e6cf8f, $accent);
 			color: $primary;
-			font-weight: 600;
+			font-weight: 700;
+			box-shadow: 0 0 0 2px rgba(194, 163, 90, 0.35);
 		}
 
 		.btn-lang {
-			color: #fff;
+			min-width: 0;
+			padding: 4px 10px;
+			border-radius: 999px;
+			color: rgba(255, 255, 255, 0.85);
+			font-size: 13px;
 			font-weight: 600;
+
+			&:hover {
+				background: rgba(255, 255, 255, 0.08);
+			}
 		}
 
 		.menu-btn {
@@ -110,17 +180,75 @@
 	}
 }
 
+.live-dot {
+	position: relative;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: #ff5a5f;
+
+	&::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: 50%;
+		background: inherit;
+		animation: live-pulse 1.8s ease-out infinite;
+	}
+}
+
+@keyframes live-pulse {
+	from {
+		transform: scale(1);
+		opacity: 0.8;
+	}
+	to {
+		transform: scale(3.2);
+		opacity: 0;
+	}
+}
+
 .nav-drawer .MuiDrawer-paper {
-	width: 260px;
-	padding: 24px;
-	background: $primary;
+	width: 280px;
+	padding: 32px 24px;
+	background: rgba(10, 27, 47, 0.92);
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
+	border-left: 1px solid rgba(194, 163, 90, 0.2);
 
 	a {
-		display: block;
-		padding: 12px 0;
-		color: #fff;
-		font-size: 16px;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 14px 0;
+		color: rgba(255, 255, 255, 0.8);
+		font-family: $font-heading;
+		font-size: 22px;
+		font-weight: 600;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+		opacity: 0;
+		animation: nav-in 0.45s ease forwards;
+
+		&.active {
+			color: $accent;
+		}
+
+		@for $i from 1 through 6 {
+			&:nth-child(#{$i}) {
+				animation-delay: #{0.05 + $i * 0.05}s;
+			}
+		}
+	}
+}
+
+@keyframes nav-in {
+	from {
+		opacity: 0;
+		transform: translateX(16px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
 	}
 }
 

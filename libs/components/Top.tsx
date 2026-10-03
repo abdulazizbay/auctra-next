@@ -32,6 +32,8 @@ const Top = () => {
 	const [langAnchor, setLangAnchor] = useState<null | HTMLElement>(null);
 	const [logoutAnchor, setLogoutAnchor] = useState<null | HTMLElement>(null);
 	const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+	const [scrolled, setScrolled] = useState<boolean>(false);
+	const isHome = router.pathname === '/';
 
 	/** LIFECYCLES **/
 	useEffect(() => {
@@ -43,30 +45,62 @@ const Top = () => {
 		connectSocket();
 	}, [user?._id]);
 
+	useEffect(() => {
+		const scrollHandler = () => setScrolled(window.scrollY > 40);
+		scrollHandler();
+		window.addEventListener('scroll', scrollHandler, { passive: true });
+		return () => window.removeEventListener('scroll', scrollHandler);
+	}, []);
+
 	/** HANDLERS **/
 	const langChoice = async (locale: string) => {
 		setLangAnchor(null);
 		await router.push(router.asPath, router.asPath, { locale });
 	};
 
+	const activeClass = (path: string) =>
+		(path === '/' ? isHome : router.pathname.startsWith(path)) ? 'active' : '';
+
 	const links = (
 		<>
-			<Link href={'/'}>{t('Home')}</Link>
-			<Link href={'/lot'}>{t('Lots')}</Link>
-			<Link href={'/seller'}>{t('Sellers')}</Link>
-			<Link href={'/community?articleCategory=MARKET_TALK'}>
+			<Link href={'/'} className={activeClass('/')}>
+				{t('Home')}
+			</Link>
+			<Link href={'/lot'} className={activeClass('/lot')}>
+				{t('Lots')}
+				<span className={'live-dot'} />
+			</Link>
+			<Link href={'/seller'} className={activeClass('/seller')}>
+				{t('Sellers')}
+			</Link>
+			<Link
+				href={'/community?articleCategory=MARKET_TALK'}
+				className={activeClass('/community')}
+			>
 				{t('Community')}
 			</Link>
-			{user?._id && <Link href={'/mypage'}>{t('My Page')}</Link>}
-			<Link href={'/cs'}>{t('CS')}</Link>
+			{user?._id && (
+				<Link href={'/mypage'} className={activeClass('/mypage')}>
+					{t('My Page')}
+				</Link>
+			)}
+			<Link href={'/cs'} className={activeClass('/cs')}>
+				{t('CS')}
+			</Link>
 		</>
 	);
 
 	return (
-		<Stack className={'navbar'}>
+		<Stack
+			className={`navbar ${isHome && !scrolled ? 'transparent' : ''} ${
+				scrolled ? 'scrolled' : ''
+			}`}
+		>
 			<Stack className={'container'}>
 				<Box component={'div'} className={'logo-box'}>
-					<Link href={'/'}>AUCTRA</Link>
+					<Link href={'/'}>
+						AUCTRA<span>.</span>
+					</Link>
 				</Box>
 				<Box component={'div'} className={'router-box'}>
 					{links}
