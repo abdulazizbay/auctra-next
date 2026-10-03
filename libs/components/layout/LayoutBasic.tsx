@@ -25,17 +25,9 @@ const withLayoutBasic = (Component: any) => {
 					title = 'Sellers';
 					desc = 'Trusted sellers with verified sales';
 					break;
-				case '/seller/detail':
-					title = 'Seller Page';
-					desc = 'Lots, reviews and ratings';
-					break;
 				case '/mypage':
 					title = 'My Page';
 					desc = 'Your lots, bids and orders';
-					break;
-				case '/member':
-					title = 'Member Page';
-					desc = 'Articles, followers and followings';
 					break;
 				case '/community':
 					title = 'Community';
@@ -75,7 +67,9 @@ const withLayoutBasic = (Component: any) => {
 						<Top />
 					</Stack>
 
-					<Stack className={`header-basic ${memoizedValues.auth ? 'auth' : ''}`}>
+					<Stack
+						className={`header-basic ${memoizedValues.auth ? 'auth' : ''}`}
+					>
 						<Stack className={'container'}>
 							<strong>{t(memoizedValues.title)}</strong>
 							<span>{t(memoizedValues.desc)}</span>

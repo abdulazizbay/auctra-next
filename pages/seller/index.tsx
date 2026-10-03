@@ -202,6 +202,9 @@ const SellerList: NextPage = ({ initialInput, ...props }: any) => {
 							) : null
 						}
 					/>
+					<Typography className={'result-count'}>
+						{t('Total {{count}} sellers', { count: total })}
+					</Typography>
 					<Box component={'div'} className={'sort-control'}>
 						<Typography>{t('Sort by')}</Typography>
 						<Button
@@ -233,9 +236,6 @@ const SellerList: NextPage = ({ initialInput, ...props }: any) => {
 						</Menu>
 					</Box>
 				</Box>
-				<Typography className={'result-count'}>
-					{t('Total {{count}} sellers', { count: total })}
-				</Typography>
 				<Stack className={'list-config'}>
 					{sellers?.length === 0 ? (
 						<div className={'no-data'}>

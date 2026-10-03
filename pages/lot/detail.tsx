@@ -612,8 +612,8 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 							{seller && (
 								<Link
 									href={{
-										pathname: '/seller/detail',
-										query: { id: seller._id },
+										pathname: '/member',
+										query: { memberId: seller._id },
 									}}
 									className={'seller-box'}
 								>

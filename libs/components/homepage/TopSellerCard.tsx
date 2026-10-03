@@ -26,7 +26,7 @@ const TopSellerCard = (props: TopSellerCardProps) => {
 
 	/** HANDLERS **/
 	const pushDetailHandler = async (sellerId: string) => {
-		await router.push({ pathname: '/seller/detail', query: { id: sellerId } });
+		await router.push({ pathname: '/member', query: { memberId: sellerId } });
 	};
 
 	return (

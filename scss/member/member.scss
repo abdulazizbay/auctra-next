@@ -57,56 +57,559 @@
 	}
 }
 
-.member-menu {
-	.member-profile {
-		align-items: center;
-		gap: 6px;
-		padding-bottom: 20px;
-		border-bottom: 1px solid $border;
+#member-page {
+	min-height: 60vh;
+	padding: 32px 0 96px;
+
+	> .container {
+		gap: 28px;
+	}
+
+	.no-data {
+		padding: 56px 16px;
 		text-align: center;
+		color: $text-secondary;
+		background: #fff;
+		border: 1px dashed $border;
+		border-radius: 20px;
+	}
 
-		.profile-img {
-			width: 88px;
-			height: 88px;
-			margin-bottom: 6px;
-			border: 4px solid #fff;
-			box-shadow: 0 10px 24px -12px rgba(15, 39, 66, 0.5);
-			background: $accent;
-			color: $primary;
-			font-size: 34px;
+	.profile-box {
+		position: relative;
+		overflow: hidden;
+		border-radius: 28px;
+		background: radial-gradient(
+				700px 360px at 90% 0%,
+				rgba(194, 163, 90, 0.3),
+				transparent 70%
+			),
+			linear-gradient(160deg, $primary 0%, $primary-dark 100%);
+		color: #fff;
+		box-shadow: 0 40px 80px -48px rgba(7, 20, 35, 0.7);
+
+		&::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+			opacity: 0.05;
+			pointer-events: none;
+		}
+
+		.cover {
+			position: relative;
+			height: 150px;
+
+			@include down(sm) {
+				height: 110px;
+			}
+
+			&::before {
+				content: '';
+				position: absolute;
+				right: -80px;
+				top: -160px;
+				width: 420px;
+				height: 420px;
+				border-radius: 50%;
+				background: repeating-radial-gradient(
+					circle,
+					rgba(194, 163, 90, 0.2) 0 1px,
+					transparent 1px 26px
+				);
+			}
+
+			.trusted-chip {
+				position: absolute;
+				z-index: 1;
+				top: 20px;
+				left: 32px;
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				padding: 6px 12px 6px 8px;
+				border: 1px solid rgba(194, 163, 90, 0.4);
+				border-radius: 999px;
+				background: rgba(194, 163, 90, 0.1);
+				color: #f1e3bb;
+				font-size: 12px;
+				font-weight: 700;
+
+				svg {
+					font-size: 16px;
+					color: $accent;
+				}
+
+				@include down(md) {
+					left: 20px;
+				}
+			}
+		}
+
+		.profile-main {
+			position: relative;
+			z-index: 1;
+			flex-direction: row;
+			align-items: flex-end;
+			gap: 28px;
+			margin-top: -64px;
+			padding: 0 32px;
+
+			@include down(md) {
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 16px;
+				padding: 0 20px;
+			}
+		}
+
+		.avatar {
+			width: 136px;
+			height: 136px;
+			flex-shrink: 0;
+			background: linear-gradient(135deg, #1f4a78, $primary);
+			color: $accent;
+			font-family: $font-heading;
+			font-size: 54px;
 			font-weight: 700;
+			box-shadow: 0 0 0 5px $primary-dark, 0 0 0 7px rgba(194, 163, 90, 0.6),
+				0 20px 40px -16px rgba(0, 0, 0, 0.6);
+
+			@include down(sm) {
+				width: 104px;
+				height: 104px;
+				font-size: 42px;
+			}
 		}
 
-		.user-name {
-			font-size: 20px;
-			font-weight: 700;
-			color: $text;
-		}
+		.profile-info {
+			flex: 1;
+			min-width: 0;
+			gap: 8px;
+			padding-bottom: 4px;
 
-		.joined {
-			font-size: 12px;
-			color: $text-secondary;
-		}
+			.name {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				font-family: $font-heading;
+				font-size: 44px;
+				font-weight: 600;
+				line-height: 1.05;
+				color: #fff;
 
-		.bio {
-			font-size: 13px;
-			line-height: 1.5;
-			color: $text;
+				.trusted {
+					font-size: 26px;
+					color: $accent;
+				}
+
+				@include down(sm) {
+					font-size: 34px;
+				}
+			}
+
+			.rating {
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap;
+				gap: 4px;
+				font-size: 14px;
+				color: rgba(255, 255, 255, 0.65);
+
+				> svg {
+					font-size: 20px;
+					color: $accent;
+				}
+
+				b {
+					color: #fff;
+				}
+
+				.seller-chip {
+					display: inline-flex;
+					align-items: center;
+					gap: 4px;
+					margin-right: 8px;
+					padding: 3px 10px 3px 8px;
+					border-radius: 999px;
+					background: $accent;
+					color: $primary;
+					font-size: 11px;
+					font-weight: 700;
+					letter-spacing: 0.5px;
+					text-transform: uppercase;
+
+					svg {
+						font-size: 14px;
+					}
+				}
+			}
+
+			.bio {
+				max-width: 640px;
+				font-size: 15px;
+				line-height: 1.6;
+				color: rgba(255, 255, 255, 0.8);
+			}
+
+			.meta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 16px;
+
+				span {
+					display: inline-flex;
+					align-items: center;
+					gap: 4px;
+					font-size: 13px;
+					color: rgba(255, 255, 255, 0.55);
+				}
+
+				svg {
+					font-size: 18px;
+					color: $accent;
+				}
+			}
 		}
 
 		.actions {
-			display: flex;
+			flex-direction: row;
 			gap: 8px;
-			margin-top: 10px;
+			padding-bottom: 4px;
+
+			button {
+				height: 44px;
+				padding: 0 20px;
+				border-radius: 999px;
+				font-size: 14px;
+				font-weight: 700;
+				text-transform: none;
+				transition: all 0.25s ease;
+			}
+
+			.follow-button {
+				background: linear-gradient(135deg, #e6cf8f, $accent);
+				color: $primary;
+
+				&:hover {
+					box-shadow: 0 12px 28px -12px rgba(194, 163, 90, 0.9);
+				}
+
+				&.following {
+					background: transparent;
+					border: 1px solid rgba(255, 255, 255, 0.3);
+					color: #fff;
+
+					&:hover {
+						border-color: $accent;
+						box-shadow: none;
+					}
+				}
+			}
+
+			.like-button {
+				min-width: 76px;
+				border: 1px solid rgba(255, 255, 255, 0.2);
+				color: #fff;
+
+				.MuiButton-startIcon {
+					margin-right: 4px;
+				}
+
+				&:hover {
+					border-color: #ff8a8e;
+					background: rgba(229, 72, 77, 0.15);
+				}
+
+				&.liked {
+					border-color: #e5484d;
+					background: #e5484d;
+
+					&:hover {
+						background: #d63c41;
+					}
+				}
+			}
 		}
 
-		.seller-link {
-			margin-top: 6px;
-			font-size: 13px;
-			font-weight: 700;
+		.stats {
+			position: relative;
+			z-index: 1;
+			display: flex;
+			flex-direction: row;
+			margin: 32px;
+			padding: 20px 0;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			border-radius: 20px;
+			background: rgba(255, 255, 255, 0.04);
+
+			@include down(md) {
+				margin: 24px 20px 20px;
+			}
+
+			@include down(sm) {
+				flex-wrap: wrap;
+				row-gap: 18px;
+			}
+
+			div {
+				flex: 1 1 0;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 4px;
+
+				& + div {
+					border-left: 1px solid rgba(255, 255, 255, 0.1);
+				}
+
+				@include down(sm) {
+					flex-basis: 33%;
+
+					& + div {
+						border-left: none;
+					}
+				}
+			}
+
+			strong {
+				font-family: $font-heading;
+				font-size: 34px;
+				font-weight: 600;
+				line-height: 1;
+				color: $accent;
+				font-variant-numeric: lining-nums;
+			}
+
+			span {
+				font-size: 11px;
+				font-weight: 700;
+				letter-spacing: 1.2px;
+				text-transform: uppercase;
+				color: rgba(255, 255, 255, 0.55);
+			}
+		}
+	}
+
+	.member-tabs {
+		flex-direction: row;
+		align-self: flex-start;
+		flex-wrap: wrap;
+		gap: 4px;
+		padding: 5px;
+		border: 1px solid $border;
+		border-radius: 999px;
+		background: #fff;
+
+		@include down(sm) {
+			align-self: stretch;
+			border-radius: 18px;
+		}
+
+		p {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			padding: 9px 18px;
+			border-radius: 999px;
+			font-size: 14px;
+			font-weight: 600;
+			color: $text-secondary;
+			cursor: pointer;
+			transition: all 0.2s ease;
+
+			span {
+				padding: 1px 8px;
+				border-radius: 999px;
+				background: $bg;
+				font-size: 12px;
+				font-weight: 700;
+				color: $text-secondary;
+			}
+
+			&:hover {
+				color: $primary;
+			}
+
+			&.active {
+				background: $primary;
+				color: #fff;
+
+				span {
+					background: rgba(255, 255, 255, 0.16);
+					color: #fff;
+				}
+			}
+		}
+	}
+
+	.member-section {
+		gap: 22px;
+
+		.section-head {
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			gap: 12px;
+		}
+
+		.section-title {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			font-family: $font-heading;
+			font-size: 36px;
+			font-weight: 600;
 			color: $primary;
-			text-decoration: underline;
-			text-underline-offset: 3px;
+
+			.count {
+				padding: 2px 10px;
+				border-radius: 999px;
+				background: rgba(194, 163, 90, 0.15);
+				font-family: $font;
+				font-size: 13px;
+				font-weight: 700;
+				color: #8a6f2e;
+			}
+		}
+
+		.status-tabs {
+			flex-direction: row;
+			flex-wrap: wrap;
+			gap: 4px;
+			padding: 4px;
+			border: 1px solid $border;
+			border-radius: 999px;
+			background: #fff;
+
+			p {
+				padding: 7px 16px;
+				border-radius: 999px;
+				font-size: 13px;
+				font-weight: 600;
+				color: $text-secondary;
+				cursor: pointer;
+				transition: all 0.2s ease;
+
+				&:hover {
+					color: $primary;
+				}
+
+				&.active {
+					background: $primary;
+					color: #fff;
+				}
+			}
+		}
+
+		.lot-list {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 24px;
+
+			@include down(md) {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			@include down(sm) {
+				grid-template-columns: minmax(0, 1fr);
+			}
+
+			.no-data {
+				grid-column: 1 / -1;
+			}
+		}
+
+		.review-list {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 16px;
+
+			@include down(md) {
+				grid-template-columns: minmax(0, 1fr);
+			}
+
+			.no-data {
+				grid-column: 1 / -1;
+			}
+		}
+
+		.pagination-box {
+			align-items: center;
+			padding-top: 8px;
+		}
+	}
+
+	.review-card {
+		position: relative;
+		gap: 14px;
+		padding: 24px;
+		overflow: hidden;
+		background: #fff;
+		border: 1px solid $border;
+		border-radius: 20px;
+		transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+		&::before {
+			content: '\201C';
+			position: absolute;
+			right: 20px;
+			top: -6px;
+			font-family: $font-heading;
+			font-size: 110px;
+			line-height: 1;
+			color: rgba(194, 163, 90, 0.18);
+			pointer-events: none;
+		}
+
+		&:hover {
+			border-color: rgba(194, 163, 90, 0.5);
+			box-shadow: 0 18px 36px -26px rgba(15, 39, 66, 0.45);
+		}
+
+		.info {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		.avatar {
+			width: 44px;
+			height: 44px;
+			background: linear-gradient(135deg, $primary, #1f4a78);
+			color: $accent;
+			font-weight: 700;
+			cursor: pointer;
+		}
+
+		.name-date {
+			flex: 1;
+			min-width: 0;
+
+			strong {
+				font-size: 15px;
+				font-weight: 700;
+				color: $primary;
+				cursor: pointer;
+			}
+
+			span {
+				font-size: 12px;
+				color: $text-secondary;
+			}
+		}
+
+		.rating {
+			position: relative;
+			color: $accent;
+		}
+
+		.review-text {
+			position: relative;
+			font-size: 15px;
+			line-height: 1.65;
+			color: $text;
 		}
 	}
 }
@@ -130,7 +633,6 @@
 	}
 }
 
-.member-menu,
 .follow-card {
 	.follow-button,
 	.like-button {

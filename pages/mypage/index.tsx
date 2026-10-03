@@ -112,7 +112,7 @@ const MyPage: NextPage = () => {
 			else
 				await router.push({
 					pathname: '/member',
-					query: { memberId, category: 'articles' },
+					query: { memberId },
 				});
 		} catch (error) {
 			await sweetErrorHandling(error);

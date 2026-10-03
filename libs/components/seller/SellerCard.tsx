@@ -29,7 +29,7 @@ const SellerCard = (props: SellerCardProps) => {
 	const isTrusted =
 		seller?.memberAvgRating >= 4 && seller?.memberSalesCount >= 5;
 	const isLiked = !!seller?.meLiked?.[0]?.myFavorite;
-	const detailHref = { pathname: '/seller/detail', query: { id: seller?._id } };
+	const detailHref = { pathname: '/member', query: { memberId: seller?._id } };
 
 	return (
 		<Stack className="seller-card">
