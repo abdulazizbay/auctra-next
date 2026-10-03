@@ -1,27 +1,41 @@
 @use '../variables' as *;
 
 .category-tabs {
+	align-self: flex-start;
+	max-width: 100%;
 	min-height: 0;
 	margin-bottom: 28px;
-	border-bottom: 1px solid $border;
+	padding: 4px;
+	border: 1px solid $border;
+	border-radius: 999px;
+	background: #fff;
+
+	.MuiTabs-flexContainer {
+		gap: 4px;
+	}
 
 	.MuiTab-root {
 		min-height: 0;
-		padding: 12px 18px;
+		padding: 9px 20px;
+		border-radius: 999px;
 		font-size: 14px;
-		font-weight: 700;
+		font-weight: 600;
 		text-transform: none;
 		color: $text-secondary;
+		transition: all 0.2s ease;
+
+		&:hover {
+			color: $primary;
+		}
 
 		&.Mui-selected {
-			color: $primary;
+			background: $primary;
+			color: #fff;
 		}
 	}
 
 	.MuiTabs-indicator {
-		height: 3px;
-		border-radius: 3px 3px 0 0;
-		background: $accent;
+		display: none;
 	}
 }
 
@@ -37,10 +51,10 @@
 
 		.board-title {
 			font-family: $font-heading;
-			font-size: 34px;
-			font-weight: 700;
+			font-size: 42px;
+			font-weight: 600;
 			line-height: 1.1;
-			color: $text;
+			color: $primary;
 		}
 
 		.board-desc {
@@ -50,15 +64,17 @@
 
 		.write-button {
 			flex-shrink: 0;
-			height: 42px;
-			padding: 0 18px;
-			border-radius: 12px;
-			background: $primary;
-			color: #fff;
+			height: 44px;
+			padding: 0 22px;
+			border-radius: 999px;
+			background: linear-gradient(135deg, #e6cf8f, $accent);
+			color: $primary;
 			font-weight: 700;
+			text-transform: none;
+			transition: box-shadow 0.25s ease;
 
 			&:hover {
-				background: $primary-dark;
+				box-shadow: 0 12px 28px -12px rgba(194, 163, 90, 0.9);
 			}
 		}
 	}
@@ -68,7 +84,11 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 12px;
-		margin-bottom: 24px;
+		margin-bottom: 28px;
+		padding: 12px;
+		background: #fff;
+		border: 1px solid $border;
+		border-radius: 18px;
 
 		@include down(sm) {
 			flex-direction: column;
@@ -77,7 +97,8 @@
 
 		.search-input {
 			width: 340px;
-			background: #fff;
+			border-radius: 999px;
+			background: $bg;
 
 			@include down(sm) {
 				width: 100%;
@@ -89,7 +110,12 @@
 			}
 
 			.MuiOutlinedInput-notchedOutline {
-				border-color: $border;
+				border-color: transparent;
+			}
+
+			&.Mui-focused .MuiOutlinedInput-notchedOutline {
+				border-width: 1px;
+				border-color: $accent;
 			}
 
 			.search-icon {
@@ -117,12 +143,18 @@
 			button {
 				min-width: 140px;
 				justify-content: space-between;
-				padding: 7px 12px;
+				padding: 7px 14px;
 				border: 1px solid $border;
-				border-radius: 8px;
-				background: #fff;
-				color: $text;
+				border-radius: 999px;
+				background: $bg;
+				color: $primary;
 				font-weight: 600;
+				text-transform: none;
+
+				&:hover {
+					border-color: $primary;
+					background: #fff;
+				}
 			}
 		}
 	}
@@ -153,9 +185,17 @@
 
 	.pagination-config {
 		align-items: center;
-		margin-top: 32px;
-		padding-top: 24px;
-		border-top: 1px solid $border;
+		margin-top: 40px;
+
+		.MuiPaginationItem-root {
+			font-weight: 600;
+			color: $primary;
+
+			&.Mui-selected {
+				background: $primary;
+				color: #fff;
+			}
+		}
 	}
 }
 
@@ -163,12 +203,13 @@
 	overflow: hidden;
 	background: #fff;
 	border: 1px solid $border;
-	border-radius: 20px;
-	transition: transform 0.25s ease, box-shadow 0.25s ease;
+	border-radius: 22px;
+	transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 
 	&:hover {
 		transform: translateY(-4px);
-		box-shadow: 0 20px 40px -20px rgba(15, 39, 66, 0.35);
+		border-color: rgba(194, 163, 90, 0.5);
+		box-shadow: 0 22px 40px -24px rgba(15, 39, 66, 0.45);
 
 		.image-box img {
 			transform: scale(1.04);
@@ -209,9 +250,8 @@
 			left: 12px;
 			padding: 5px 10px;
 			border-radius: 999px;
-			background: rgba(15, 39, 66, 0.85);
-			backdrop-filter: blur(6px);
-			color: #fff;
+			background: rgba(10, 27, 47, 0.85);
+			color: #f1e3bb;
 			font-size: 11px;
 			font-weight: 700;
 			letter-spacing: 0.3px;
@@ -258,10 +298,11 @@
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
-		font-size: 17px;
-		font-weight: 700;
-		line-height: 1.35;
-		color: $text;
+		font-family: $font-heading;
+		font-size: 21px;
+		font-weight: 600;
+		line-height: 1.25;
+		color: $primary;
 	}
 
 	.preview {
@@ -294,8 +335,8 @@
 		.avatar {
 			width: 28px;
 			height: 28px;
-			background: $accent;
-			color: $primary;
+			background: linear-gradient(135deg, $primary, #1f4a78);
+			color: $accent;
 			font-size: 13px;
 			font-weight: 700;
 		}
