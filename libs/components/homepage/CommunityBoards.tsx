@@ -62,12 +62,22 @@ const CommunityBoards = () => {
 	});
 
 	return (
-		<Stack className={'community-board'}>
+		<Stack className={'community-board reveal'}>
 			<Stack className={'container'}>
 				<Stack className={'info-box'}>
 					<Box component={'div'} className={'left'}>
+						<em>{t('Journal')}</em>
 						<span>{t('Community Board')}</span>
 						<p>{t('News, stories and market talk from collectors')}</p>
+					</Box>
+					<Box component={'div'} className={'right'}>
+						<Link
+							href={'/community?articleCategory=NEWS'}
+							className={'more-box'}
+						>
+							{t('View all')}
+							<EastIcon />
+						</Link>
 					</Box>
 				</Stack>
 				<Stack className="community-main">

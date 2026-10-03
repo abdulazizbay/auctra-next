@@ -7,6 +7,7 @@ import HotLots from '../libs/components/homepage/HotLots';
 import NewLots from '../libs/components/homepage/NewLots';
 import CommunityBoards from '../libs/components/homepage/CommunityBoards';
 import TopSellers from '../libs/components/homepage/TopSellers';
+import SellCta from '../libs/components/homepage/SellCta';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -22,6 +23,7 @@ const Home: NextPage = () => {
 			<NewLots />
 			<CommunityBoards />
 			<TopSellers />
+			<SellCta />
 		</Stack>
 	);
 };

@@ -39,19 +39,18 @@ const TopSellers = (props: TopSellersProps) => {
 	});
 
 	return (
-		<Stack className={'top-sellers'}>
+		<Stack className={'top-sellers reveal'}>
 			<Stack className={'container'}>
 				<Stack className={'info-box'}>
 					<Box component={'div'} className={'left'}>
+						<em>{t('Trusted hands')}</em>
 						<span>{t('Top Sellers')}</span>
 						<p>{t('Highest rated sellers on Auctra')}</p>
 					</Box>
 					<Box component={'div'} className={'right'}>
-						<Link href={'/seller'}>
-							<div className={'more-box'}>
-								<span>{t('See all sellers')}</span>
-								<EastIcon />
-							</div>
+						<Link href={'/seller'} className={'more-box'}>
+							{t('See all sellers')}
+							<EastIcon />
 						</Link>
 					</Box>
 				</Stack>

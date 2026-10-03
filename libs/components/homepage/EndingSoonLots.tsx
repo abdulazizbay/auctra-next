@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { Box, Stack } from '@mui/material';
 import WestIcon from '@mui/icons-material/West';
 import EastIcon from '@mui/icons-material/East';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper';
+import { Navigation } from 'swiper';
 import { useMutation, useQuery } from '@apollo/client';
 import LotCard from '../lot/LotCard';
 import { Lot } from '../../types/lot/lot';
@@ -64,47 +65,67 @@ const EndingSoonLots = (props: EndingSoonLotsProps) => {
 	return (
 		<Stack className={'home-lots ending-soon-lots'}>
 			<Stack className={'container'}>
-				<Stack className={'info-box'}>
-					<Box component={'div'} className={'left'}>
-						<span>{t('Ending Soon')}</span>
-						<p>{t('Last chance to place your bid')}</p>
-					</Box>
-					<Box component={'div'} className={'right'}>
-						<div className={'pagination-box'}>
-							<WestIcon className={'swiper-ending-prev'} />
-							<div className={'swiper-ending-pagination'}></div>
-							<EastIcon className={'swiper-ending-next'} />
-						</div>
-					</Box>
-				</Stack>
-				<Stack className={'card-box'}>
-					{endingSoonLots.length === 0 ? (
-						<Box component={'div'} className={'empty-list'}>
-							{t('No lots yet')}
+				<Stack className={'ending-panel'}>
+					<Stack className={'info-box'}>
+						<Box component={'div'} className={'left'}>
+							<em>
+								<span className={'live-dot'} />
+								{t('Last call')}
+							</em>
+							<span>{t('Ending Soon')}</span>
+							<p>{t('Last chance to place your bid')}</p>
 						</Box>
-					) : (
-						<Swiper
-							className={'home-lots-swiper'}
-							slidesPerView={'auto'}
-							spaceBetween={24}
-							modules={[Autoplay, Navigation, Pagination]}
-							navigation={{
-								nextEl: '.swiper-ending-next',
-								prevEl: '.swiper-ending-prev',
-							}}
-							pagination={{
-								el: '.swiper-ending-pagination',
-							}}
-						>
-							{endingSoonLots.map((lot: Lot) => {
-								return (
-									<SwiperSlide key={lot._id} className={'home-lots-slide'}>
-										<LotCard lot={lot} watchLotHandler={watchLotHandler} />
-									</SwiperSlide>
-								);
-							})}
-						</Swiper>
-					)}
+						<Box component={'div'} className={'right'}>
+							<Link
+								href={{
+									pathname: '/lot',
+									query: {
+										input: JSON.stringify({
+											page: 1,
+											limit: 9,
+											sort: 'lotEndsAt',
+											direction: 'ASC',
+											search: {},
+										}),
+									},
+								}}
+								className={'more-box'}
+							>
+								{t('View all')}
+								<EastIcon />
+							</Link>
+							<div className={'pagination-box'}>
+								<WestIcon className={'nav-btn swiper-ending-prev'} />
+								<EastIcon className={'nav-btn swiper-ending-next'} />
+							</div>
+						</Box>
+					</Stack>
+					<Stack className={'card-box'}>
+						{endingSoonLots.length === 0 ? (
+							<Box component={'div'} className={'empty-list'}>
+								{t('No lots yet')}
+							</Box>
+						) : (
+							<Swiper
+								className={'home-lots-swiper'}
+								slidesPerView={'auto'}
+								spaceBetween={24}
+								modules={[Navigation]}
+								navigation={{
+									nextEl: '.swiper-ending-next',
+									prevEl: '.swiper-ending-prev',
+								}}
+							>
+								{endingSoonLots.map((lot: Lot) => {
+									return (
+										<SwiperSlide key={lot._id} className={'home-lots-slide'}>
+											<LotCard lot={lot} watchLotHandler={watchLotHandler} />
+										</SwiperSlide>
+									);
+								})}
+							</Swiper>
+						)}
+					</Stack>
 				</Stack>
 			</Stack>
 		</Stack>
