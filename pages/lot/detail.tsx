@@ -20,6 +20,7 @@ import {
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded';
 import WatchOutlinedIcon from '@mui/icons-material/WatchOutlined';
@@ -386,6 +387,25 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 										</Tooltip>
 										<Typography>{lot?.lotWatchers}</Typography>
 									</Stack>
+									{user?._id && (
+										<Stack className="button-box">
+											<Tooltip title={t('Write about this lot')}>
+												<IconButton
+													size={'small'}
+													component={Link}
+													href={{
+														pathname: '/mypage',
+														query: {
+															category: 'writeArticle',
+															lotId: lot?._id,
+														},
+													}}
+												>
+													<EditNoteOutlinedIcon />
+												</IconButton>
+											</Tooltip>
+										</Stack>
+									)}
 								</Stack>
 							</Stack>
 						</Stack>

@@ -263,5 +263,18 @@
 	"Your application was rejected. You can apply again.": "Your application was rejected. You can apply again.",
 	"Upload a photo of your ID or business document.": "Upload a photo of your ID or business document.",
 	"Upload document": "Upload document",
-	"Apply": "Apply"
+	"Apply": "Apply",
+	"Write Article": "Write Article",
+	"Edit Article": "Edit Article",
+	"Write an Article": "Write an Article",
+	"Share your knowledge with other collectors": "Share your knowledge with other collectors",
+	"Related lot (optional)": "Related lot (optional)",
+	"Type here": "Type here",
+	"Publish": "Publish",
+	"Please insert a title and content": "Please insert a title and content",
+	"Article is too long (max 5000 characters)": "Article is too long (max 5000 characters)",
+	"Article updated": "Article updated",
+	"Article published": "Article published",
+	"You can only edit your own articles": "You can only edit your own articles",
+	"Write about this lot": "Write about this lot"
 }

@@ -118,7 +118,7 @@ NewLots.defaultProps = {
 		sort: 'createdAt',
 		direction: 'DESC',
 		search: {
-			lotStatus: LotStatus.OPEN,
+			lotStatusList: [LotStatus.OPEN],
 		},
 	},
 };

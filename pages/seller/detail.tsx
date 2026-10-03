@@ -148,7 +148,7 @@ const SellerDetail: NextPage = ({
 		setSearchFilter({
 			...searchFilter,
 			page: 1,
-			search: { ...searchFilter.search, lotStatus: value },
+			search: { ...searchFilter.search, lotStatusList: [value] },
 		});
 	};
 
@@ -363,7 +363,7 @@ const SellerDetail: NextPage = ({
 											key={status}
 											onClick={() => changeStatusHandler(status)}
 											className={
-												searchFilter.search.lotStatus === status
+												searchFilter.search.lotStatusList?.[0] === status
 													? 'active-tab-name'
 													: 'tab-name'
 											}
@@ -445,7 +445,7 @@ SellerDetail.defaultProps = {
 		sort: 'createdAt',
 		direction: 'DESC',
 		search: {
-			lotStatus: LotStatus.OPEN,
+			lotStatusList: [LotStatus.OPEN],
 		},
 	},
 	initialReview: {

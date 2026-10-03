@@ -9,6 +9,7 @@ import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded';
 import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
+import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
@@ -70,6 +71,11 @@ const MyMenu = () => {
 		{
 			title: 'Community',
 			items: [
+				{
+					key: 'writeArticle',
+					label: 'Write Article',
+					icon: <EditNoteOutlinedIcon />,
+				},
 				{
 					key: 'myArticles',
 					label: 'My Articles',

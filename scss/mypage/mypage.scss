@@ -508,3 +508,66 @@
 		}
 	}
 }
+
+#write-article-page {
+	.editor-config {
+		gap: 20px;
+		padding: 28px;
+		background: #fff;
+		border: 1px solid $border;
+		border-radius: 16px;
+
+		@include down(sm) {
+			padding: 20px 16px;
+		}
+	}
+
+	.config-row {
+		display: grid;
+		grid-template-columns: 220px minmax(0, 1fr);
+		gap: 20px;
+
+		@include down(sm) {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+
+	.buttons-row {
+		flex-direction: row;
+		justify-content: flex-end;
+
+		button {
+			min-width: 140px;
+		}
+	}
+}
+
+.lot-option {
+	gap: 12px;
+
+	img,
+	.no-image {
+		width: 40px;
+		height: 32px;
+		flex-shrink: 0;
+		border-radius: 6px;
+		background: $bg;
+		object-fit: cover;
+	}
+
+	.name {
+		flex: 1;
+		min-width: 0;
+		font-size: 14px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.status {
+		font-size: 11px;
+		font-weight: 700;
+		color: $text-secondary;
+		text-transform: uppercase;
+	}
+}

@@ -13,6 +13,7 @@ import MyWatchlist from '../../libs/components/mypage/MyWatchlist';
 import RecentlyVisited from '../../libs/components/mypage/RecentlyVisited';
 import MyOrders from '../../libs/components/mypage/MyOrders';
 import MyProfile from '../../libs/components/mypage/MyProfile';
+import WriteArticle from '../../libs/components/mypage/WriteArticle';
 import MemberArticles from '../../libs/components/member/MemberArticles';
 import MemberFollowers from '../../libs/components/member/MemberFollowers';
 import MemberFollowings from '../../libs/components/member/MemberFollowings';
@@ -141,6 +142,7 @@ const MyPage: NextPage = () => {
 						{category === 'myProfile' && <MyProfile />}
 						{category === 'watchlist' && <MyWatchlist />}
 						{category === 'recentlyVisited' && <RecentlyVisited />}
+						{category === 'writeArticle' && <WriteArticle />}
 						{category === 'myArticles' && <MemberArticles />}
 						{category === 'followers' && (
 							<MemberFollowers

@@ -118,7 +118,7 @@ HotLots.defaultProps = {
 		sort: 'lotPopular',
 		direction: 'DESC',
 		search: {
-			lotStatus: LotStatus.OPEN,
+			lotStatusList: [LotStatus.OPEN],
 		},
 	},
 };

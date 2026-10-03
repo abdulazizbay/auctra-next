@@ -53,7 +53,7 @@ const MyLots = ({ initialInput, ...props }: any) => {
 		setSearchFilter({
 			...searchFilter,
 			page: 1,
-			search: { ...searchFilter.search, lotStatus: value },
+			search: { ...searchFilter.search, lotStatusList: [value] },
 		});
 	};
 
@@ -92,7 +92,7 @@ const MyLots = ({ initialInput, ...props }: any) => {
 							key={status}
 							onClick={() => changeStatusHandler(status)}
 							className={
-								searchFilter.search.lotStatus === status
+								searchFilter.search.lotStatusList?.[0] === status
 									? 'active-tab-name'
 									: 'tab-name'
 							}
@@ -150,7 +150,7 @@ MyLots.defaultProps = {
 		limit: 5,
 		sort: 'createdAt',
 		search: {
-			lotStatus: LotStatus.OPEN,
+			lotStatusList: [LotStatus.OPEN],
 		},
 	},
 };

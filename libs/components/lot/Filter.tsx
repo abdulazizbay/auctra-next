@@ -92,11 +92,11 @@ const Filter = (props: FilterType) => {
 				await router.push(
 					`/lot?input=${JSON.stringify({
 						...searchFilter,
-						search: { ...searchFilter.search, lotStatus: status },
+						search: { ...searchFilter.search, lotStatusList: [status] },
 					})}`,
 					`/lot?input=${JSON.stringify({
 						...searchFilter,
-						search: { ...searchFilter.search, lotStatus: status },
+						search: { ...searchFilter.search, lotStatusList: [status] },
 					})}`,
 					{ scroll: false },
 				);
@@ -342,7 +342,8 @@ const Filter = (props: FilterType) => {
 							key={status}
 							label={t(status)}
 							color={
-								(searchFilter?.search?.lotStatus ?? LotStatus.OPEN) === status
+								(searchFilter?.search?.lotStatusList?.[0] ?? LotStatus.OPEN) ===
+								status
 									? 'primary'
 									: 'default'
 							}

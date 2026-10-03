@@ -230,6 +230,18 @@ export const LIKE_TARGET_ARTICLE = gql`
 	}
 `;
 
+export const CREATE_ARTICLE = gql`
+	mutation CreateArticle($input: ArticleInput!) {
+		createArticle(input: $input) {
+			_id
+			articleCategory
+			articleTitle
+			lotId
+			createdAt
+		}
+	}
+`;
+
 export const UPDATE_ARTICLE = gql`
 	mutation UpdateArticle($input: ArticleUpdate!) {
 		updateArticle(input: $input) {

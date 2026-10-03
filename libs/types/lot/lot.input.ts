@@ -22,7 +22,7 @@ interface PricesRange {
 
 interface LISearch {
 	memberId?: string;
-	lotStatus?: LotStatus;
+	lotStatusList?: LotStatus[];
 	lotCategoryList?: LotCategory[];
 	lotConditionList?: LotCondition[];
 	pricesRange?: PricesRange;

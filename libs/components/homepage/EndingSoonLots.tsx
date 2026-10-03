@@ -118,7 +118,7 @@ EndingSoonLots.defaultProps = {
 		sort: 'lotEndsAt',
 		direction: 'ASC',
 		search: {
-			lotStatus: LotStatus.OPEN,
+			lotStatusList: [LotStatus.OPEN],
 		},
 	},
 };
