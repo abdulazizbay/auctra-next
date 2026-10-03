@@ -10,6 +10,10 @@ import {
 	Box,
 	Button,
 	CircularProgress,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogTitle,
 	IconButton,
 	Pagination as MuiPagination,
 	Stack,
@@ -92,6 +96,7 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 	const [bidTotal, setBidTotal] = useState<number>(0);
 	const [bidPrice, setBidPrice] = useState<number>(0);
 	const [now, setNow] = useState<number>(Date.now());
+	const [wonOpen, setWonOpen] = useState<boolean>(false);
 	const [commentInquiry, setCommentInquiry] =
 		useState<CommentsInquiry>(initialComment);
 	const [lotComments, setLotComments] = useState<Comment[]>([]);
@@ -227,25 +232,44 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 	useEffect(() => {
 		if (!socket || !lotId) return;
 		const leaveRoom = joinRoom(socket, `lot:${lotId}`);
-		const bidHandler = (msg: MessageEvent) => {
+		const lotHandler = (msg: MessageEvent) => {
 			const data = JSON.parse(msg.data);
-			if (data.event !== 'bid' || data.lotId !== lotId) return;
-			setLot((prev) =>
-				prev
-					? {
-							...prev,
-							lotCurrentPrice: data.bidPrice,
-							lotBids: data.lotBids,
-							lotHighestBidderId: data.memberId,
-							lotEndsAt: data.lotEndsAt,
-					  }
-					: prev,
-			);
-			getBidsRefetch();
+			if (data.lotId !== lotId) return;
+			if (data.event === 'bid') {
+				setLot((prev) =>
+					prev
+						? {
+								...prev,
+								lotCurrentPrice: data.bidPrice,
+								lotBids: data.lotBids,
+								lotHighestBidderId: data.memberId,
+								lotEndsAt: data.lotEndsAt,
+						  }
+						: prev,
+				);
+				getBidsRefetch();
+			}
+			if (data.event === 'lotClosed') {
+				setLot((prev) =>
+					prev
+						? {
+								...prev,
+								lotStatus: data.lotStatus,
+								lotCurrentPrice: data.lotCurrentPrice,
+								lotHighestBidderId: data.lotHighestBidderId,
+						  }
+						: prev,
+				);
+				if (
+					data.lotStatus === LotStatus.SOLD &&
+					data.lotHighestBidderId === userVar()._id
+				)
+					setWonOpen(true);
+			}
 		};
-		socket.addEventListener('message', bidHandler);
+		socket.addEventListener('message', lotHandler);
 		return () => {
-			socket.removeEventListener('message', bidHandler);
+			socket.removeEventListener('message', lotHandler);
 			leaveRoom();
 		};
 	}, [socket, lotId]);
@@ -253,16 +277,6 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 	useEffect(() => {
 		if (lot) setBidPrice(minBidPrice(lot));
 	}, [lot?._id, lot?.lotCurrentPrice]);
-
-	const lotEnded =
-		lot?.lotStatus === LotStatus.OPEN &&
-		new Date(lot?.lotEndsAt as Date).getTime() <= now;
-
-	useEffect(() => {
-		if (!lotEnded) return;
-		const timer = setInterval(() => getLotRefetch({ input: lotId }), 15000);
-		return () => clearInterval(timer);
-	}, [lotEnded]);
 
 	/** HANDLERS **/
 	const minBidPrice = (target: Lot) => {
@@ -832,6 +846,32 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 					)}
 				</Stack>
 			</div>
+
+			<Dialog
+				open={wonOpen}
+				onClose={() => setWonOpen(false)}
+				className={'won-dialog'}
+			>
+				<DialogTitle>{t('Congratulations, you won!')}</DialogTitle>
+				<DialogContent>
+					<Typography className={'lot-name'}>{lot?.lotName}</Typography>
+					<Typography className={'price'}>
+						${formatterStr(lot?.lotCurrentPrice)}
+					</Typography>
+					<Typography className={'note'}>
+						{t('Please complete payment within 48 hours.')}
+					</Typography>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={() => setWonOpen(false)}>{t('Close')}</Button>
+					<Button
+						variant={'contained'}
+						onClick={() => router.push('/mypage?category=myOrders')}
+					>
+						{t('Pay now')}
+					</Button>
+				</DialogActions>
+			</Dialog>
 		</div>
 	);
 };

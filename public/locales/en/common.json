@@ -297,5 +297,9 @@
 	"Load older": "Load older",
 	"No messages yet": "No messages yet",
 	"Write a message": "Write a message",
-	"Admin": "Admin"
+	"Admin": "Admin",
+	"Congratulations, you won!": "Congratulations, you won!",
+	"Please complete payment within 48 hours.": "Please complete payment within 48 hours.",
+	"Close": "Close",
+	"Pay now": "Pay now"
 }

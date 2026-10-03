@@ -517,3 +517,29 @@
 		}
 	}
 }
+
+.won-dialog {
+	.MuiDialogTitle-root {
+		font-family: $font-heading;
+		font-size: 26px;
+		font-weight: 700;
+		color: $primary;
+	}
+
+	.lot-name {
+		font-weight: 600;
+	}
+
+	.price {
+		font-family: $font-heading;
+		font-size: 32px;
+		font-weight: 700;
+		color: $accent;
+	}
+
+	.note {
+		margin-top: 8px;
+		font-size: 14px;
+		color: $text-secondary;
+	}
+}
