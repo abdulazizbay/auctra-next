@@ -342,5 +342,6 @@
 	"{{count}} people viewed this lot": "{{count}}명이 이 경매품을 조회했습니다",
 	"{{count}} people viewed this lot_other": "{{count}}명이 이 경매품을 조회했습니다",
 	"{{count}} people are watching this lot": "{{count}}명이 이 경매품을 관심 등록했습니다",
-	"{{count}} people are watching this lot_other": "{{count}}명이 이 경매품을 관심 등록했습니다"
+	"{{count}} people are watching this lot_other": "{{count}}명이 이 경매품을 관심 등록했습니다",
+	"Member": "회원"
 }

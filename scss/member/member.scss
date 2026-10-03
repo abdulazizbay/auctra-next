@@ -35,28 +35,6 @@
 	}
 }
 
-.my-menu {
-	.sub-section a .count {
-		margin-left: auto;
-		padding: 1px 8px;
-		border-radius: 999px;
-		background: $bg;
-		font-size: 12px;
-		font-weight: 700;
-		color: $text-secondary;
-	}
-
-	.sub-section .focus a .count {
-		background: rgba(255, 255, 255, 0.16);
-		color: #fff;
-	}
-
-	.section + .section {
-		border-top: 1px solid $border;
-		margin-top: 12px;
-	}
-}
-
 #member-page {
 	min-height: 60vh;
 	padding: 32px 0 96px;

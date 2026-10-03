@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { useReactiveVar } from '@apollo/client';
-import { Avatar, List, ListItem, Stack, Typography } from '@mui/material';
+import { Avatar, Box, List, ListItem, Stack, Typography } from '@mui/material';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded';
@@ -128,7 +128,29 @@ const MyMenu = () => {
 				</Avatar>
 				<Stack className={'user-info'}>
 					<Typography className={'user-name'}>{user?.memberNick}</Typography>
-					<Typography className={'user-type'}>{user?.memberType}</Typography>
+					<Typography className={'user-type'}>
+						{isSeller
+							? t('Seller')
+							: user.memberType === MemberType.ADMIN
+							? t('Admin')
+							: t('Member')}
+					</Typography>
+				</Stack>
+				<Stack className={'profile-stats'}>
+					<Box component={'div'}>
+						<strong>{user?.memberFollowers ?? 0}</strong>
+						<span>{t('Followers')}</span>
+					</Box>
+					<Box component={'div'}>
+						<strong>{user?.memberFollowings ?? 0}</strong>
+						<span>{t('Followings')}</span>
+					</Box>
+					{isSeller && (
+						<Box component={'div'}>
+							<strong>{user?.memberSalesCount ?? 0}</strong>
+							<span>{t('Sales')}</span>
+						</Box>
+					)}
 				</Stack>
 			</Stack>
 			{sections.map((section: T) => (
