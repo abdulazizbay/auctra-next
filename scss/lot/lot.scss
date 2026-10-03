@@ -1,7 +1,7 @@
 @use '../variables' as *;
 
 #lot-list-page {
-	padding: 48px 0 80px;
+	padding: 40px 0 96px;
 
 	.lot-page {
 		flex-direction: row;
@@ -11,18 +11,25 @@
 		@include down(md) {
 			flex-direction: column;
 			align-items: stretch;
+			gap: 16px;
 		}
 	}
 
 	.filter-config {
 		position: sticky;
 		top: 96px;
-		width: 280px;
+		width: 288px;
 		flex-shrink: 0;
 
 		@include down(md) {
 			position: static;
 			width: 100%;
+			display: none;
+
+			&.open {
+				display: flex;
+				animation: filter-in 0.3s ease both;
+			}
 		}
 	}
 
@@ -35,34 +42,64 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		flex-wrap: wrap;
 		gap: 12px;
-		margin-bottom: 18px;
+		margin-bottom: 24px;
+		padding: 12px 12px 12px 20px;
+		background: #fff;
+		border: 1px solid $border;
+		border-radius: 18px;
 
 		.result-count {
+			flex: 1;
 			font-size: 14px;
 			font-weight: 600;
-			color: $text;
+			color: $text-secondary;
+		}
+
+		.filter-toggle {
+			display: none;
+			padding: 7px 14px;
+			border: 1px solid $border;
+			border-radius: 999px;
+			color: $primary;
+			font-weight: 600;
+			text-transform: none;
+
+			@include down(md) {
+				display: inline-flex;
+			}
 		}
 
 		.sort-control {
 			display: flex;
 			align-items: center;
-			gap: 8px;
+			gap: 10px;
 
 			> p {
 				font-size: 13px;
 				color: $text-secondary;
+
+				@include down(sm) {
+					display: none;
+				}
 			}
 
 			button {
-				min-width: 140px;
+				min-width: 150px;
 				justify-content: space-between;
-				padding: 7px 12px;
+				padding: 7px 14px;
 				border: 1px solid $border;
-				border-radius: 8px;
-				background: #fff;
-				color: $text;
+				border-radius: 999px;
+				background: $bg;
+				color: $primary;
 				font-weight: 600;
+				text-transform: none;
+
+				&:hover {
+					border-color: $primary;
+					background: #fff;
+				}
 			}
 		}
 	}
@@ -83,51 +120,120 @@
 
 	.no-data {
 		grid-column: 1 / -1;
-		padding: 80px 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 12px;
+		padding: 72px 24px;
 		text-align: center;
-		color: $text-secondary;
 		background: #fff;
 		border: 1px dashed $border;
-		border-radius: 16px;
+		border-radius: 20px;
+
+		svg {
+			font-size: 48px;
+			color: $accent;
+		}
+
+		p {
+			font-size: 16px;
+			font-weight: 600;
+			color: $primary;
+		}
+
+		button {
+			padding: 8px 20px;
+			border: 1px solid $primary;
+			border-radius: 999px;
+			color: $primary;
+			font-weight: 600;
+			text-transform: none;
+
+			&:hover {
+				background: $primary;
+				color: #fff;
+			}
+		}
 	}
 
 	.pagination-config {
 		align-items: center;
-		margin-top: 32px;
-		padding-top: 24px;
-		border-top: 1px solid $border;
+		margin-top: 40px;
 
 		&:empty {
 			display: none;
 		}
+
+		.MuiPaginationItem-root {
+			font-weight: 600;
+			color: $primary;
+			border: 1px solid transparent;
+
+			&:hover {
+				border-color: $border;
+				background: #fff;
+			}
+
+			&.Mui-selected {
+				background: $primary;
+				color: #fff;
+
+				&:hover {
+					background: $primary-dark;
+				}
+			}
+		}
+	}
+}
+
+@keyframes filter-in {
+	from {
+		opacity: 0;
+		transform: translateY(-8px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
 	}
 }
 
 .filter-box {
-	padding: 20px;
-	gap: 26px;
+	padding: 24px;
+	gap: 28px;
 	background: #fff;
 	border: 1px solid $border;
-	border-radius: 16px;
-	box-shadow: 0 6px 20px -18px rgba(15, 39, 66, 0.3);
+	border-radius: 20px;
+	box-shadow: 0 20px 40px -32px rgba(15, 39, 66, 0.35);
 
 	.filter-title {
-		padding-bottom: 14px;
-		margin-bottom: -10px;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding-bottom: 16px;
+		margin-bottom: -8px;
 		border-bottom: 1px solid $border;
 		font-family: $font-heading;
-		font-size: 22px;
+		font-size: 26px;
 		font-weight: 600;
+		color: $primary;
+
+		&::before {
+			content: '';
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: $accent;
+		}
 	}
 
 	.section {
-		gap: 9px;
+		gap: 4px;
 
 		.title {
-			margin-bottom: 2px;
-			font-size: 12px;
+			margin-bottom: 8px;
+			font-size: 11px;
 			font-weight: 700;
-			letter-spacing: 0.8px;
+			letter-spacing: 1.5px;
 			text-transform: uppercase;
 			color: $text-secondary;
 		}
@@ -136,7 +242,18 @@
 	.input-box {
 		flex-direction: row;
 		align-items: center;
-		min-height: 32px;
+		min-height: 36px;
+
+		&:has(label) {
+			margin: 0 -8px;
+			padding: 0 8px;
+			border-radius: 10px;
+			transition: background 0.2s ease;
+
+			&:hover {
+				background: $bg;
+			}
+		}
 
 		label {
 			flex: 1;
@@ -147,22 +264,34 @@
 
 		.MuiCheckbox-root {
 			padding: 4px 8px 4px 0;
+			color: #c5cbd3;
+
+			&.Mui-checked {
+				color: $primary;
+			}
 		}
 
 		.search-input {
 			flex: 1;
+			border-radius: 999px;
+			background: $bg;
 
 			.MuiOutlinedInput-input {
-				padding: 11px 12px;
+				padding: 11px 16px;
 				font-size: 14px;
 			}
 
 			.MuiOutlinedInput-notchedOutline {
-				border-color: $border;
+				border-color: transparent;
 			}
 
 			&:hover .MuiOutlinedInput-notchedOutline {
-				border-color: rgba(15, 39, 66, 0.25);
+				border-color: $border;
+			}
+
+			&.Mui-focused .MuiOutlinedInput-notchedOutline {
+				border-width: 1px;
+				border-color: $accent;
 			}
 		}
 
@@ -171,25 +300,60 @@
 			font-size: 18px;
 			color: $text-secondary;
 		}
+
+		.MuiIconButton-root {
+			width: 42px;
+			height: 42px;
+			margin-left: 8px;
+			border: 1px solid $border;
+			color: $primary;
+			transition: all 0.25s ease;
+
+			svg {
+				transition: transform 0.4s ease;
+			}
+
+			&:hover {
+				background: $primary;
+				border-color: $primary;
+				color: #fff;
+
+				svg {
+					transform: rotate(-180deg);
+				}
+			}
+		}
 	}
 
 	.chips {
 		flex-direction: row;
 		flex-wrap: wrap;
-		gap: 7px;
+		gap: 8px;
 
 		.MuiChip-root {
-			height: 32px;
-			border-radius: 8px;
+			height: 34px;
 			border: 1px solid $border;
+			border-radius: 999px;
 			background: #fff;
+			color: $text;
 			font-size: 12px;
 			font-weight: 600;
+			transition: all 0.2s ease;
+
+			&:hover {
+				border-color: $primary;
+				background: #fff;
+			}
 		}
 
 		.MuiChip-colorPrimary {
-			border-color: transparent;
+			border-color: $primary;
 			background: $primary;
+			color: #fff;
+
+			&:hover {
+				background: $primary-dark;
+			}
 		}
 	}
 }
@@ -197,18 +361,18 @@
 .lot-card {
 	background: #fff;
 	border: 1px solid $border;
-	border-radius: 16px;
+	border-radius: 20px;
 	overflow: hidden;
 	transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 
 	&:hover {
-		transform: translateY(-3px);
-		border-color: rgba(15, 39, 66, 0.14);
-		box-shadow: 0 14px 32px -16px rgba(15, 39, 66, 0.28);
+		transform: translateY(-4px);
+		border-color: rgba(194, 163, 90, 0.5);
+		box-shadow: 0 22px 40px -24px rgba(15, 39, 66, 0.45);
 	}
 
 	&:hover .top img {
-		transform: scale(1.03);
+		transform: scale(1.06);
 	}
 
 	.top {
@@ -244,8 +408,11 @@
 			position: absolute;
 			top: 12px;
 			left: 12px;
-			padding: 5px 9px;
-			border-radius: 6px;
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			padding: 5px 10px;
+			border-radius: 999px;
 			background: rgba(15, 39, 66, 0.9);
 			color: #fff;
 			font-size: 11px;
@@ -328,8 +495,20 @@
 		}
 
 		.time {
+			display: flex;
+			align-items: center;
+			gap: 4px;
 			font-size: 12px;
 			color: $text-secondary;
+
+			svg {
+				font-size: 14px;
+			}
+
+			&.urgent {
+				color: #d64045;
+				font-weight: 700;
+			}
 		}
 
 		.buttons {

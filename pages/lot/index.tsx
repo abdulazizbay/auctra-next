@@ -13,6 +13,8 @@ import {
 	Typography,
 } from '@mui/material';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
+import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
+import SearchOffRoundedIcon from '@mui/icons-material/SearchOffRounded';
 import { useMutation, useQuery } from '@apollo/client';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import Filter from '../../libs/components/lot/Filter';
@@ -48,6 +50,7 @@ const LotList: NextPage = ({ initialInput, ...props }: any) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const [sortingOpen, setSortingOpen] = useState(false);
 	const [filterSortName, setFilterSortName] = useState('Newest');
+	const [filtersOpen, setFiltersOpen] = useState<boolean>(false);
 
 	/** APOLLO REQUESTS **/
 	const [watchTargetLot] = useMutation(WATCH_TARGET_LOT);
@@ -104,6 +107,14 @@ const LotList: NextPage = ({ initialInput, ...props }: any) => {
 			console.log('ERROR, watchLotHandler: ', err.message);
 			sweetMixinErrorAlert(err.message).then();
 		}
+	};
+
+	const resetFilterHandler = async () => {
+		await router.push(
+			`/lot?input=${JSON.stringify(initialInput)}`,
+			`/lot?input=${JSON.stringify(initialInput)}`,
+			{ scroll: false },
+		);
 	};
 
 	const sortingClickHandler = (e: MouseEvent<HTMLElement>) => {
@@ -174,7 +185,7 @@ const LotList: NextPage = ({ initialInput, ...props }: any) => {
 		<div id="lot-list-page">
 			<Stack className="container">
 				<Stack className={'lot-page'}>
-					<Stack className={'filter-config'}>
+					<Stack className={`filter-config ${filtersOpen ? 'open' : ''}`}>
 						<Filter
 							searchFilter={searchFilter}
 							setSearchFilter={setSearchFilter}
@@ -186,6 +197,13 @@ const LotList: NextPage = ({ initialInput, ...props }: any) => {
 							<Typography className={'result-count'}>
 								{t('Total {{count}} lots', { count: total })}
 							</Typography>
+							<Button
+								className={'filter-toggle'}
+								startIcon={<TuneRoundedIcon />}
+								onClick={() => setFiltersOpen(!filtersOpen)}
+							>
+								{t('Filters')}
+							</Button>
 							<Box component={'div'} className={'sort-control'}>
 								<Typography>{t('Sort by')}</Typography>
 								<Button
@@ -239,7 +257,11 @@ const LotList: NextPage = ({ initialInput, ...props }: any) => {
 						<Stack className={'list-config'}>
 							{lots?.length === 0 ? (
 								<div className={'no-data'}>
+									<SearchOffRoundedIcon />
 									<p>{t('No lots found!')}</p>
+									<Button onClick={resetFilterHandler}>
+										{t('Clear filters')}
+									</Button>
 								</div>
 							) : (
 								lots.map((lot: Lot) => {

@@ -7,6 +7,7 @@ import { Box, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import WatchOutlinedIcon from '@mui/icons-material/WatchOutlined';
+import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 import { Lot } from '../../types/lot/lot';
 import { LotStatus } from '../../enums/lot.enum';
 import { userVar } from '../../../apollo/store';
@@ -40,6 +41,10 @@ const LotCard = (props: LotCardType) => {
 			? `${t('Starts')} ${moment(lot.lotStartsAt).fromNow()}`
 			: `${t('Ended')} ${moment(lot.lotEndsAt).format('YYYY.MM.DD')}`;
 
+	const isUrgent =
+		lot.lotStatus === LotStatus.OPEN &&
+		moment(lot.lotEndsAt).diff(moment(), 'hours') < 1;
+
 	const isHighest = !!user._id && lot.lotHighestBidderId === user._id;
 	const bidStatus =
 		lot.lotStatus === LotStatus.OPEN
@@ -72,6 +77,9 @@ const LotCard = (props: LotCardType) => {
 							: ''
 					}`}
 				>
+					{!myBids && lot.lotStatus === LotStatus.OPEN && (
+						<span className={'live-dot'} />
+					)}
 					{t(myBids ? bidStatus : lot.lotStatus)}
 				</Box>
 			</Stack>
@@ -96,7 +104,10 @@ const LotCard = (props: LotCardType) => {
 					</Typography>
 				</Stack>
 				<Stack className={'footer'}>
-					<Typography className={'time'}>{timeText}</Typography>
+					<Typography className={`time ${isUrgent ? 'urgent' : ''}`}>
+						<AccessTimeRoundedIcon />
+						{timeText}
+					</Typography>
 					<Stack className={'buttons'}>
 						{recentlyVisited && <BookmarkBorderIcon className={'static'} />}
 						{!recentlyVisited && (
