@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import {
@@ -14,6 +15,7 @@ import {
 	Typography,
 } from '@mui/material';
 import OrderCard from './OrderCard';
+import OrderChat from './OrderChat';
 import { Order } from '../../types/order/order';
 import { OrdersInquiry } from '../../types/order/order.input';
 import { OrderUpdate } from '../../types/order/order.update';
@@ -31,6 +33,7 @@ import {
 
 const MyOrders = ({ initialInput, sales, ...props }: any) => {
 	const user = useReactiveVar(userVar);
+	const router = useRouter();
 	const { t } = useTranslation('common');
 	const [searchFilter, setSearchFilter] = useState<OrdersInquiry>({
 		...initialInput,
@@ -46,6 +49,7 @@ const MyOrders = ({ initialInput, sales, ...props }: any) => {
 	const [address, setAddress] = useState<string>('');
 	const [rating, setRating] = useState<number | null>(5);
 	const [reviewText, setReviewText] = useState<string>('');
+	const [chatOrderId, setChatOrderId] = useState<string | null>(null);
 
 	/** APOLLO REQUESTS **/
 	const [updateOrder] = useMutation(UPDATE_ORDER);
@@ -65,7 +69,24 @@ const MyOrders = ({ initialInput, sales, ...props }: any) => {
 		},
 	);
 
+	/** LIFECYCLES **/
+	useEffect(() => {
+		if (router.query.chat) setChatOrderId(router.query.chat as string);
+	}, [router.query.chat]);
+
 	/** HANDLERS **/
+	const closeChatHandler = () => {
+		setChatOrderId(null);
+		if (router.query.chat)
+			router
+				.replace(
+					{ pathname: '/mypage', query: { category: router.query.category } },
+					undefined,
+					{ shallow: true },
+				)
+				.then();
+	};
+
 	const paginationHandler = (e: T, value: number) => {
 		setSearchFilter({ ...searchFilter, page: value });
 	};
@@ -197,6 +218,7 @@ const MyOrders = ({ initialInput, sales, ...props }: any) => {
 								order={order}
 								sales={!!sales}
 								actionHandler={actionHandler}
+								chatHandler={setChatOrderId}
 							/>
 						))
 					)}
@@ -285,6 +307,8 @@ const MyOrders = ({ initialInput, sales, ...props }: any) => {
 					</Button>
 				</DialogActions>
 			</Dialog>
+
+			<OrderChat orderId={chatOrderId} onClose={closeChatHandler} />
 		</div>
 	);
 };

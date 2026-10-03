@@ -292,5 +292,9 @@
 	"Your seller application was rejected": "판매자 신청이 거절되었습니다",
 	"Notifications": "알림",
 	"Mark all read": "모두 읽음",
-	"No notifications": "알림이 없습니다"
+	"No notifications": "알림이 없습니다",
+	"Messages": "메시지",
+	"Load older": "이전 메시지 보기",
+	"No messages yet": "아직 메시지가 없습니다",
+	"Write a message": "메시지를 입력하세요"
 }

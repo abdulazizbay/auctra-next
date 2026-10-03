@@ -2,8 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import moment from 'moment';
 import { useTranslation } from 'next-i18next';
-import { Button, Stack, Typography } from '@mui/material';
+import { Button, IconButton, Stack, Typography } from '@mui/material';
 import WatchOutlinedIcon from '@mui/icons-material/WatchOutlined';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { Order } from '../../types/order/order';
 import { OrderStatus } from '../../enums/order.enum';
 import { REACT_APP_API_URL } from '../../config';
@@ -13,10 +14,11 @@ interface OrderCardProps {
 	order: Order;
 	sales: boolean;
 	actionHandler: any;
+	chatHandler: any;
 }
 
 const OrderCard = (props: OrderCardProps) => {
-	const { order, sales, actionHandler } = props;
+	const { order, sales, actionHandler, chatHandler } = props;
 	const { t } = useTranslation('common');
 	const lot = order.lotData?.[0];
 	const moreLots = (order.lotData?.length ?? 0) - 1;
@@ -76,6 +78,9 @@ const OrderCard = (props: OrderCardProps) => {
 				<Typography className="status">{t(order.orderStatus)}</Typography>
 			</Stack>
 			<Stack className="action-box">
+				<IconButton size="small" onClick={() => chatHandler(order._id)}>
+					<ChatBubbleOutlineIcon />
+				</IconButton>
 				{actionLabel ? (
 					<Button
 						size="small"

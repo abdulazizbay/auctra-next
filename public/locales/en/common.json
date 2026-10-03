@@ -292,5 +292,9 @@
 	"Your seller application was rejected": "Your seller application was rejected",
 	"Notifications": "Notifications",
 	"Mark all read": "Mark all read",
-	"No notifications": "No notifications"
+	"No notifications": "No notifications",
+	"Messages": "Messages",
+	"Load older": "Load older",
+	"No messages yet": "No messages yet",
+	"Write a message": "Write a message"
 }

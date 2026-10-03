@@ -327,3 +327,19 @@ export const READ_ALL_NOTIFICATIONS = gql`
 		readAllNotifications
 	}
 `;
+
+/**************************
+ *        MESSAGE         *
+ *************************/
+
+export const SEND_MESSAGE = gql`
+	mutation SendMessage($input: MessageInput!) {
+		sendMessage(input: $input) {
+			_id
+			orderId
+			memberId
+			messageText
+			createdAt
+		}
+	}
+`;

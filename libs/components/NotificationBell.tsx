@@ -18,7 +18,7 @@ import {
 	Typography,
 } from '@mui/material';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
-import { socketVar } from '../../apollo/store';
+import { socketVar, userVar } from '../../apollo/store';
 import { GET_NOTIFICATIONS } from '../../apollo/user/query';
 import {
 	READ_ALL_NOTIFICATIONS,
@@ -29,6 +29,7 @@ import {
 	NotificationRefType,
 	NotificationType,
 } from '../enums/notification.enum';
+import { MemberType } from '../enums/member.enum';
 import { T } from '../types/common';
 import { notificationMessages } from '../config';
 import { formatterStr } from '../utils';
@@ -41,6 +42,7 @@ const NotificationBell = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const [notifications, setNotifications] = useState<Notification[]>([]);
 	const [unreadCount, setUnreadCount] = useState<number>(0);
+	const user = useReactiveVar(userVar);
 
 	/** APOLLO REQUESTS **/
 	const [readNotification] = useMutation(READ_NOTIFICATION);
@@ -83,9 +85,12 @@ const NotificationBell = () => {
 
 	const notificationLink = (notification: Notification) => {
 		switch (notification.notificationType) {
+			case NotificationType.NEW_MESSAGE:
+				return `/mypage?category=${
+					user.memberType === MemberType.SELLER ? 'mySales' : 'myOrders'
+				}&chat=${notification.notificationRefId}`;
 			case NotificationType.WON:
 			case NotificationType.SHIPPED:
-			case NotificationType.NEW_MESSAGE:
 				return '/mypage?category=myOrders';
 			case NotificationType.PAYMENT_RECEIVED:
 			case NotificationType.ORDER_COMPLETED:

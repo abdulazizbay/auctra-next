@@ -571,3 +571,24 @@ export const GET_NOTIFICATIONS = gql`
 		}
 	}
 `;
+
+/**************************
+ *        MESSAGE         *
+ *************************/
+
+export const GET_MESSAGES = gql`
+	query GetMessages($input: MessagesInquiry!) {
+		getMessages(input: $input) {
+			list {
+				_id
+				orderId
+				memberId
+				messageText
+				createdAt
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
