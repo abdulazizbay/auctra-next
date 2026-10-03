@@ -5,6 +5,7 @@ import { useReactiveVar } from '@apollo/client';
 import {
 	Badge,
 	Box,
+	ClickAwayListener,
 	IconButton,
 	Stack,
 	TextField,
@@ -59,6 +60,10 @@ const Chat = () => {
 		setUnread(false);
 	};
 
+	const closeHandler = () => {
+		if (open) setOpen(false);
+	};
+
 	const sendHandler = () => {
 		const text = messageText.trim();
 		if (!text || socket?.readyState !== WebSocket.OPEN) return;
@@ -75,65 +80,73 @@ const Chat = () => {
 	if (!socket || router.pathname.startsWith('/_admin')) return null;
 
 	return (
-		<Box component={'div'} className={'lobby-chat'}>
-			{open && (
-				<Stack className={'chat-box'}>
-					<Box component={'div'} className={'chat-head'}>
-						<Typography className={'title'}>{t('Live chat')}</Typography>
-						<Typography className={'online'}>
-							{t('{{count}} online', { count: onlineCount })}
-						</Typography>
-					</Box>
-					<Stack ref={listRef} className={'chat-list'}>
-						{messages.length === 0 && (
-							<Typography className={'chat-empty'}>
-								{t('Say hello!')}
+		<ClickAwayListener onClickAway={closeHandler}>
+			<Box component={'div'} className={'lobby-chat'}>
+				{open && (
+					<Stack className={'chat-box'}>
+						<Box component={'div'} className={'chat-head'}>
+							<Typography className={'title'}>{t('Live chat')}</Typography>
+							<Typography className={'online'}>
+								<span className={'live-dot'} />
+								{t('{{count}} online', { count: onlineCount })}
 							</Typography>
-						)}
-						{messages.map((message, index) => {
-							const mine = !!user._id && message.memberData?._id === user._id;
-							return (
-								<Stack
-									key={index}
-									className={mine ? 'chat-message mine' : 'chat-message'}
-								>
-									{!mine && (
-										<Typography className={'nick'}>
-											{message.memberData?.memberNick ?? t('Guest')}
-										</Typography>
-									)}
-									<Typography className={'text'}>{message.text}</Typography>
-								</Stack>
-							);
-						})}
+						</Box>
+						<Stack ref={listRef} className={'chat-list'}>
+							{messages.length === 0 && (
+								<Typography className={'chat-empty'}>
+									{t('Say hello!')}
+								</Typography>
+							)}
+							{messages.map((message, index) => {
+								const mine = !!user._id && message.memberData?._id === user._id;
+								return (
+									<Stack
+										key={index}
+										className={mine ? 'chat-message mine' : 'chat-message'}
+									>
+										{!mine && (
+											<Typography className={'nick'}>
+												{message.memberData?.memberNick ?? t('Guest')}
+											</Typography>
+										)}
+										<Typography className={'text'}>{message.text}</Typography>
+									</Stack>
+								);
+							})}
+						</Stack>
+						<Box component={'div'} className={'chat-input'}>
+							<TextField
+								fullWidth
+								size={'small'}
+								disabled={!user._id}
+								placeholder={
+									user._id ? t('Write a message') : t('Login to chat')
+								}
+								value={messageText}
+								onChange={(e) => setMessageText(e.target.value)}
+								onKeyDown={keyDownHandler}
+								slotProps={{ htmlInput: { maxLength: 300 } }}
+							/>
+							<IconButton
+								color={'primary'}
+								disabled={!user._id || !messageText.trim()}
+								onClick={sendHandler}
+							>
+								<SendIcon />
+							</IconButton>
+						</Box>
 					</Stack>
-					<Box component={'div'} className={'chat-input'}>
-						<TextField
-							fullWidth
-							size={'small'}
-							disabled={!user._id}
-							placeholder={user._id ? t('Write a message') : t('Login to chat')}
-							value={messageText}
-							onChange={(e) => setMessageText(e.target.value)}
-							onKeyDown={keyDownHandler}
-							slotProps={{ htmlInput: { maxLength: 300 } }}
-						/>
-						<IconButton
-							color={'primary'}
-							disabled={!user._id || !messageText.trim()}
-							onClick={sendHandler}
-						>
-							<SendIcon />
-						</IconButton>
-					</Box>
-				</Stack>
-			)}
-			<IconButton className={'chat-button'} onClick={toggleHandler}>
-				<Badge variant={'dot'} color={'error'} invisible={open || !unread}>
-					{open ? <CloseIcon /> : <ChatBubbleOutlineIcon />}
-				</Badge>
-			</IconButton>
-		</Box>
+				)}
+				<IconButton
+					className={`chat-button ${!open && unread ? 'unread' : ''}`}
+					onClick={toggleHandler}
+				>
+					<Badge variant={'dot'} color={'error'} invisible={open || !unread}>
+						{open ? <CloseIcon /> : <ChatBubbleOutlineIcon />}
+					</Badge>
+				</IconButton>
+			</Box>
+		</ClickAwayListener>
 	);
 };
 

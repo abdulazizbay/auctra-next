@@ -537,57 +537,102 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-	gap: 12px;
+	gap: 14px;
 
 	.chat-button {
-		width: 56px;
-		height: 56px;
-		background: $primary;
-		color: #fff;
-		box-shadow: 0 6px 20px rgba($primary, 0.3);
+		position: relative;
+		width: 58px;
+		height: 58px;
+		background: linear-gradient(145deg, #1f4a78, $primary);
+		color: $accent;
+		box-shadow: 0 0 0 2px rgba(194, 163, 90, 0.45),
+			0 14px 30px -10px rgba(7, 20, 35, 0.6);
+		transition: transform 0.25s ease, box-shadow 0.25s ease;
 
 		&:hover {
-			background: $primary-dark;
+			transform: translateY(-2px);
+			background: linear-gradient(145deg, #1f4a78, $primary);
+			box-shadow: 0 0 0 2px $accent, 0 18px 36px -12px rgba(7, 20, 35, 0.7);
+		}
+
+		&.unread::after {
+			content: '';
+			position: absolute;
+			inset: -2px;
+			border-radius: 50%;
+			border: 2px solid $accent;
+			animation: chat-ring 1.6s ease-out infinite;
 		}
 	}
 
 	.chat-box {
-		width: 340px;
+		width: 360px;
 		max-width: calc(100vw - 32px);
-		height: 460px;
-		background: #fff;
-		border: 1px solid $border;
-		border-radius: 16px;
-		box-shadow: 0 12px 32px rgba($primary, 0.18);
+		height: 500px;
+		max-height: calc(100vh - 120px);
 		overflow: hidden;
+		background: #fff;
+		border: 1px solid rgba(15, 39, 66, 0.08);
+		border-radius: 24px;
+		box-shadow: 0 30px 60px -24px rgba(7, 20, 35, 0.45);
+		transform-origin: bottom right;
+		animation: chat-in 0.25s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 	}
 
 	.chat-head {
+		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 14px 16px;
-		background: $primary;
+		padding: 18px 20px;
+		overflow: hidden;
+		background: radial-gradient(
+				240px 120px at 100% 0%,
+				rgba(194, 163, 90, 0.35),
+				transparent 70%
+			),
+			linear-gradient(160deg, $primary, $primary-dark);
 		color: #fff;
 
 		.title {
 			font-family: $font-heading;
-			font-size: 20px;
-			font-weight: 700;
+			font-size: 24px;
+			font-weight: 600;
 		}
 
 		.online {
-			font-size: 13px;
-			color: $accent;
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 4px 12px;
+			border: 1px solid rgba(194, 163, 90, 0.35);
+			border-radius: 999px;
+			background: rgba(194, 163, 90, 0.1);
+			font-size: 12px;
+			font-weight: 600;
+			color: #f1e3bb;
+
+			.live-dot {
+				background: #4cd28a;
+			}
 		}
 	}
 
 	.chat-list {
 		flex: 1;
-		gap: 8px;
-		padding: 12px;
+		gap: 10px;
+		padding: 16px 14px;
 		overflow-y: auto;
-		background: $bg;
+		background: linear-gradient(180deg, #f3f4f7, $bg);
+
+		&::-webkit-scrollbar {
+			width: 6px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			border-radius: 6px;
+			background: rgba(15, 39, 66, 0.15);
+		}
 	}
 
 	.chat-empty {
@@ -598,26 +643,31 @@
 	.chat-message {
 		align-self: flex-start;
 		max-width: 80%;
-		padding: 6px 10px;
-		border-radius: 12px;
-		background: #fff;
+		padding: 8px 14px;
 		border: 1px solid $border;
+		border-radius: 18px 18px 18px 6px;
+		background: #fff;
+		box-shadow: 0 4px 12px -8px rgba(15, 39, 66, 0.25);
+		animation: chat-msg 0.2s ease both;
 
 		.nick {
-			font-size: 12px;
+			font-size: 11px;
 			font-weight: 700;
-			color: $primary;
+			letter-spacing: 0.3px;
+			color: #8a6f2e;
 		}
 
 		.text {
 			font-size: 14px;
+			line-height: 1.45;
 			word-break: break-word;
 		}
 
 		&.mine {
 			align-self: flex-end;
-			background: $primary;
-			border-color: $primary;
+			border-color: transparent;
+			border-radius: 18px 18px 6px 18px;
+			background: linear-gradient(160deg, #1f4a78, $primary);
 
 			.text {
 				color: #fff;
@@ -628,14 +678,79 @@
 	.chat-input {
 		display: flex;
 		align-items: center;
-		gap: 4px;
-		padding: 10px 8px 10px 12px;
+		gap: 8px;
+		padding: 12px;
 		border-top: 1px solid $border;
+
+		.MuiOutlinedInput-root {
+			border-radius: 999px;
+			background: $bg;
+			font-size: 14px;
+
+			.MuiOutlinedInput-notchedOutline {
+				border-color: transparent;
+			}
+
+			&.Mui-focused .MuiOutlinedInput-notchedOutline {
+				border-width: 1px;
+				border-color: $accent;
+			}
+		}
+
+		.MuiIconButton-root {
+			width: 40px;
+			height: 40px;
+			flex-shrink: 0;
+			background: linear-gradient(135deg, #e6cf8f, $accent);
+			color: $primary;
+
+			svg {
+				font-size: 18px;
+			}
+
+			&.Mui-disabled {
+				background: $border;
+				color: $text-secondary;
+			}
+		}
 	}
 
 	@include down(sm) {
 		right: 16px;
 		bottom: 16px;
+	}
+}
+
+@keyframes chat-in {
+	from {
+		opacity: 0;
+		transform: translateY(12px) scale(0.96);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes chat-msg {
+	from {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes chat-ring {
+	from {
+		transform: scale(1);
+		opacity: 0.9;
+	}
+	to {
+		transform: scale(1.35);
+		opacity: 0;
 	}
 }
 
