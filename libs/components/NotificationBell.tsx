@@ -18,6 +18,21 @@ import {
 	Typography,
 } from '@mui/material';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
+import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
+import GavelOutlinedIcon from '@mui/icons-material/GavelOutlined';
+import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
+import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined';
+import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
+import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+import TaskAltRoundedIcon from '@mui/icons-material/TaskAltRounded';
+import ChatBubbleOutlineRoundedIcon from '@mui/icons-material/ChatBubbleOutlineRounded';
+import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
+import WatchOutlinedIcon from '@mui/icons-material/WatchOutlined';
+import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
+import VerifiedOutlinedIcon from '@mui/icons-material/VerifiedOutlined';
+import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import { socketVar, userVar } from '../../apollo/store';
 import { GET_NOTIFICATIONS } from '../../apollo/user/query';
 import {
@@ -35,6 +50,27 @@ import { notificationMessages } from '../config';
 import { formatterStr } from '../utils';
 import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../sweetAlert';
 
+const notificationIcons: Record<
+	string,
+	{ icon: React.ReactNode; tone: string }
+> = {
+	OUTBID: { icon: <GavelOutlinedIcon />, tone: 'red' },
+	ENDING_SOON: { icon: <AccessTimeRoundedIcon />, tone: 'gold' },
+	WON: { icon: <EmojiEventsOutlinedIcon />, tone: 'gold' },
+	LOST: { icon: <GavelOutlinedIcon />, tone: 'grey' },
+	PAYMENT_DUE: { icon: <CreditCardOutlinedIcon />, tone: 'red' },
+	PAYMENT_RECEIVED: { icon: <PaidOutlinedIcon />, tone: 'green' },
+	SHIPPED: { icon: <LocalShippingOutlinedIcon />, tone: 'navy' },
+	ORDER_COMPLETED: { icon: <TaskAltRoundedIcon />, tone: 'green' },
+	NEW_COMMENT: { icon: <ChatBubbleOutlineRoundedIcon />, tone: 'navy' },
+	NEW_MESSAGE: { icon: <MailOutlineRoundedIcon />, tone: 'navy' },
+	NEW_LOT_FROM_FOLLOWED: { icon: <WatchOutlinedIcon />, tone: 'gold' },
+	NEW_ARTICLE_FROM_FOLLOWED: { icon: <ArticleOutlinedIcon />, tone: 'navy' },
+	SELLER_APPROVED: { icon: <VerifiedOutlinedIcon />, tone: 'green' },
+	SELLER_REJECTED: { icon: <BlockOutlinedIcon />, tone: 'red' },
+	LOT_CANCELLED: { icon: <CancelOutlinedIcon />, tone: 'red' },
+};
+
 const NotificationBell = () => {
 	const router = useRouter();
 	const { t } = useTranslation('common');
@@ -42,6 +78,7 @@ const NotificationBell = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const [notifications, setNotifications] = useState<Notification[]>([]);
 	const [unreadCount, setUnreadCount] = useState<number>(0);
+	const [ringing, setRinging] = useState<boolean>(false);
 	const user = useReactiveVar(userVar);
 
 	/** APOLLO REQUESTS **/
@@ -67,6 +104,8 @@ const NotificationBell = () => {
 			if (data.event !== 'notification') return;
 			setUnreadCount((count) => count + 1);
 			setNotifications((list) => [data.notification, ...list].slice(0, 10));
+			setRinging(true);
+			setTimeout(() => setRinging(false), 1000);
 			sweetTopSmallSuccessAlert(notificationText(data.notification), 3000);
 		};
 		socket.addEventListener('message', notificationHandler);
@@ -148,7 +187,12 @@ const NotificationBell = () => {
 
 	return (
 		<>
-			<IconButton className={'icon-btn'} onClick={openHandler}>
+			<IconButton
+				className={`icon-btn bell-btn ${ringing ? 'ringing' : ''} ${
+					anchorEl ? 'active' : ''
+				}`}
+				onClick={openHandler}
+			>
 				<Badge badgeContent={unreadCount} color={'error'} max={99}>
 					<NotificationsOutlinedIcon />
 				</Badge>
@@ -158,9 +202,14 @@ const NotificationBell = () => {
 				anchorEl={anchorEl}
 				open={Boolean(anchorEl)}
 				onClose={() => setAnchorEl(null)}
+				anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+				transformOrigin={{ vertical: 'top', horizontal: 'right' }}
 			>
 				<Box component={'div'} className={'notification-head'}>
-					<Typography className={'title'}>{t('Notifications')}</Typography>
+					<Typography className={'title'}>
+						{t('Notifications')}
+						{unreadCount > 0 && <span>{unreadCount}</span>}
+					</Typography>
 					<Button
 						size={'small'}
 						disabled={!unreadCount}
@@ -170,9 +219,10 @@ const NotificationBell = () => {
 					</Button>
 				</Box>
 				{notifications.length === 0 && (
-					<Typography className={'notification-empty'}>
-						{t('No notifications')}
-					</Typography>
+					<Box component={'div'} className={'notification-empty'}>
+						<NotificationsNoneRoundedIcon />
+						<Typography>{t('No notifications')}</Typography>
+					</Box>
 				)}
 				{notifications.map((notification) => (
 					<MenuItem
@@ -184,12 +234,27 @@ const NotificationBell = () => {
 						}
 						onClick={() => clickNotificationHandler(notification)}
 					>
-						<Typography className={'text'}>
-							{notificationText(notification)}
-						</Typography>
-						<Typography className={'date'}>
-							{moment(notification.createdAt).fromNow()}
-						</Typography>
+						<Box
+							component={'div'}
+							className={`type-icon ${
+								notificationIcons[notification.notificationType]?.tone ?? 'navy'
+							}`}
+						>
+							{notificationIcons[notification.notificationType]?.icon ?? (
+								<NotificationsOutlinedIcon />
+							)}
+						</Box>
+						<Box component={'div'} className={'content'}>
+							<Typography className={'text'}>
+								{notificationText(notification)}
+							</Typography>
+							<Typography className={'date'}>
+								{moment(notification.createdAt).fromNow()}
+							</Typography>
+						</Box>
+						{!notification.notificationReadAt && (
+							<span className={'unread-dot'} />
+						)}
 					</MenuItem>
 				))}
 			</Menu>
