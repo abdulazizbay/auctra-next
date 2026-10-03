@@ -31,6 +31,7 @@ export const notificationMessages: Record<string, string> = {
 	NEW_COMMENT: 'New comment: {{text}}',
 	NEW_MESSAGE: 'New message: {{text}}',
 	NEW_LOT_FROM_FOLLOWED: 'New lot from a seller you follow: {{lotName}}',
+	NEW_ARTICLE_FROM_FOLLOWED: 'New article from someone you follow: {{text}}',
 	SELLER_APPROVED: 'Your seller application was approved',
 	SELLER_REJECTED: 'Your seller application was rejected',
 	LOT_CANCELLED: '{{lotName}} was cancelled by the admin',

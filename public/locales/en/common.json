@@ -288,6 +288,7 @@
 	"New comment: {{text}}": "New comment: {{text}}",
 	"New message: {{text}}": "New message: {{text}}",
 	"New lot from a seller you follow: {{lotName}}": "New lot from a seller you follow: {{lotName}}",
+	"New article from someone you follow: {{text}}": "New article from someone you follow: {{text}}",
 	"Your seller application was approved": "Your seller application was approved",
 	"Your seller application was rejected": "Your seller application was rejected",
 	"Notifications": "Notifications",

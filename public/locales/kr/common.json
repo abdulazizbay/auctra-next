@@ -288,6 +288,7 @@
 	"New comment: {{text}}": "새 댓글: {{text}}",
 	"New message: {{text}}": "새 메시지: {{text}}",
 	"New lot from a seller you follow: {{lotName}}": "팔로우한 판매자의 새 경매품: {{lotName}}",
+	"New article from someone you follow: {{text}}": "팔로우한 회원의 새 글: {{text}}",
 	"Your seller application was approved": "판매자 신청이 승인되었습니다",
 	"Your seller application was rejected": "판매자 신청이 거절되었습니다",
 	"Notifications": "알림",
