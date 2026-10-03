@@ -108,7 +108,10 @@ const LotCard = (props: LotCardType) => {
 						<AccessTimeRoundedIcon />
 						{timeText}
 					</Typography>
-					<Stack className={'buttons'}>
+					<Stack
+						className={`buttons ${recentlyVisited ? '' : 'clickable'}`}
+						onClick={() => !recentlyVisited && watchLotHandler(user, lot?._id)}
+					>
 						{recentlyVisited && <BookmarkBorderIcon className={'static'} />}
 						{!recentlyVisited && (
 							<Tooltip
@@ -116,10 +119,7 @@ const LotCard = (props: LotCardType) => {
 									isWatched ? t('Remove from watchlist') : t('Add to watchlist')
 								}
 							>
-								<IconButton
-									size={'small'}
-									onClick={() => watchLotHandler(user, lot?._id)}
-								>
+								<IconButton size={'small'}>
 									{isWatched ? (
 										<BookmarkIcon className={'watched'} />
 									) : (
@@ -128,7 +128,15 @@ const LotCard = (props: LotCardType) => {
 								</IconButton>
 							</Tooltip>
 						)}
-						<Typography className={'watch-count'}>{lot.lotWatchers}</Typography>
+						<Tooltip
+							title={t('{{count}} people are watching this lot', {
+								count: lot.lotWatchers ?? 0,
+							})}
+						>
+							<Typography className={'watch-count'}>
+								{lot.lotWatchers}
+							</Typography>
+						</Tooltip>
 					</Stack>
 				</Stack>
 			</Stack>

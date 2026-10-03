@@ -337,5 +337,10 @@
 	"Start selling": "Start selling",
 	"Live auctions every day": "Live auctions every day",
 	"Made for collectors": "Made for collectors",
-	"Clear filters": "Clear filters"
+	"Clear filters": "Clear filters",
+	"Lot details": "Lot details",
+	"{{count}} people viewed this lot_one": "{{count}} person viewed this lot",
+	"{{count}} people viewed this lot_other": "{{count}} people viewed this lot",
+	"{{count}} people are watching this lot_one": "{{count}} person is watching this lot",
+	"{{count}} people are watching this lot_other": "{{count}} people are watching this lot"
 }

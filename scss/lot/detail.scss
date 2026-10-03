@@ -7,67 +7,101 @@
 }
 
 #lot-detail-page {
-	padding: 40px 0 80px;
+	padding: 28px 0 96px;
 
 	.lot-detail-config {
 		gap: 48px;
 	}
 
-	.lot-info-config {
-		gap: 24px;
+	.breadcrumbs {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-bottom: -20px;
+		font-size: 13px;
+		color: $text-secondary;
 
-		.info {
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: flex-end;
-			gap: 16px;
-
-			@include down(sm) {
-				flex-direction: column;
-				align-items: flex-start;
-			}
+		a:hover {
+			color: $primary;
 		}
 
-		.title-main {
-			font-family: $font-heading;
-			font-size: 40px;
+		span {
+			color: #c5cbd3;
+		}
+
+		p {
+			min-width: 0;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
 			font-weight: 600;
-			line-height: 1.15;
+			color: $primary;
+		}
+	}
 
-			@include down(sm) {
-				font-size: 30px;
-			}
+	.lot-hero {
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 48px;
+
+		@include down(md) {
+			flex-direction: column;
+			align-items: stretch;
+			gap: 28px;
+		}
+	}
+
+	.gallery {
+		flex: 1.15 1 0;
+		min-width: 0;
+		gap: 14px;
+		position: sticky;
+		top: 96px;
+
+		@include down(md) {
+			position: static;
+		}
+	}
+
+	.main-image {
+		position: relative;
+		aspect-ratio: 5 / 4;
+		overflow: hidden;
+		background: #fff;
+		border: 1px solid $border;
+		border-radius: 24px;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
 		}
 
-		.top-box {
-			flex-direction: row;
-			flex-wrap: wrap;
+		.no-image {
+			height: 100%;
 			align-items: center;
-			gap: 12px;
-			margin-top: 10px;
-			color: $text-secondary;
-			font-size: 14px;
+			justify-content: center;
+			color: #c5cbd3;
 
-			.meta,
-			.date {
-				font-size: 14px;
-			}
-
-			.divider {
-				width: 1px;
-				height: 14px;
-				background: $border;
+			svg {
+				font-size: 96px;
 			}
 		}
 
 		.status-badge {
-			padding: 4px 9px;
-			border-radius: 6px;
-			background: $primary;
+			position: absolute;
+			top: 16px;
+			left: 16px;
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			padding: 6px 12px;
+			border-radius: 999px;
+			background: rgba(10, 27, 47, 0.85);
 			color: #fff;
 			font-size: 11px;
 			font-weight: 700;
-			letter-spacing: 0.3px;
+			letter-spacing: 0.5px;
 			text-transform: uppercase;
 
 			&.live {
@@ -76,386 +110,311 @@
 			}
 		}
 
-		.buttons {
-			flex-direction: row;
-			gap: 16px;
-
-			.button-box {
-				flex-direction: row;
-				align-items: center;
-				gap: 4px;
-				color: $text-secondary;
-
-				p {
-					font-size: 14px;
-				}
-
-				.watched {
-					color: $accent;
-				}
-			}
-		}
-
-		.images {
-			gap: 12px;
-
-			.main-image {
-				aspect-ratio: 16 / 9;
-				max-height: 560px;
-				border-radius: 16px;
-				overflow: hidden;
-				background: $bg;
-				border: 1px solid $border;
-
-				img {
-					width: 100%;
-					height: 100%;
-					object-fit: contain;
-					background: #fff;
-				}
-
-				.no-image {
-					height: 100%;
-					align-items: center;
-					justify-content: center;
-					color: $text-secondary;
-
-					svg {
-						font-size: 72px;
-					}
-				}
-			}
-
-			.sub-images {
-				flex-direction: row;
-				gap: 10px;
-				overflow-x: auto;
-
-				.sub-img-box {
-					flex-shrink: 0;
-					width: 96px;
-					height: 72px;
-					border-radius: 10px;
-					overflow: hidden;
-					border: 2px solid transparent;
-					cursor: pointer;
-					opacity: 0.75;
-					transition: opacity 0.2s, border-color 0.2s;
-
-					&.active,
-					&:hover {
-						opacity: 1;
-						border-color: $accent;
-					}
-
-					img {
-						width: 100%;
-						height: 100%;
-						object-fit: cover;
-					}
-				}
-			}
-		}
-	}
-
-	.lot-desc-config {
-		flex-direction: row;
-		align-items: flex-start;
-		gap: 40px;
-
-		@include down(md) {
-			flex-direction: column-reverse;
-			align-items: stretch;
-		}
-
-		.title {
-			margin-bottom: 12px;
-			font-family: $font-heading;
-			font-size: 24px;
+		.image-count {
+			position: absolute;
+			right: 16px;
+			bottom: 16px;
+			padding: 5px 12px;
+			border-radius: 999px;
+			background: rgba(10, 27, 47, 0.7);
+			color: #fff;
+			font-size: 12px;
 			font-weight: 600;
 		}
 	}
 
-	.left-config {
-		flex: 1;
-		min-width: 0;
-		gap: 40px;
+	.sub-images {
+		flex-direction: row;
+		gap: 10px;
+		overflow-x: auto;
+		padding-bottom: 4px;
 
-		.options-config {
-			display: grid;
-			grid-template-columns: repeat(4, minmax(0, 1fr));
-			gap: 12px;
+		.sub-img-box {
+			width: 84px;
+			height: 84px;
+			flex-shrink: 0;
+			overflow: hidden;
+			border: 2px solid transparent;
+			border-radius: 14px;
+			opacity: 0.6;
+			cursor: pointer;
+			transition: opacity 0.2s ease, border-color 0.2s ease;
 
-			@include down(sm) {
-				grid-template-columns: repeat(2, minmax(0, 1fr));
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
 			}
 
-			.option {
-				padding: 16px;
-				background: #fff;
-				border: 1px solid $border;
-				border-radius: 12px;
-
-				.title {
-					margin-bottom: 4px;
-					font-family: $font;
-					font-size: 11px;
-					font-weight: 700;
-					letter-spacing: 0.6px;
-					text-transform: uppercase;
-					color: $text-secondary;
-				}
-
-				.option-data {
-					font-size: 16px;
-					font-weight: 700;
-					font-variant-numeric: tabular-nums;
-				}
-			}
-		}
-
-		.lot-desc {
-			.desc {
-				margin-bottom: 20px;
-				color: $text-secondary;
-				line-height: 1.7;
-				white-space: pre-line;
-			}
-		}
-
-		.bids-config {
-			.empty {
-				color: $text-secondary;
+			&:hover {
+				opacity: 1;
 			}
 
-			.bid-list {
-				background: #fff;
-				border: 1px solid $border;
-				border-radius: 12px;
-				overflow: hidden;
-			}
-
-			.bid-row {
-				flex-direction: row;
-				align-items: center;
-				gap: 12px;
-				padding: 12px 16px;
-				border-bottom: 1px solid $border;
-
-				&:last-child {
-					border-bottom: none;
-				}
-
-				&.top {
-					background: rgba(194, 163, 90, 0.08);
-
-					.price {
-						color: $primary;
-					}
-				}
-
-				.avatar {
-					width: 32px;
-					height: 32px;
-					font-size: 14px;
-					cursor: pointer;
-				}
-
-				.nick {
-					flex: 1;
-					font-weight: 600;
-					cursor: pointer;
-
-					&:hover {
-						color: $accent;
-					}
-				}
-
-				.time {
-					font-size: 13px;
-					color: $text-secondary;
-				}
-
-				.price {
-					min-width: 120px;
-					text-align: right;
-					font-weight: 700;
-					font-variant-numeric: tabular-nums;
-					color: $text-secondary;
-				}
-			}
-
-			.pagination-box {
-				align-items: center;
-				margin-top: 16px;
-			}
-		}
-
-		.reviews-config {
-			.review-list {
-				gap: 16px;
-
-				.pagination-box {
-					display: flex;
-					justify-content: center;
-				}
-			}
-
-			.review-config {
-				gap: 10px;
-				padding: 16px;
-				background: #fff;
-				border: 1px solid $border;
-				border-radius: 12px;
-
-				.img-name-box {
-					flex-direction: row;
-					align-items: center;
-					gap: 12px;
-
-					.remove-btn {
-						margin-left: auto;
-					}
-				}
-
-				.name {
-					font-weight: 600;
-					cursor: pointer;
-
-					&:hover {
-						color: $accent;
-					}
-				}
-
-				.date {
-					font-size: 12px;
-					color: $text-secondary;
-				}
-
-				.description {
-					color: $text;
-					line-height: 1.6;
-				}
-			}
-		}
-
-		.leave-review-config {
-			gap: 12px;
-
-			.submit-btn {
-				display: flex;
-				justify-content: flex-end;
+			&.active {
+				border-color: $accent;
+				opacity: 1;
 			}
 		}
 	}
 
-	.right-config {
-		position: sticky;
-		top: 96px;
-		width: 360px;
-		flex-shrink: 0;
-		gap: 16px;
+	.summary {
+		flex: 1 1 0;
+		min-width: 0;
+		gap: 18px;
+	}
 
-		@include down(md) {
-			position: static;
-			width: 100%;
+	.top-box {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+
+		.meta {
+			font-size: 12px;
+			font-weight: 700;
+			letter-spacing: 1.5px;
+			text-transform: uppercase;
+			color: $accent;
+		}
+
+		.date {
+			font-size: 13px;
+			color: $text-secondary;
+		}
+	}
+
+	.title-main {
+		font-family: $font-heading;
+		font-size: 44px;
+		font-weight: 600;
+		line-height: 1.1;
+		color: $primary;
+
+		@include down(sm) {
+			font-size: 34px;
+		}
+	}
+
+	.buttons {
+		flex-direction: row;
+		gap: 8px;
+
+		.button-box {
+			&.clickable {
+				cursor: pointer;
+				transition: border-color 0.2s ease;
+
+				&:hover {
+					border-color: $accent;
+				}
+			}
+
+			flex-direction: row;
+			align-items: center;
+			gap: 4px;
+			min-height: 36px;
+			padding: 0 12px 0 10px;
+			border: 1px solid $border;
+			border-radius: 999px;
+			background: #fff;
+			color: $text-secondary;
+
+			p {
+				font-size: 13px;
+				font-weight: 600;
+				color: $text;
+			}
+
+			.MuiIconButton-root {
+				padding: 2px;
+			}
+
+			.watched {
+				color: $accent;
+			}
+		}
+	}
+
+	.bid-box {
+		gap: 18px;
+		padding: 28px;
+		border-radius: 24px;
+		background: radial-gradient(
+				420px 220px at 100% 0%,
+				rgba(194, 163, 90, 0.25),
+				transparent 70%
+			),
+			linear-gradient(160deg, $primary, $primary-dark);
+		color: #fff;
+		box-shadow: 0 30px 60px -36px rgba(7, 20, 35, 0.7);
+
+		@include down(sm) {
+			padding: 22px;
 		}
 
 		.label {
 			font-size: 11px;
 			font-weight: 700;
-			letter-spacing: 0.6px;
+			letter-spacing: 1.5px;
 			text-transform: uppercase;
-			color: $text-secondary;
-		}
-
-		.bid-box,
-		.seller-box {
-			padding: 20px;
-			gap: 16px;
-			background: #fff;
-			border: 1px solid $border;
-			border-radius: 16px;
-			box-shadow: 0 6px 20px -18px rgba(15, 39, 66, 0.3);
+			color: rgba(255, 255, 255, 0.55);
 		}
 
 		.time-box {
-			padding-bottom: 16px;
-			border-bottom: 1px solid $border;
+			gap: 4px;
+			padding-bottom: 18px;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		}
 
-			.countdown {
-				margin-top: 4px;
-				font-size: 28px;
-				font-weight: 700;
-				color: $primary;
-				font-variant-numeric: tabular-nums;
-			}
+		.countdown {
+			font-size: 30px;
+			font-weight: 700;
+			letter-spacing: 1px;
+			color: #fff;
+			font-variant-numeric: tabular-nums;
 		}
 
 		.price-box {
+			gap: 2px;
+
 			.price {
-				margin-top: 4px;
-				font-size: 32px;
-				font-weight: 700;
+				font-family: $font-heading;
+				font-size: 54px;
+				font-weight: 600;
 				line-height: 1.1;
-				color: $primary;
-				font-variant-numeric: tabular-nums;
+				color: $accent;
+				font-variant-numeric: lining-nums;
 			}
 
 			.bids {
-				margin-top: 4px;
 				font-size: 13px;
-				color: $text-secondary;
+				color: rgba(255, 255, 255, 0.6);
 			}
 		}
 
 		.notice {
-			padding: 12px;
-			border-radius: 10px;
-			background: $bg;
-			text-align: center;
+			padding: 12px 16px;
+			border-radius: 14px;
+			background: rgba(255, 255, 255, 0.08);
 			font-size: 14px;
 			font-weight: 600;
+			text-align: center;
+			color: #fff;
 
 			&.highest {
-				background: rgba(194, 163, 90, 0.15);
-				color: $primary;
+				background: rgba(46, 125, 50, 0.25);
+				color: #a5d6a7;
 			}
 		}
 
 		.bid-form {
-			gap: 10px;
+			gap: 12px;
+
+			.MuiOutlinedInput-root {
+				border-radius: 14px;
+				background: rgba(255, 255, 255, 0.06);
+				color: #fff;
+				font-size: 22px;
+				font-weight: 700;
+
+				input {
+					padding: 14px 12px;
+
+					&::-webkit-outer-spin-button,
+					&::-webkit-inner-spin-button {
+						appearance: none;
+						margin: 0;
+					}
+				}
+
+				.MuiOutlinedInput-notchedOutline {
+					border-color: rgba(255, 255, 255, 0.18);
+				}
+
+				&:hover .MuiOutlinedInput-notchedOutline {
+					border-color: rgba(255, 255, 255, 0.35);
+				}
+
+				&.Mui-focused .MuiOutlinedInput-notchedOutline {
+					border-color: $accent;
+				}
+			}
 
 			.currency {
-				margin-right: 6px;
-				color: $text-secondary;
+				margin-right: 4px;
+				font-size: 22px;
+				font-weight: 700;
+				color: $accent;
+			}
+
+			button {
+				height: 54px;
+				border-radius: 14px;
+				background: linear-gradient(135deg, #e6cf8f, $accent);
+				color: $primary;
+				font-size: 16px;
+				font-weight: 700;
+				text-transform: none;
+				box-shadow: none;
+
+				&:hover {
+					box-shadow: 0 14px 30px -12px rgba(194, 163, 90, 0.9);
+				}
+
+				&.Mui-disabled {
+					background: rgba(255, 255, 255, 0.1);
+					color: rgba(255, 255, 255, 0.35);
+				}
 			}
 
 			.ceiling-note {
 				font-size: 12px;
-				color: $text-secondary;
 				text-align: center;
+				color: rgba(255, 255, 255, 0.6);
 			}
 		}
+	}
 
-		.seller-info {
-			flex-direction: row;
-			align-items: center;
-			gap: 12px;
+	.seller-box {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		padding: 16px 18px;
+		background: #fff;
+		border: 1px solid $border;
+		border-radius: 20px;
+		transition: border-color 0.25s ease, box-shadow 0.25s ease;
 
-			.avatar {
-				width: 48px;
-				height: 48px;
-				background: $accent;
-				color: $primary;
+		.avatar {
+			width: 52px;
+			height: 52px;
+			background: linear-gradient(135deg, $primary, #1f4a78);
+			color: $accent;
+			font-family: $font-heading;
+			font-size: 22px;
+			font-weight: 700;
+		}
+
+		.seller-text {
+			flex: 1;
+			min-width: 0;
+			gap: 2px;
+
+			.label {
+				font-size: 11px;
 				font-weight: 700;
+				letter-spacing: 1.5px;
+				text-transform: uppercase;
+				color: $text-secondary;
 			}
 
 			.name {
 				display: flex;
 				align-items: center;
 				gap: 4px;
+				font-size: 16px;
 				font-weight: 700;
+				color: $primary;
 
 				.trusted {
 					font-size: 18px;
@@ -466,7 +425,7 @@
 			.rating {
 				display: flex;
 				align-items: center;
-				gap: 2px;
+				gap: 3px;
 				font-size: 13px;
 				color: $text-secondary;
 
@@ -476,40 +435,359 @@
 				}
 			}
 		}
+
+		.arrow {
+			color: $text-secondary;
+			transition: transform 0.25s ease, color 0.25s ease;
+		}
+
+		&:hover {
+			border-color: rgba(194, 163, 90, 0.6);
+			box-shadow: 0 16px 32px -24px rgba(15, 39, 66, 0.45);
+
+			.arrow {
+				transform: translateX(4px);
+				color: $primary;
+			}
+		}
+	}
+
+	.lot-desc-config {
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 32px;
+
+		@include down(md) {
+			flex-direction: column;
+			align-items: stretch;
+		}
+	}
+
+	.left-config {
+		flex: 1;
+		min-width: 0;
+		gap: 24px;
+	}
+
+	.right-config {
+		width: 340px;
+		flex-shrink: 0;
+		position: sticky;
+		top: 96px;
+
+		@include down(md) {
+			position: static;
+			width: 100%;
+		}
+	}
+
+	.lot-desc,
+	.bids-config,
+	.reviews-config,
+	.options-config {
+		gap: 14px;
+		padding: 28px;
+		background: #fff;
+		border: 1px solid $border;
+		border-radius: 24px;
+
+		@include down(sm) {
+			padding: 22px 18px;
+		}
+
+		.title {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			font-family: $font-heading;
+			font-size: 26px;
+			font-weight: 600;
+			color: $primary;
+
+			span {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				min-width: 28px;
+				height: 24px;
+				padding: 0 8px;
+				border-radius: 999px;
+				background: rgba(194, 163, 90, 0.15);
+				color: #8a6f2e;
+				font-family: $font;
+				font-size: 12px;
+				font-weight: 700;
+			}
+		}
+	}
+
+	.lot-desc {
+		.title:not(:first-child) {
+			margin-top: 10px;
+		}
+
+		.desc {
+			font-size: 15px;
+			line-height: 1.75;
+			color: $text;
+			white-space: pre-line;
+		}
+	}
+
+	.empty {
+		padding: 24px 0;
+		text-align: center;
+		font-size: 14px;
+		color: $text-secondary;
+	}
+
+	.bid-row {
+		flex-direction: row;
+		align-items: center;
+		gap: 12px;
+		padding: 12px 0;
+		border-bottom: 1px solid $border;
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		.avatar {
+			width: 36px;
+			height: 36px;
+			background: $bg;
+			color: $primary;
+			font-size: 14px;
+			font-weight: 700;
+			cursor: pointer;
+		}
+
+		.nick {
+			font-size: 14px;
+			font-weight: 600;
+			color: $primary;
+			cursor: pointer;
+
+			&:hover {
+				color: #8a6f2e;
+			}
+		}
+
+		.time {
+			flex: 1;
+			font-size: 12px;
+			color: $text-secondary;
+		}
+
+		.price {
+			font-weight: 700;
+			color: $primary;
+			font-variant-numeric: tabular-nums;
+		}
+
+		&.top {
+			margin: 0 -14px;
+			padding: 12px 14px;
+			border-bottom-color: transparent;
+			border-radius: 14px;
+			background: linear-gradient(
+				90deg,
+				rgba(194, 163, 90, 0.16),
+				rgba(194, 163, 90, 0.03)
+			);
+
+			.avatar {
+				background: $accent;
+			}
+
+			.price {
+				font-size: 17px;
+				color: #8a6f2e;
+			}
+		}
+	}
+
+	.pagination-box {
+		display: flex;
+		justify-content: center;
+		margin-top: 12px;
+	}
+
+	.review-config {
+		gap: 10px;
+		padding: 16px 0;
+		border-bottom: 1px solid $border;
+
+		.img-name-box {
+			flex-direction: row;
+			align-items: center;
+			gap: 12px;
+
+			.img-box {
+				width: 40px;
+				height: 40px;
+				background: $bg;
+				color: $primary;
+				font-weight: 700;
+			}
+
+			.name {
+				font-size: 14px;
+				font-weight: 600;
+				color: $primary;
+				cursor: pointer;
+			}
+
+			.date {
+				font-size: 12px;
+				color: $text-secondary;
+			}
+
+			.remove-btn {
+				margin-left: auto;
+				color: $text-secondary;
+
+				&:hover {
+					color: #d64045;
+				}
+			}
+		}
+
+		.description {
+			padding-left: 52px;
+			font-size: 14px;
+			line-height: 1.65;
+			color: $text;
+		}
+	}
+
+	.leave-review-config {
+		gap: 10px;
+		margin-top: 6px;
+
+		.MuiOutlinedInput-root {
+			border-radius: 16px;
+			background: $bg;
+			font-size: 14px;
+
+			.MuiOutlinedInput-notchedOutline {
+				border-color: transparent;
+			}
+
+			&.Mui-focused .MuiOutlinedInput-notchedOutline {
+				border-width: 1px;
+				border-color: $accent;
+			}
+		}
+
+		.submit-btn {
+			display: flex;
+			justify-content: flex-end;
+
+			button {
+				padding: 9px 24px;
+				border-radius: 999px;
+				background: $primary;
+				color: #fff;
+				font-weight: 600;
+				text-transform: none;
+				box-shadow: none;
+
+				&:hover {
+					background: $primary-dark;
+				}
+
+				&.Mui-disabled {
+					background: $border;
+					color: $text-secondary;
+				}
+			}
+		}
+	}
+
+	.options-config {
+		gap: 0;
+
+		.title {
+			margin-bottom: 8px;
+		}
+
+		.option {
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+			padding: 13px 0;
+			border-bottom: 1px dashed $border;
+
+			&:last-child {
+				border-bottom: none;
+			}
+
+			.option-title {
+				font-size: 13px;
+				color: $text-secondary;
+			}
+
+			.option-data {
+				font-size: 14px;
+				font-weight: 700;
+				text-align: right;
+				color: $primary;
+				font-variant-numeric: tabular-nums;
+			}
+		}
 	}
 
 	.similar-lots-config {
-		gap: 20px;
+		gap: 24px;
 
 		.title-pagination-box {
 			flex-direction: row;
+			align-items: flex-end;
 			justify-content: space-between;
-			align-items: center;
 
 			.main-title {
 				font-family: $font-heading;
-				font-size: 28px;
+				font-size: 36px;
 				font-weight: 600;
+				color: $primary;
+			}
+		}
+
+		.pagination-box {
+			flex-direction: row;
+			gap: 8px;
+			margin-top: 0;
+		}
+
+		.nav-btn {
+			width: 40px;
+			height: 40px;
+			padding: 11px;
+			border: 1px solid $border;
+			border-radius: 50%;
+			background: #fff;
+			color: $primary;
+			cursor: pointer;
+			transition: all 0.25s ease;
+
+			&:hover {
+				background: $primary;
+				border-color: $primary;
+				color: #fff;
 			}
 
-			.pagination-box {
-				flex-direction: row;
-				align-items: center;
-				gap: 10px;
-
-				svg {
-					cursor: pointer;
-					color: $text-secondary;
-
-					&:hover {
-						color: $primary;
-					}
-				}
-
-				.swiper-pagination-bullet-active {
-					background: $primary;
-				}
+			&.swiper-button-disabled {
+				opacity: 0.35;
+				pointer-events: none;
 			}
+		}
+
+		.similar-lots-swiper {
+			width: 100%;
+			padding: 4px 4px 28px;
+			margin: -4px -4px -28px;
 		}
 
 		.similar-lots-slide {

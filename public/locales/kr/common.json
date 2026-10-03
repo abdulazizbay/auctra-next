@@ -337,5 +337,10 @@
 	"Start selling": "판매 시작하기",
 	"Live auctions every day": "매일 진행되는 실시간 경매",
 	"Made for collectors": "컬렉터를 위해 만들었습니다",
-	"Clear filters": "필터 초기화"
+	"Clear filters": "필터 초기화",
+	"Lot details": "경매품 정보",
+	"{{count}} people viewed this lot": "{{count}}명이 이 경매품을 조회했습니다",
+	"{{count}} people viewed this lot_other": "{{count}}명이 이 경매품을 조회했습니다",
+	"{{count}} people are watching this lot": "{{count}}명이 이 경매품을 관심 등록했습니다",
+	"{{count}} people are watching this lot_other": "{{count}}명이 이 경매품을 관심 등록했습니다"
 }

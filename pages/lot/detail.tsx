@@ -408,81 +408,16 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 		<div id={'lot-detail-page'}>
 			<div className={'container'}>
 				<Stack className={'lot-detail-config'}>
-					<Stack className={'lot-info-config'}>
-						<Stack className={'info'}>
-							<Stack className={'left-box'}>
-								<Typography className={'title-main'}>{lot?.lotName}</Typography>
-								<Stack className={'top-box'}>
-									<Box
-										component={'div'}
-										className={`status-badge ${isOpen ? 'live' : ''}`}
-									>
-										{t(lot?.lotStatus as string)}
-									</Box>
-									<Typography className={'meta'}>
-										{t(lot?.lotCategory as string)} ·{' '}
-										{t(lot?.lotCondition as string)}
-									</Typography>
-									<Stack className={'divider'}></Stack>
-									<Typography className={'date'}>
-										{t('Listed {{days}} days ago', {
-											days: moment().diff(lot?.createdAt, 'days'),
-										})}
-									</Typography>
-								</Stack>
-							</Stack>
-							<Stack className={'right-box'}>
-								<Stack className="buttons">
-									<Stack className="button-box">
-										<RemoveRedEyeIcon fontSize="small" />
-										<Typography>{lot?.lotViews}</Typography>
-									</Stack>
-									<Stack className="button-box">
-										<Tooltip
-											title={
-												lot?.meWatched?.[0]?.myWatch
-													? t('Remove from watchlist')
-													: t('Add to watchlist')
-											}
-										>
-											<IconButton
-												size={'small'}
-												onClick={() =>
-													watchLotHandler(user, lot?._id as string)
-												}
-											>
-												{lot?.meWatched && lot?.meWatched[0]?.myWatch ? (
-													<BookmarkIcon className={'watched'} />
-												) : (
-													<BookmarkBorderIcon />
-												)}
-											</IconButton>
-										</Tooltip>
-										<Typography>{lot?.lotWatchers}</Typography>
-									</Stack>
-									{user?._id && (
-										<Stack className="button-box">
-											<Tooltip title={t('Write about this lot')}>
-												<IconButton
-													size={'small'}
-													component={Link}
-													href={{
-														pathname: '/mypage',
-														query: {
-															category: 'writeArticle',
-															lotId: lot?._id,
-														},
-													}}
-												>
-													<EditNoteOutlinedIcon />
-												</IconButton>
-											</Tooltip>
-										</Stack>
-									)}
-								</Stack>
-							</Stack>
-						</Stack>
-						<Stack className={'images'}>
+					<Box component={'div'} className={'breadcrumbs'}>
+						<Link href={'/'}>{t('Home')}</Link>
+						<span>/</span>
+						<Link href={'/lot'}>{t('Lots')}</Link>
+						<span>/</span>
+						<p>{lot?.lotName}</p>
+					</Box>
+
+					<Stack className={'lot-hero'}>
+						<Stack className={'gallery'}>
 							<Stack className={'main-image'}>
 								{slideImage ? (
 									<img src={imagePath(slideImage)} alt={'main-image'} />
@@ -490,6 +425,19 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 									<Stack className={'no-image'}>
 										<WatchOutlinedIcon />
 									</Stack>
+								)}
+								<Box
+									component={'div'}
+									className={`status-badge ${isOpen ? 'live' : ''}`}
+								>
+									{isOpen && <span className={'live-dot'} />}
+									{t(lot?.lotStatus as string)}
+								</Box>
+								{(lot?.lotImages?.length ?? 0) > 1 && (
+									<Box component={'div'} className={'image-count'}>
+										{(lot?.lotImages.indexOf(slideImage) ?? 0) + 1} /{' '}
+										{lot?.lotImages.length}
+									</Box>
 								)}
 							</Stack>
 							{(lot?.lotImages?.length ?? 0) > 1 && (
@@ -510,186 +458,79 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 								</Stack>
 							)}
 						</Stack>
-					</Stack>
 
-					<Stack className={'lot-desc-config'}>
-						<Stack className={'left-config'}>
-							<Stack className={'options-config'}>
-								<Stack className={'option'}>
-									<Typography className={'title'}>
-										{t('Start price')}
-									</Typography>
-									<Typography className={'option-data'}>
-										${formatterStr(lot?.lotStartPrice) || 0}
-									</Typography>
-								</Stack>
-								<Stack className={'option'}>
-									<Typography className={'title'}>
-										{t('Min increment')}
-									</Typography>
-									<Typography className={'option-data'}>
-										${formatterStr(lot?.lotMinIncrement) || 0}
-									</Typography>
-								</Stack>
-								<Stack className={'option'}>
-									<Typography className={'title'}>
-										{t('Ceiling price')}
-									</Typography>
-									<Typography className={'option-data'}>
-										{lot?.lotCeilingPrice
-											? `$${formatterStr(lot?.lotCeilingPrice)}`
-											: '—'}
-									</Typography>
-								</Stack>
-								<Stack className={'option'}>
-									<Typography className={'title'}>{t('Ends at')}</Typography>
-									<Typography className={'option-data'}>
-										{moment(lot?.lotEndsAt).format('YYYY.MM.DD HH:mm')}
-									</Typography>
-								</Stack>
-							</Stack>
-
-							<Stack className={'lot-desc'}>
-								<Typography className={'title'}>{t('Description')}</Typography>
-								<Typography className={'desc'}>
-									{lot?.lotDesc ?? t('No description!')}
+						<Stack className={'summary'}>
+							<Stack className={'top-box'}>
+								<Typography className={'meta'}>
+									{t(lot?.lotCategory as string)} ·{' '}
+									{t(lot?.lotCondition as string)}
 								</Typography>
-								{lot?.lotShippingNote && (
-									<>
-										<Typography className={'title'}>{t('Shipping')}</Typography>
-										<Typography className={'desc'}>
-											{lot?.lotShippingNote}
-										</Typography>
-									</>
-								)}
-							</Stack>
-
-							<Stack className={'bids-config'}>
-								<Typography className={'title'}>
-									{t('Bid history')} ({bidTotal})
+								<Typography className={'date'}>
+									{t('Listed {{days}} days ago', {
+										days: moment().diff(lot?.createdAt, 'days'),
+									})}
 								</Typography>
-								{lotBids.length === 0 ? (
-									<Typography className={'empty'}>
-										{t('No bids yet')}
-									</Typography>
-								) : (
-									<Stack className={'bid-list'}>
-										{lotBids.map((bid: Bid, index: number) => {
-											return (
-												<Stack
-													className={`bid-row ${
-														bidInquiry.page === 1 && index === 0 ? 'top' : ''
-													}`}
-													key={bid._id}
-												>
-													<Avatar
-														src={
-															imagePath(
-																bid?.memberData?.memberImage as string,
-															) || undefined
-														}
-														className={'avatar'}
-														onClick={() =>
-															goMemberPage(bid?.memberData?._id as string)
-														}
-													>
-														{bid?.memberData?.memberNick?.[0]?.toUpperCase()}
-													</Avatar>
-													<Typography
-														className={'nick'}
-														onClick={() =>
-															goMemberPage(bid?.memberData?._id as string)
-														}
-													>
-														{bid?.memberData?.memberNick}
-													</Typography>
-													<Typography className={'time'}>
-														{moment(bid.createdAt).fromNow()}
-													</Typography>
-													<Typography className={'price'}>
-														${formatterStr(bid.bidPrice)}
-													</Typography>
-												</Stack>
-											);
-										})}
+							</Stack>
+							<Typography className={'title-main'}>{lot?.lotName}</Typography>
+							<Stack className="buttons">
+								<Tooltip
+									title={t('{{count}} people viewed this lot', {
+										count: lot?.lotViews ?? 0,
+									})}
+								>
+									<Stack className="button-box">
+										<RemoveRedEyeIcon fontSize="small" />
+										<Typography>{lot?.lotViews}</Typography>
 									</Stack>
-								)}
-								{bidTotal > bidInquiry.limit && (
-									<Box component={'div'} className={'pagination-box'}>
-										<MuiPagination
-											page={bidInquiry.page}
-											count={Math.ceil(bidTotal / bidInquiry.limit)}
-											onChange={bidPaginationChangeHandler}
-											shape="circular"
-											color="primary"
-										/>
-									</Box>
-								)}
-							</Stack>
-
-							{commentTotal !== 0 && (
-								<Stack className={'reviews-config'}>
-									<Typography className={'title'}>
-										{t('Comments')} ({commentTotal})
-									</Typography>
-									<Stack className={'review-list'}>
-										{lotComments?.map((comment: Comment) => {
-											return (
-												<LotComment
-													comment={comment}
-													key={comment?._id}
-													removeHandler={
-														user?.memberType === MemberType.ADMIN
-															? removeCommentHandler
-															: undefined
-													}
-												/>
-											);
-										})}
-										<Box component={'div'} className={'pagination-box'}>
-											<MuiPagination
-												page={commentInquiry.page}
-												count={Math.ceil(commentTotal / commentInquiry.limit)}
-												onChange={commentPaginationChangeHandler}
-												shape="circular"
-												color="primary"
-											/>
-										</Box>
-									</Stack>
-								</Stack>
-							)}
-
-							<Stack className={'leave-review-config'}>
-								<Typography className={'title'}>
-									{t('Leave a comment')}
-								</Typography>
-								<TextField
-									multiline
-									minRows={4}
-									placeholder={t('Ask the seller or share your thoughts')}
-									onChange={({ target: { value } }: any) => {
-										setInsertCommentData({
-											...insertCommentData,
-											commentText: value,
-										});
-									}}
-									value={insertCommentData.commentText}
-								/>
-								<Box className={'submit-btn'} component={'div'}>
-									<Button
-										variant={'contained'}
-										disabled={
-											insertCommentData.commentText === '' || user?._id === ''
+								</Tooltip>
+								<Stack
+									className="button-box clickable"
+									onClick={() => watchLotHandler(user, lot?._id as string)}
+								>
+									<Tooltip
+										title={
+											lot?.meWatched?.[0]?.myWatch
+												? t('Remove from watchlist')
+												: t('Add to watchlist')
 										}
-										onClick={createCommentHandler}
 									>
-										{t('Submit')}
-									</Button>
-								</Box>
+										<IconButton size={'small'}>
+											{lot?.meWatched && lot?.meWatched[0]?.myWatch ? (
+												<BookmarkIcon className={'watched'} />
+											) : (
+												<BookmarkBorderIcon />
+											)}
+										</IconButton>
+									</Tooltip>
+									<Tooltip
+										title={t('{{count}} people are watching this lot', {
+											count: lot?.lotWatchers ?? 0,
+										})}
+									>
+										<Typography>{lot?.lotWatchers}</Typography>
+									</Tooltip>
+								</Stack>
+								{user?._id && (
+									<Stack className="button-box">
+										<Tooltip title={t('Write about this lot')}>
+											<IconButton
+												size={'small'}
+												component={Link}
+												href={{
+													pathname: '/mypage',
+													query: {
+														category: 'writeArticle',
+														lotId: lot?._id,
+													},
+												}}
+											>
+												<EditNoteOutlinedIcon />
+											</IconButton>
+										</Tooltip>
+									</Stack>
+								)}
 							</Stack>
-						</Stack>
 
-						<Stack className={'right-config'}>
 							<Stack className={'bid-box'}>
 								<Stack className={'time-box'}>
 									<Typography className={'label'}>
@@ -769,41 +610,236 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 							</Stack>
 
 							{seller && (
-								<Stack className={'seller-box'}>
-									<Typography className={'label'}>{t('Seller')}</Typography>
-									<Link
-										href={{
-											pathname: '/seller/detail',
-											query: { id: seller._id },
-										}}
+								<Link
+									href={{
+										pathname: '/seller/detail',
+										query: { id: seller._id },
+									}}
+									className={'seller-box'}
+								>
+									<Avatar
+										src={imagePath(seller.memberImage) || undefined}
+										className={'avatar'}
 									>
-										<Stack className={'seller-info'}>
-											<Avatar
-												src={imagePath(seller.memberImage) || undefined}
-												className={'avatar'}
-											>
-												{seller.memberNick?.[0]?.toUpperCase()}
-											</Avatar>
-											<Stack>
-												<Typography className={'name'}>
-													{seller.memberNick}
-													{isTrusted && (
-														<VerifiedRoundedIcon className={'trusted'} />
-													)}
-												</Typography>
-												<Typography className={'rating'}>
-													<StarRoundedIcon />
-													{seller.memberAvgRating?.toFixed(1)} (
-													{seller.memberReviewCount}) ·{' '}
-													{t('{{count}} sales', {
-														count: seller.memberSalesCount,
-													})}
-												</Typography>
-											</Stack>
-										</Stack>
-									</Link>
-								</Stack>
+										{seller.memberNick?.[0]?.toUpperCase()}
+									</Avatar>
+									<Stack className={'seller-text'}>
+										<Typography className={'label'}>{t('Seller')}</Typography>
+										<Typography className={'name'}>
+											{seller.memberNick}
+											{isTrusted && (
+												<VerifiedRoundedIcon className={'trusted'} />
+											)}
+										</Typography>
+										<Typography className={'rating'}>
+											<StarRoundedIcon />
+											{seller.memberAvgRating?.toFixed(1)} (
+											{seller.memberReviewCount}) ·{' '}
+											{t('{{count}} sales', {
+												count: seller.memberSalesCount,
+											})}
+										</Typography>
+									</Stack>
+									<EastIcon className={'arrow'} />
+								</Link>
 							)}
+						</Stack>
+					</Stack>
+
+					<Stack className={'lot-desc-config'}>
+						<Stack className={'left-config'}>
+							<Stack className={'lot-desc'}>
+								<Typography className={'title'}>{t('Description')}</Typography>
+								<Typography className={'desc'}>
+									{lot?.lotDesc ?? t('No description!')}
+								</Typography>
+								{lot?.lotShippingNote && (
+									<>
+										<Typography className={'title'}>{t('Shipping')}</Typography>
+										<Typography className={'desc'}>
+											{lot?.lotShippingNote}
+										</Typography>
+									</>
+								)}
+							</Stack>
+
+							<Stack className={'bids-config'}>
+								<Typography className={'title'}>
+									{t('Bid history')} <span>{bidTotal}</span>
+								</Typography>
+								{lotBids.length === 0 ? (
+									<Typography className={'empty'}>
+										{t('No bids yet')}
+									</Typography>
+								) : (
+									<Stack className={'bid-list'}>
+										{lotBids.map((bid: Bid, index: number) => {
+											return (
+												<Stack
+													className={`bid-row ${
+														bidInquiry.page === 1 && index === 0 ? 'top' : ''
+													}`}
+													key={bid._id}
+												>
+													<Avatar
+														src={
+															imagePath(
+																bid?.memberData?.memberImage as string,
+															) || undefined
+														}
+														className={'avatar'}
+														onClick={() =>
+															goMemberPage(bid?.memberData?._id as string)
+														}
+													>
+														{bid?.memberData?.memberNick?.[0]?.toUpperCase()}
+													</Avatar>
+													<Typography
+														className={'nick'}
+														onClick={() =>
+															goMemberPage(bid?.memberData?._id as string)
+														}
+													>
+														{bid?.memberData?.memberNick}
+													</Typography>
+													<Typography className={'time'}>
+														{moment(bid.createdAt).fromNow()}
+													</Typography>
+													<Typography className={'price'}>
+														${formatterStr(bid.bidPrice)}
+													</Typography>
+												</Stack>
+											);
+										})}
+									</Stack>
+								)}
+								{bidTotal > bidInquiry.limit && (
+									<Box component={'div'} className={'pagination-box'}>
+										<MuiPagination
+											page={bidInquiry.page}
+											count={Math.ceil(bidTotal / bidInquiry.limit)}
+											onChange={bidPaginationChangeHandler}
+											shape="circular"
+											color="primary"
+										/>
+									</Box>
+								)}
+							</Stack>
+
+							<Stack className={'reviews-config'}>
+								<Typography className={'title'}>
+									{t('Comments')} <span>{commentTotal}</span>
+								</Typography>
+								{commentTotal !== 0 && (
+									<Stack className={'review-list'}>
+										{lotComments?.map((comment: Comment) => {
+											return (
+												<LotComment
+													comment={comment}
+													key={comment?._id}
+													removeHandler={
+														user?.memberType === MemberType.ADMIN
+															? removeCommentHandler
+															: undefined
+													}
+												/>
+											);
+										})}
+										{commentTotal > commentInquiry.limit && (
+											<Box component={'div'} className={'pagination-box'}>
+												<MuiPagination
+													page={commentInquiry.page}
+													count={Math.ceil(commentTotal / commentInquiry.limit)}
+													onChange={commentPaginationChangeHandler}
+													shape="circular"
+													color="primary"
+												/>
+											</Box>
+										)}
+									</Stack>
+								)}
+								<Stack className={'leave-review-config'}>
+									<TextField
+										multiline
+										minRows={3}
+										placeholder={t('Ask the seller or share your thoughts')}
+										onChange={({ target: { value } }: any) => {
+											setInsertCommentData({
+												...insertCommentData,
+												commentText: value,
+											});
+										}}
+										value={insertCommentData.commentText}
+									/>
+									<Box className={'submit-btn'} component={'div'}>
+										<Button
+											variant={'contained'}
+											disabled={
+												insertCommentData.commentText === '' || user?._id === ''
+											}
+											onClick={createCommentHandler}
+										>
+											{t('Submit')}
+										</Button>
+									</Box>
+								</Stack>
+							</Stack>
+						</Stack>
+
+						<Stack className={'right-config'}>
+							<Stack className={'options-config'}>
+								<Typography className={'title'}>{t('Lot details')}</Typography>
+								<Stack className={'option'}>
+									<Typography className={'option-title'}>
+										{t('Start price')}
+									</Typography>
+									<Typography className={'option-data'}>
+										${formatterStr(lot?.lotStartPrice) || 0}
+									</Typography>
+								</Stack>
+								<Stack className={'option'}>
+									<Typography className={'option-title'}>
+										{t('Min increment')}
+									</Typography>
+									<Typography className={'option-data'}>
+										${formatterStr(lot?.lotMinIncrement) || 0}
+									</Typography>
+								</Stack>
+								<Stack className={'option'}>
+									<Typography className={'option-title'}>
+										{t('Ceiling price')}
+									</Typography>
+									<Typography className={'option-data'}>
+										{lot?.lotCeilingPrice
+											? `$${formatterStr(lot?.lotCeilingPrice)}`
+											: '—'}
+									</Typography>
+								</Stack>
+								<Stack className={'option'}>
+									<Typography className={'option-title'}>
+										{t('Ends at')}
+									</Typography>
+									<Typography className={'option-data'}>
+										{moment(lot?.lotEndsAt).format('YYYY.MM.DD HH:mm')}
+									</Typography>
+								</Stack>
+								<Stack className={'option'}>
+									<Typography className={'option-title'}>
+										{t('Category')}
+									</Typography>
+									<Typography className={'option-data'}>
+										{t(lot?.lotCategory as string)}
+									</Typography>
+								</Stack>
+								<Stack className={'option'}>
+									<Typography className={'option-title'}>
+										{t('Condition')}
+									</Typography>
+									<Typography className={'option-data'}>
+										{t(lot?.lotCondition as string)}
+									</Typography>
+								</Stack>
+							</Stack>
 						</Stack>
 					</Stack>
 
@@ -814,9 +850,8 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 									{t('Similar lots')}
 								</Typography>
 								<Stack className={'pagination-box'}>
-									<WestIcon className={'swiper-similar-prev'} />
-									<div className={'swiper-similar-pagination'}></div>
-									<EastIcon className={'swiper-similar-next'} />
+									<WestIcon className={'nav-btn swiper-similar-prev'} />
+									<EastIcon className={'nav-btn swiper-similar-next'} />
 								</Stack>
 							</Stack>
 							<Stack className={'cards-box'}>
@@ -824,13 +859,10 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 									className={'similar-lots-swiper'}
 									slidesPerView={'auto'}
 									spaceBetween={24}
-									modules={[Autoplay, Navigation, Pagination]}
+									modules={[Navigation]}
 									navigation={{
 										nextEl: '.swiper-similar-next',
 										prevEl: '.swiper-similar-prev',
-									}}
-									pagination={{
-										el: '.swiper-similar-pagination',
 									}}
 								>
 									{similarLots.map((similar: Lot) => {
