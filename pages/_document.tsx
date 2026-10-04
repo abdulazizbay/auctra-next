@@ -17,21 +17,19 @@ const Document = (props: DocumentProps & DocumentHeadTagsProps) => {
 		<Html lang="en">
 			<Head>
 				<DocumentHeadTags {...props} />
-				<meta name="robots" content="index,follow" />
-
-				{/* SEO */}
+				<link rel="icon" href="/favicon.ico" sizes="any" />
+				<link rel="icon" type="image/png" href="/icon-512.png" />
+				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+				<meta name="theme-color" content="#0F2742" />
 				<meta
-					name="keyword"
+					name="keywords"
 					content={
 						'auctra, live auction, luxury watches, jewellery, art, coins, collectibles, live bidding'
 					}
 				/>
-				<meta
-					name={'description'}
-					content={
-						'Live auctions for luxury watches, jewellery, art and collectibles. Bid in real time on lots from verified sellers on Auctra.'
-					}
-				/>
+				<meta property="og:site_name" content="Auctra" />
+				<meta property="og:type" content="website" />
+				<meta name="twitter:card" content="summary_large_image" />
 			</Head>
 			<body>
 				<Main />

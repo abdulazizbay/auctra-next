@@ -70,6 +70,7 @@ const withLayoutAdmin = (Component: any) => {
 			<>
 				<Head>
 					<title>Auctra Admin</title>
+					<meta key="robots" name="robots" content="noindex,nofollow" />
 				</Head>
 				<Stack id={'admin-wrap'}>
 					<Drawer variant={'permanent'} className={'admin-aside'}>

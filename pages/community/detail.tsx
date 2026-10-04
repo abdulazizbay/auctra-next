@@ -28,6 +28,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import WatchOutlinedIcon from '@mui/icons-material/WatchOutlined';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
+import Seo from '../../libs/components/Seo';
 import { userVar } from '../../apollo/store';
 import { Article } from '../../libs/types/article/article';
 import { Comment } from '../../libs/types/comment/comment';
@@ -305,6 +306,20 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 
 	return (
 		<div id="community-detail-page">
+			{article && (
+				<Seo
+					title={article.articleTitle}
+					description={article.articleContent
+						?.replace(/<[^>]+>/g, ' ')
+						.replace(/\s+/g, ' ')
+						.trim()}
+					image={
+						article.articleImages?.[0]
+							? imageUrl(article.articleImages[0])
+							: undefined
+					}
+				/>
+			)}
 			<Stack className="container">
 				<TabContext value={articleCategory ?? ArticleCategory.MARKET_TALK}>
 					<TabList

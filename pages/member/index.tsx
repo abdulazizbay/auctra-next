@@ -17,6 +17,7 @@ import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import withLayoutFull from '../../libs/components/layout/LayoutFull';
 import MemberLots from '../../libs/components/member/MemberLots';
+import Seo from '../../libs/components/Seo';
 import MemberReviews from '../../libs/components/member/MemberReviews';
 import MemberArticles from '../../libs/components/member/MemberArticles';
 import MemberFollowers from '../../libs/components/member/MemberFollowers';
@@ -176,6 +177,11 @@ const MemberPage: NextPage = () => {
 
 	return (
 		<div id="member-page">
+			<Seo
+				title={member.memberNick}
+				description={member.memberBio}
+				image={memberImage || undefined}
+			/>
 			<Stack className="container">
 				<Stack className={'profile-box'}>
 					<Box component={'div'} className={'cover'}>

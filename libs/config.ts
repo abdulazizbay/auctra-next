@@ -1,4 +1,6 @@
 export const REACT_APP_API_URL = `${process.env.REACT_APP_API_URL}`;
+export const SITE_URL =
+	process.env.REACT_APP_SITE_URL ?? 'http://localhost:3000';
 
 export const Messages = {
 	error1: 'Something went wrong!',

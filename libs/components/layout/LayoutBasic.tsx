@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
+import Seo from '../Seo';
 import { useTranslation } from 'next-i18next';
 import { Stack } from '@mui/material';
 import Top from '../Top';
@@ -58,10 +58,10 @@ const withLayoutBasic = (Component: any) => {
 
 		return (
 			<>
-				<Head>
-					<title>Auctra</title>
-					<meta name={'title'} content={`Auctra`} />
-				</Head>
+				<Seo
+					title={memoizedValues.title ? t(memoizedValues.title) : undefined}
+					description={memoizedValues.desc ? t(memoizedValues.desc) : undefined}
+				/>
 				<Stack id="wrap">
 					<Stack id={'top'}>
 						<Top />

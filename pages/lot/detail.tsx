@@ -37,6 +37,7 @@ import 'swiper/css/pagination';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import withLayoutFull from '../../libs/components/layout/LayoutFull';
 import LotCard from '../../libs/components/lot/LotCard';
+import Seo from '../../libs/components/Seo';
 import LotComment from '../../libs/components/lot/LotComment';
 import { socketVar, userVar } from '../../apollo/store';
 import { joinRoom } from '../../libs/socket';
@@ -421,6 +422,13 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 
 	return (
 		<div id={'lot-detail-page'}>
+			{lot && (
+				<Seo
+					title={lot.lotName}
+					description={lot.lotDesc}
+					image={lot.lotImages?.[0] ? imagePath(lot.lotImages[0]) : undefined}
+				/>
+			)}
 			<div className={'container'}>
 				<Stack className={'lot-detail-config'}>
 					<Box component={'div'} className={'breadcrumbs'}>
