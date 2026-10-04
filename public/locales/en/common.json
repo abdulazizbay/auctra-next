@@ -346,5 +346,8 @@
 	"Member": "Member",
 	"Welcome back": "Welcome back",
 	"Join Auctra": "Join Auctra",
-	"Create account": "Create account"
+	"Create account": "Create account",
+	"Bid placed: {{price}}": "Bid placed: {{price}}",
+	"You're the highest bidder. We'll notify you if someone outbids you.": "You're the highest bidder. We'll notify you if someone outbids you.",
+	"You reached the ceiling price. The lot closes now and you win it.": "You reached the ceiling price. The lot closes now and you win it."
 }

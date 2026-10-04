@@ -69,6 +69,7 @@ import { REMOVE_COMMENT_BY_ADMIN } from '../../apollo/admin/mutation';
 import { MemberType } from '../../libs/enums/member.enum';
 import {
 	sweetConfirmAlert,
+	sweetMixinSuccessAlert,
 	sweetErrorHandling,
 	sweetMixinErrorAlert,
 	sweetTopSmallSuccessAlert,
@@ -342,7 +343,21 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 			await placeBid({
 				variables: { input: { lotId: lot._id, bidPrice: bidPrice } },
 			});
-			await sweetTopSmallSuccessAlert(t('Bid placed'), 800);
+			const isCeiling =
+				!!lot.lotCeilingPrice && bidPrice >= lot.lotCeilingPrice;
+			await sweetMixinSuccessAlert(
+				t('Bid placed: {{price}}', {
+					price: `$${formatterStr(isCeiling ? lot.lotCeilingPrice : bidPrice)}`,
+				}),
+				4000,
+				isCeiling
+					? t(
+							'You reached the ceiling price. The lot closes now and you win it.',
+					  )
+					: t(
+							"You're the highest bidder. We'll notify you if someone outbids you.",
+					  ),
+			);
 		} catch (err: any) {
 			console.log('ERROR, placeBidHandler: ', err.message);
 			sweetMixinErrorAlert(err.message).then();

@@ -346,5 +346,8 @@
 	"Member": "회원",
 	"Welcome back": "다시 오신 것을 환영합니다",
 	"Join Auctra": "Auctra 가입하기",
-	"Create account": "계정 만들기"
+	"Create account": "계정 만들기",
+	"Bid placed: {{price}}": "입찰 완료: {{price}}",
+	"You're the highest bidder. We'll notify you if someone outbids you.": "현재 최고 입찰자입니다. 다른 사람이 더 높게 입찰하면 알려드릴게요.",
+	"You reached the ceiling price. The lot closes now and you win it.": "상한가에 도달했습니다. 경매가 바로 종료되며 낙찰됩니다."
 }

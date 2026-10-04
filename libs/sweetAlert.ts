@@ -85,10 +85,11 @@ export const sweetMixinErrorAlert = async (msg: string, duration: number = 3000)
 	});
 };
 
-export const sweetMixinSuccessAlert = async (msg: string, duration: number = 2000) => {
+export const sweetMixinSuccessAlert = async (msg: string, duration: number = 2000, text?: string) => {
 	await Swal.fire({
 		icon: 'success',
 		title: msg,
+		text: text,
 		showConfirmButton: false,
 		timer: duration,
 	});
