@@ -18,7 +18,7 @@ const SellCta = () => {
 		: '/mypage?category=myProfile';
 
 	return (
-		<Stack className={'sell-cta reveal'}>
+		<Stack className={'sell-cta'}>
 			<Stack className={'container'}>
 				<Stack className={'cta-box'}>
 					<Stack className={'cta-text'}>

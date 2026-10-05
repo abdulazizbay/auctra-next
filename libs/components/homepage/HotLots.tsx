@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import { useMutation, useQuery } from '@apollo/client';
 import LotCard from '../lot/LotCard';
+import LotCardSkeleton from '../lot/LotCardSkeleton';
 import { Lot } from '../../types/lot/lot';
 import { LotsInquiry } from '../../types/lot/lot.input';
 import { T } from '../../types/common';
@@ -63,7 +64,7 @@ const HotLots = (props: HotLotsProps) => {
 	if (!hotLots) return null;
 
 	return (
-		<Stack className={'reveal home-lots hot-lots'}>
+		<Stack className={'home-lots hot-lots'}>
 			<Stack className={'container'}>
 				<Stack className={'info-box'}>
 					<Box component={'div'} className={'left'}>
@@ -90,14 +91,16 @@ const HotLots = (props: HotLotsProps) => {
 							{t('View all')}
 							<EastIcon />
 						</Link>
-						<div className={'pagination-box'}>
-							<WestIcon className={'nav-btn swiper-hot-prev'} />
-							<EastIcon className={'nav-btn swiper-hot-next'} />
-						</div>
 					</Box>
 				</Stack>
 				<Stack className={'card-box'}>
-					{hotLots.length === 0 ? (
+					{getLotsLoading && hotLots.length === 0 ? (
+						<Stack className={'skeleton-row'}>
+							{[0, 1, 2, 3].map((i) => (
+								<LotCardSkeleton key={i} />
+							))}
+						</Stack>
+					) : hotLots.length === 0 ? (
 						<Box component={'div'} className={'empty-list'}>
 							{t('No lots yet')}
 						</Box>
@@ -122,6 +125,10 @@ const HotLots = (props: HotLotsProps) => {
 						</Swiper>
 					)}
 				</Stack>
+				<div className={'pagination-box'}>
+					<WestIcon className={'nav-btn swiper-hot-prev'} />
+					<EastIcon className={'nav-btn swiper-hot-next'} />
+				</div>
 			</Stack>
 		</Stack>
 	);

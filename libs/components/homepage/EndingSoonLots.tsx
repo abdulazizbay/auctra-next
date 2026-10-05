@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import { useMutation, useQuery } from '@apollo/client';
 import LotCard from '../lot/LotCard';
+import LotCardSkeleton from '../lot/LotCardSkeleton';
 import { Lot } from '../../types/lot/lot';
 import { LotsInquiry } from '../../types/lot/lot.input';
 import { T } from '../../types/common';
@@ -94,14 +95,16 @@ const EndingSoonLots = (props: EndingSoonLotsProps) => {
 								{t('View all')}
 								<EastIcon />
 							</Link>
-							<div className={'pagination-box'}>
-								<WestIcon className={'nav-btn swiper-ending-prev'} />
-								<EastIcon className={'nav-btn swiper-ending-next'} />
-							</div>
 						</Box>
 					</Stack>
 					<Stack className={'card-box'}>
-						{endingSoonLots.length === 0 ? (
+						{getLotsLoading && endingSoonLots.length === 0 ? (
+							<Stack className={'skeleton-row'}>
+								{[0, 1, 2, 3].map((i) => (
+									<LotCardSkeleton key={i} />
+								))}
+							</Stack>
+						) : endingSoonLots.length === 0 ? (
 							<Box component={'div'} className={'empty-list'}>
 								{t('No lots yet')}
 							</Box>
@@ -126,6 +129,10 @@ const EndingSoonLots = (props: EndingSoonLotsProps) => {
 							</Swiper>
 						)}
 					</Stack>
+					<div className={'pagination-box'}>
+						<WestIcon className={'nav-btn swiper-ending-prev'} />
+						<EastIcon className={'nav-btn swiper-ending-next'} />
+					</div>
 				</Stack>
 			</Stack>
 		</Stack>

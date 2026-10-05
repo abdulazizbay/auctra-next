@@ -17,6 +17,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Logout } from '@mui/icons-material';
+import PersonOutlineRoundedIcon from '@mui/icons-material/PersonOutlineRounded';
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 import { userVar } from '../../apollo/store';
 import { getJwtToken, logOut, requestUserInfo } from '../auth';
@@ -79,11 +80,6 @@ const Top = () => {
 			>
 				{t('Community')}
 			</Link>
-			{user?._id && (
-				<Link href={'/mypage'} className={activeClass('/mypage')}>
-					{t('My Page')}
-				</Link>
-			)}
 			<Link href={'/cs'} className={activeClass('/cs')}>
 				{t('CS')}
 			</Link>
@@ -92,7 +88,7 @@ const Top = () => {
 
 	return (
 		<Stack
-			className={`navbar ${isHome && !scrolled ? 'transparent' : ''} ${
+			className={`navbar ${isHome ? 'light' : ''} ${
 				scrolled ? 'scrolled' : ''
 			}`}
 		>
@@ -127,6 +123,9 @@ const Top = () => {
 								anchorEl={logoutAnchor}
 								open={Boolean(logoutAnchor)}
 								onClose={() => setLogoutAnchor(null)}
+								anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+								transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+								className={'nav-menu'}
 							>
 								{user.memberType === MemberType.ADMIN && (
 									<MenuItem onClick={() => router.push('/_admin')}>
@@ -137,6 +136,10 @@ const Top = () => {
 										{t('Admin')}
 									</MenuItem>
 								)}
+								<MenuItem onClick={() => router.push('/mypage')}>
+									<PersonOutlineRoundedIcon fontSize="small" sx={{ mr: 1 }} />
+									{t('My Page')}
+								</MenuItem>
 								<MenuItem onClick={() => logOut()}>
 									<Logout fontSize="small" sx={{ mr: 1 }} />
 									{t('Logout')}
@@ -166,6 +169,9 @@ const Top = () => {
 						anchorEl={langAnchor}
 						open={Boolean(langAnchor)}
 						onClose={() => setLangAnchor(null)}
+						anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+						transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+						className={'nav-menu'}
 					>
 						<MenuItem onClick={() => langChoice('en')}>English</MenuItem>
 						<MenuItem onClick={() => langChoice('kr')}>한국어</MenuItem>

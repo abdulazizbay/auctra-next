@@ -4,15 +4,17 @@ import { useTranslation } from 'next-i18next';
 import { Avatar, Stack, Typography } from '@mui/material';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded';
+import EastIcon from '@mui/icons-material/East';
 import { Member } from '../../types/member/member';
 import { REACT_APP_API_URL } from '../../config';
 
 interface TopSellerCardProps {
 	seller: Member;
+	rank: number;
 }
 
 const TopSellerCard = (props: TopSellerCardProps) => {
-	const { seller } = props;
+	const { seller, rank } = props;
 	const router = useRouter();
 	const { t } = useTranslation('common');
 	const image = seller?.memberImage;
@@ -34,18 +36,23 @@ const TopSellerCard = (props: TopSellerCardProps) => {
 			className="top-seller-card"
 			onClick={() => pushDetailHandler(seller?._id)}
 		>
+			<span className={'rank'}>{rank}</span>
 			<Avatar src={sellerImage || undefined} className={'avatar'}>
 				{seller?.memberNick?.[0]?.toUpperCase()}
 			</Avatar>
-			<strong>
-				{seller?.memberNick}
-				{isTrusted && <VerifiedRoundedIcon className={'trusted'} />}
-			</strong>
-			<Typography className={'rating'}>
-				<StarRoundedIcon />
-				{seller?.memberAvgRating?.toFixed(1)} ({seller?.memberReviewCount})
-			</Typography>
-			<span>{t('{{count}} sales', { count: seller?.memberSalesCount })}</span>
+			<Stack className={'info'}>
+				<strong>
+					{seller?.memberNick}
+					{isTrusted && <VerifiedRoundedIcon className={'trusted'} />}
+				</strong>
+				<Typography className={'meta'}>
+					<StarRoundedIcon />
+					{seller?.memberAvgRating?.toFixed(1)} ({seller?.memberReviewCount})
+					<span>·</span>
+					{t('{{count}} sales', { count: seller?.memberSalesCount })}
+				</Typography>
+			</Stack>
+			<EastIcon className={'arrow'} />
 		</Stack>
 	);
 };

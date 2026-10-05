@@ -62,7 +62,7 @@ const CommunityBoards = () => {
 	});
 
 	return (
-		<Stack className={'community-board reveal'}>
+		<Stack className={'community-board'}>
 			<Stack className={'container'}>
 				<Stack className={'info-box'}>
 					<Box component={'div'} className={'left'}>
