@@ -11,6 +11,7 @@ const nextConfig = {
 		REACT_APP_API_WS: process.env.REACT_APP_API_WS,
 		REACT_APP_SITE_URL: process.env.REACT_APP_SITE_URL,
 		REACT_APP_GOOGLE_CLIENT_ID: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+		REACT_APP_KAKAO_REST_KEY: process.env.REACT_APP_KAKAO_REST_KEY,
 	},
 };
 

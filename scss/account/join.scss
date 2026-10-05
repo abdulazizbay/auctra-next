@@ -156,6 +156,29 @@
 				font-size: 13px;
 				color: $text-secondary;
 			}
+
+			.kakao-btn {
+				gap: 8px;
+				width: 100%;
+				max-width: 360px;
+				height: 40px;
+				border-radius: 20px;
+				background: #fee500;
+				color: rgba(0, 0, 0, 0.85);
+				font-size: 14px;
+				font-weight: 500;
+				text-transform: none;
+
+				svg {
+					width: 18px;
+					height: 18px;
+					fill: #000;
+				}
+
+				&:hover {
+					background: #f5dc00;
+				}
+			}
 		}
 
 		.ask-info {
@@ -270,4 +293,10 @@
 		opacity: 1;
 		transform: none;
 	}
+}
+
+.social-callback {
+	min-height: 100vh;
+	align-items: center;
+	justify-content: center;
 }

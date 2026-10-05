@@ -83,6 +83,19 @@ const Join: NextPage = () => {
 		}
 	};
 
+	const kakaoLoginHandler = () => {
+		const state = crypto.randomUUID();
+		sessionStorage.setItem('kakaoState', state);
+		sessionStorage.setItem('kakaoReferrer', `${router.query.referrer ?? '/'}`);
+		const params = new URLSearchParams({
+			client_id: process.env.REACT_APP_KAKAO_REST_KEY ?? '',
+			redirect_uri: `${window.location.origin}/account/kakao`,
+			response_type: 'code',
+			state,
+		});
+		window.location.href = `https://kauth.kakao.com/oauth/authorize?${params}`;
+	};
+
 	const submitHandler = (e: any) => {
 		e.preventDefault();
 		if (loginView) doLogin();
@@ -188,9 +201,9 @@ const Join: NextPage = () => {
 								{loginView ? t('Login') : t('Create account')}
 							</Button>
 						</Box>
-						{process.env.REACT_APP_GOOGLE_CLIENT_ID && (
-							<Stack className={'social-login'}>
-								<Divider>{t('or')}</Divider>
+						<Stack className={'social-login'}>
+							<Divider>{t('or')}</Divider>
+							{process.env.REACT_APP_GOOGLE_CLIENT_ID && (
 								<GoogleOAuthProvider
 									clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
 									locale={router.locale === 'kr' ? 'ko' : 'en'}
@@ -204,8 +217,20 @@ const Join: NextPage = () => {
 										}
 									/>
 								</GoogleOAuthProvider>
-							</Stack>
-						)}
+							)}
+							{process.env.REACT_APP_KAKAO_REST_KEY && (
+								<Button className={'kakao-btn'} onClick={kakaoLoginHandler}>
+									<svg viewBox={'0 0 24 24'}>
+										<path
+											d={
+												'M12 3C6.48 3 2 6.58 2 11c0 2.83 1.86 5.32 4.66 6.73l-.95 3.48c-.08.31.27.56.54.38l4.15-2.75c.52.05 1.06.08 1.6.08 5.52 0 10-3.58 10-8S17.52 3 12 3z'
+											}
+										/>
+									</svg>
+									{t('Continue with Kakao')}
+								</Button>
+							)}
+						</Stack>
 						<Box className={'ask-info'}>
 							{loginView ? (
 								<p>
