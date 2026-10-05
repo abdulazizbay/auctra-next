@@ -27,7 +27,7 @@ const CommunityBoards = () => {
 		error: getNewsArticlesError,
 		refetch: getNewsArticlesRefetch,
 	} = useQuery(GET_ARTICLES, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'cache-and-network',
 		variables: {
 			input: {
 				...searchCommunity,
@@ -47,7 +47,7 @@ const CommunityBoards = () => {
 		error: getMarketTalkArticlesError,
 		refetch: getMarketTalkArticlesRefetch,
 	} = useQuery(GET_ARTICLES, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'cache-and-network',
 		variables: {
 			input: {
 				...searchCommunity,

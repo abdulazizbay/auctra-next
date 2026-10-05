@@ -72,7 +72,7 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 		error: getArticlesError,
 		refetch: getArticlesRefetch,
 	} = useQuery(GET_ARTICLES, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'cache-and-network',
 		variables: { input: searchCommunity },
 		skip: !articleCategory,
 		notifyOnNetworkStatusChange: true,

@@ -25,7 +25,7 @@ const Notice = ({ initialInput, ...props }: any) => {
 		error: getNoticesError,
 		refetch: getNoticesRefetch,
 	} = useQuery(GET_NOTICES, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'cache-and-network',
 		variables: { input: searchFilter },
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {

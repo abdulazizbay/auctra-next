@@ -62,7 +62,7 @@ const SellerList: NextPage = ({ initialInput, ...props }: any) => {
 		error: getSellersError,
 		refetch: getSellersRefetch,
 	} = useQuery(GET_SELLERS, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'cache-and-network',
 		variables: { input: searchFilter },
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
