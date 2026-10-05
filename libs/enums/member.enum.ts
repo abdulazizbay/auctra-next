@@ -13,7 +13,6 @@ export enum MemberStatus {
 export enum MemberAuthType {
 	LOCAL = 'LOCAL',
 	GOOGLE = 'GOOGLE',
-	TELEGRAM = 'TELEGRAM',
 	KAKAO = 'KAKAO',
 }
 
