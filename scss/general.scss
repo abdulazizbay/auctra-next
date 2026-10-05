@@ -1025,3 +1025,32 @@
 		animation: none !important;
 	}
 }
+
+.route-loader {
+	position: fixed;
+	inset: 0;
+	z-index: 1350;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.7);
+	backdrop-filter: blur(3px);
+	animation: route-loader-in 0.2s ease;
+
+	.gavel-scene {
+		width: 110px;
+
+		.gavel,
+		.impact line,
+		.ripple {
+			animation-duration: 0.9s;
+			animation-iteration-count: infinite;
+		}
+	}
+}
+
+@keyframes route-loader-in {
+	from {
+		opacity: 0;
+	}
+}
