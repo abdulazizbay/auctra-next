@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import moment from 'moment';
 import { useTranslation } from 'next-i18next';
@@ -10,7 +10,7 @@ import WatchOutlinedIcon from '@mui/icons-material/WatchOutlined';
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 import { Lot } from '../../types/lot/lot';
 import { LotStatus } from '../../enums/lot.enum';
-import { userVar } from '../../../apollo/store';
+import { userVar, watchToastVar } from '../../../apollo/store';
 import { REACT_APP_API_URL } from '../../config';
 import { formatterStr } from '../../utils';
 
@@ -26,6 +26,7 @@ const LotCard = (props: LotCardType) => {
 	const { lot, watchLotHandler, myWatched, recentlyVisited, myBids } = props;
 	const isWatched = myWatched || !!lot?.meWatched?.[0]?.myWatch;
 	const user = useReactiveVar(userVar);
+	const [pop, setPop] = useState<boolean>(false);
 	const { t } = useTranslation('common');
 	const image = lot?.lotImages[0];
 	const imagePath: string = !image
@@ -109,8 +110,19 @@ const LotCard = (props: LotCardType) => {
 						{timeText}
 					</Typography>
 					<Stack
-						className={`buttons ${recentlyVisited ? '' : 'clickable'}`}
-						onClick={() => !recentlyVisited && watchLotHandler(user, lot?._id)}
+						className={`buttons ${recentlyVisited ? '' : 'clickable'} ${
+							pop ? 'pop' : ''
+						}`}
+						onClick={() => {
+							if (recentlyVisited) return;
+							if (user?._id && !isWatched) {
+								setPop(true);
+								setTimeout(() => setPop(false), 700);
+							}
+							if (user?._id)
+								watchToastVar({ lot, added: !isWatched, key: Date.now() });
+							watchLotHandler(user, lot?._id);
+						}}
 					>
 						{recentlyVisited && <BookmarkBorderIcon className={'static'} />}
 						{!recentlyVisited && (

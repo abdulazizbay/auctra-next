@@ -836,3 +836,192 @@
 .empty-list {
 	color: $muted;
 }
+
+.watch-toast {
+	position: fixed;
+	z-index: 1400;
+	top: 84px;
+	right: 24px;
+	width: 340px;
+	max-width: calc(100vw - 32px);
+	overflow: hidden;
+	border: 1px solid $line;
+	border-radius: 16px;
+	background: #fff;
+	box-shadow: 0 16px 40px rgba(17, 17, 17, 0.18);
+	animation: watch-toast-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+	@include down(sm) {
+		top: auto;
+		right: 16px;
+		bottom: 88px;
+		left: 16px;
+		width: auto;
+	}
+
+	.wt-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+		padding: 9px 14px;
+		background: $ink;
+		color: #fff;
+	}
+
+	.wt-label {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 11px;
+		font-weight: 800;
+		letter-spacing: 0.6px;
+		text-transform: uppercase;
+
+		svg {
+			font-size: 16px;
+		}
+	}
+
+	&.added .wt-label svg {
+		animation: watch-eye 0.6s 0.2s ease both;
+	}
+
+	.wt-timer {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 12px;
+		font-weight: 700;
+		color: rgba(255, 255, 255, 0.75);
+		font-variant-numeric: tabular-nums;
+
+		&.live {
+			color: #fff;
+		}
+	}
+
+	.wt-body {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		padding: 12px 14px;
+	}
+
+	.thumb {
+		width: 52px;
+		height: 52px;
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		border-radius: 10px;
+		background: $soft-2;
+		color: $faint;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.text {
+		flex: 1;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 3px;
+
+		strong {
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			font-size: 14px;
+			font-weight: 800;
+			color: $ink;
+		}
+
+		span {
+			font-size: 12px;
+			line-height: 1.4;
+			color: $muted;
+		}
+	}
+
+	.wt-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 32px;
+		height: 32px;
+		flex-shrink: 0;
+		border: 1px solid $line-2;
+		border-radius: 50%;
+		color: $ink;
+		transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+		svg {
+			font-size: 16px;
+		}
+
+		&:hover {
+			border-color: $ink;
+			background: $ink;
+			color: #fff;
+		}
+	}
+
+	.progress {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: 3px;
+		background: $ink;
+		transform-origin: left;
+		animation: watch-progress 4.2s linear forwards;
+	}
+
+	&.removed {
+		.wt-head {
+			background: $soft-2;
+			color: $ink;
+		}
+
+		.progress {
+			background: $faint;
+		}
+	}
+}
+
+@keyframes watch-toast-in {
+	from {
+		opacity: 0;
+		transform: translateX(24px);
+	}
+}
+
+@keyframes watch-eye {
+	0%,
+	100% {
+		transform: scaleY(1);
+	}
+	40% {
+		transform: scaleY(0.1);
+	}
+}
+
+@keyframes watch-progress {
+	to {
+		transform: scaleX(0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.watch-toast,
+	.watch-toast * {
+		animation: none !important;
+	}
+}

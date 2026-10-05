@@ -26,10 +26,7 @@ import { T } from '../../libs/types/common';
 import { Direction, Message } from '../../libs/enums/common.enum';
 import { GET_LOTS } from '../../apollo/user/query';
 import { WATCH_TARGET_LOT } from '../../apollo/user/mutation';
-import {
-	sweetMixinErrorAlert,
-	sweetTopSmallSuccessAlert,
-} from '../../libs/sweetAlert';
+import { sweetMixinErrorAlert } from '../../libs/sweetAlert';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -103,7 +100,6 @@ const LotList: NextPage = ({ initialInput, ...props }: any) => {
 
 			await watchTargetLot({ variables: { input: id } });
 			await getLotsRefetch({ input: searchFilter });
-			await sweetTopSmallSuccessAlert('success', 800);
 		} catch (err: any) {
 			console.log('ERROR, watchLotHandler: ', err.message);
 			sweetMixinErrorAlert(err.message).then();

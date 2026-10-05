@@ -10,10 +10,7 @@ import { Direction, Message } from '../../enums/common.enum';
 import { LotStatus } from '../../enums/lot.enum';
 import { GET_LOTS } from '../../../apollo/user/query';
 import { WATCH_TARGET_LOT } from '../../../apollo/user/mutation';
-import {
-	sweetMixinErrorAlert,
-	sweetTopSmallSuccessAlert,
-} from '../../sweetAlert';
+import { sweetMixinErrorAlert } from '../../sweetAlert';
 
 const MyBids = ({ initialInput, ...props }: any) => {
 	const { t } = useTranslation('common');
@@ -51,7 +48,6 @@ const MyBids = ({ initialInput, ...props }: any) => {
 
 			await watchTargetLot({ variables: { input: id } });
 			await getLotsRefetch({ input: searchFilter });
-			await sweetTopSmallSuccessAlert('success', 800);
 		} catch (err: any) {
 			console.log('ERROR, watchLotHandler: ', err.message);
 			sweetMixinErrorAlert(err.message).then();

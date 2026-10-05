@@ -10,10 +10,7 @@ import { LotStatus, publicLotStatuses } from '../../enums/lot.enum';
 import { Message } from '../../enums/common.enum';
 import { GET_LOTS } from '../../../apollo/user/query';
 import { WATCH_TARGET_LOT } from '../../../apollo/user/mutation';
-import {
-	sweetMixinErrorAlert,
-	sweetTopSmallSuccessAlert,
-} from '../../sweetAlert';
+import { sweetMixinErrorAlert } from '../../sweetAlert';
 
 interface MemberLotsProps {
 	memberId: string;
@@ -74,7 +71,6 @@ const MemberLots = (props: MemberLotsProps) => {
 
 			await watchTargetLot({ variables: { input: id } });
 			await getLotsRefetch({ input: searchFilter });
-			await sweetTopSmallSuccessAlert('success', 800);
 		} catch (err: any) {
 			console.log('ERROR, watchLotHandler: ', err.message);
 			sweetMixinErrorAlert(err.message).then();

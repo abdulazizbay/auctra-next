@@ -38,8 +38,9 @@ import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import withLayoutFull from '../../libs/components/layout/LayoutFull';
 import LotCard from '../../libs/components/lot/LotCard';
 import Seo from '../../libs/components/Seo';
+import BidPlacedOverlay from '../../libs/components/lot/BidPlacedOverlay';
 import LotComment from '../../libs/components/lot/LotComment';
-import { socketVar, userVar } from '../../apollo/store';
+import { socketVar, userVar, watchToastVar } from '../../apollo/store';
 import { joinRoom } from '../../libs/socket';
 import { Lot } from '../../libs/types/lot/lot';
 import { Bid } from '../../libs/types/bid/bid';
@@ -70,7 +71,6 @@ import { REMOVE_COMMENT_BY_ADMIN } from '../../apollo/admin/mutation';
 import { MemberType } from '../../libs/enums/member.enum';
 import {
 	sweetConfirmAlert,
-	sweetMixinSuccessAlert,
 	sweetErrorHandling,
 	sweetMixinErrorAlert,
 	sweetTopSmallSuccessAlert,
@@ -99,6 +99,11 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 	const [bidPrice, setBidPrice] = useState<number>(0);
 	const [now, setNow] = useState<number>(Date.now());
 	const [wonOpen, setWonOpen] = useState<boolean>(false);
+	const [bidPlaced, setBidPlaced] = useState<{
+		price: string;
+		won: boolean;
+	} | null>(null);
+	const [watchPop, setWatchPop] = useState<boolean>(false);
 	const bidPage = useRef<number>(1);
 	const [commentInquiry, setCommentInquiry] =
 		useState<CommentsInquiry>(initialComment);
@@ -324,7 +329,6 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 			await watchTargetLot({ variables: { input: id } });
 			await getLotRefetch({ input: lotId });
 			await getLotsRefetch();
-			await sweetTopSmallSuccessAlert('success', 800);
 		} catch (err: any) {
 			console.log('ERROR, watchLotHandler: ', err.message);
 			sweetMixinErrorAlert(err.message).then();
@@ -346,19 +350,10 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 			});
 			const isCeiling =
 				!!lot.lotCeilingPrice && bidPrice >= lot.lotCeilingPrice;
-			await sweetMixinSuccessAlert(
-				t('Bid placed: {{price}}', {
-					price: `$${formatterStr(isCeiling ? lot.lotCeilingPrice : bidPrice)}`,
-				}),
-				4000,
-				isCeiling
-					? t(
-							'You reached the ceiling price. The lot closes now and you win it.',
-					  )
-					: t(
-							"You're the highest bidder. We'll notify you if someone outbids you.",
-					  ),
-			);
+			setBidPlaced({
+				price: `$${formatterStr(isCeiling ? lot.lotCeilingPrice : bidPrice)}`,
+				won: isCeiling,
+			});
 		} catch (err: any) {
 			console.log('ERROR, placeBidHandler: ', err.message);
 			sweetMixinErrorAlert(err.message).then();
@@ -507,8 +502,20 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 									</Stack>
 								</Tooltip>
 								<Stack
-									className="button-box clickable"
-									onClick={() => watchLotHandler(user, lot?._id as string)}
+									className={`button-box clickable ${watchPop ? 'pop' : ''}`}
+									onClick={() => {
+										if (user?._id && !lot?.meWatched?.[0]?.myWatch) {
+											setWatchPop(true);
+											setTimeout(() => setWatchPop(false), 700);
+										}
+										if (user?._id && lot)
+											watchToastVar({
+												lot,
+												added: !lot.meWatched?.[0]?.myWatch,
+												key: Date.now(),
+											});
+										watchLotHandler(user, lot?._id as string);
+									}}
 								>
 									<Tooltip
 										title={
@@ -908,8 +915,15 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 				</Stack>
 			</div>
 
+			{bidPlaced && (
+				<BidPlacedOverlay
+					price={bidPlaced.price}
+					won={bidPlaced.won}
+					onClose={() => setBidPlaced(null)}
+				/>
+			)}
 			<Dialog
-				open={wonOpen}
+				open={wonOpen && !bidPlaced}
 				onClose={() => setWonOpen(false)}
 				className={'won-dialog'}
 			>

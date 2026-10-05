@@ -1,5 +1,6 @@
 import { makeVar } from '@apollo/client';
 import { UserInfo } from '../libs/types/userInfo';
+import { Lot } from '../libs/types/lot/lot';
 
 export const userVar = makeVar<UserInfo>({
 	_id: '',
@@ -24,3 +25,9 @@ export const userVar = makeVar<UserInfo>({
 });
 
 export const socketVar = makeVar<WebSocket | null>(null);
+
+export const watchToastVar = makeVar<{
+	lot: Lot;
+	added: boolean;
+	key: number;
+} | null>(null);
