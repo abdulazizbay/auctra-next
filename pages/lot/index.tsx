@@ -19,6 +19,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import Filter from '../../libs/components/lot/Filter';
 import LotCard from '../../libs/components/lot/LotCard';
+import LotCardSkeleton from '../../libs/components/lot/LotCardSkeleton';
 import { LotsInquiry } from '../../libs/types/lot/lot.input';
 import { Lot } from '../../libs/types/lot/lot';
 import { T } from '../../libs/types/common';
@@ -255,7 +256,9 @@ const LotList: NextPage = ({ initialInput, ...props }: any) => {
 							</Box>
 						</Box>
 						<Stack className={'list-config'}>
-							{lots?.length === 0 ? (
+							{getLotsLoading && lots?.length === 0 ? (
+								[0, 1, 2, 3, 4, 5].map((i) => <LotCardSkeleton key={i} />)
+							) : lots?.length === 0 ? (
 								<div className={'no-data'}>
 									<SearchOffRoundedIcon />
 									<p>{t('No lots found!')}</p>

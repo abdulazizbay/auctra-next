@@ -1,18 +1,29 @@
 /** VARIABLES **/
 @use 'sass:map';
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 $font: 'Manrope', sans-serif;
-$font-heading: 'Cormorant Garamond', serif;
+$font-logo: 'Cormorant Garamond', serif;
 
-$primary: #0f2742;
-$primary-dark: #0a1b2f;
-$accent: #c2a35a;
-$bg: #f6f7f9;
-$text: #14202e;
-$text-secondary: #5b6573;
-$border: #e3e6ea;
+$ink: #111;
+$ink-2: #555;
+$muted: #8a8a8a;
+$faint: #c4c4c4;
+$line: #ececec;
+$line-2: #e4e4e4;
+$soft: #f6f5f3;
+$soft-2: #f3f2ef;
+$hover: #2b2b2b;
+$live: #ff4d2e;
+$success: #1f9d55;
+$danger: #e5484d;
+$brand: #c2a35a;
+
+$bg: #fff;
+$text: $ink;
+$text-secondary: $ink-2;
+$border: $line;
 
 $breakpoints: (
 	sm: 600px,

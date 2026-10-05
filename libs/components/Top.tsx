@@ -87,11 +87,7 @@ const Top = () => {
 	);
 
 	return (
-		<Stack
-			className={`navbar ${isHome ? 'light' : ''} ${
-				scrolled ? 'scrolled' : ''
-			}`}
-		>
+		<Stack className={`navbar ${scrolled ? 'scrolled' : ''}`}>
 			<Stack className={'container'}>
 				<Box component={'div'} className={'logo-box'}>
 					<Link href={'/'}>

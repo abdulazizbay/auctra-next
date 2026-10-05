@@ -1,0 +1,218 @@
+@use 'variables' as *;
+
+.auctra-toast.swal2-container,
+.auctra-swal.swal2-container {
+	z-index: 1500;
+}
+
+body.swal2-toast-shown .auctra-toast.swal2-container.swal2-top {
+	width: auto !important;
+	max-width: 100%;
+}
+
+.auctra-toast.swal2-container.swal2-top {
+	padding: 16px;
+	pointer-events: none;
+
+	.swal2-popup.auctra-toast-popup {
+		display: grid !important;
+		grid-template-columns: 26px 1fr;
+		align-items: center;
+		column-gap: 10px;
+		row-gap: 0;
+		width: fit-content !important;
+		min-width: 0;
+		max-width: min(360px, calc(100vw - 32px));
+		padding: 7px 14px 7px 7px;
+		border: none;
+		border-radius: 14px;
+		background: $ink;
+		box-shadow: 0 10px 30px rgba(17, 17, 17, 0.28);
+		pointer-events: auto;
+	}
+
+	.auctra-toast-icon {
+		flex-shrink: 0;
+		grid-row: 1;
+		width: 26px;
+		height: 26px;
+		min-width: 26px;
+		margin: 0;
+		border: none;
+		border-radius: 50%;
+		color: #fff;
+
+		&.swal2-success {
+			background: #fff;
+			color: $ink;
+		}
+
+		&.swal2-error {
+			background: $live;
+		}
+
+		svg {
+			width: 14px;
+			height: 14px;
+		}
+	}
+
+	.auctra-toast-title {
+		margin: 0;
+		padding: 0;
+		grid-column: 2;
+		grid-row: 1;
+		font-family: $font;
+		align-self: center;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 1.35;
+		color: #fff;
+		text-align: left;
+	}
+
+	.auctra-toast-text {
+		grid-column: 2;
+		grid-row: 2;
+		margin: 2px 0 0;
+		padding: 0;
+		font-family: $font;
+		font-size: 13px;
+		line-height: 1.45;
+		color: rgba(255, 255, 255, 0.65);
+		text-align: left;
+	}
+}
+
+.auctra-swal.swal2-backdrop-show {
+	background: rgba(17, 17, 17, 0.4);
+}
+
+.auctra-swal {
+	.auctra-swal-popup {
+		max-width: calc(100vw - 32px);
+		padding: 28px 24px 20px;
+		border-radius: 20px;
+		background: #fff;
+	}
+
+	.auctra-swal-icon {
+		width: 48px;
+		height: 48px;
+		margin: 0 auto 14px;
+		border: none;
+		border-radius: 50%;
+		background: $soft-2;
+		color: $ink;
+
+		svg {
+			width: 24px;
+			height: 24px;
+		}
+	}
+
+	.auctra-swal-title {
+		padding: 0;
+		font-family: $font;
+		font-size: 17px;
+		font-weight: 700;
+		line-height: 1.45;
+		color: $ink;
+	}
+
+	.auctra-swal-actions {
+		width: 100%;
+		margin: 22px 0 0;
+		gap: 8px;
+		flex-wrap: nowrap;
+	}
+
+	.auctra-swal-btn {
+		flex: 1;
+		margin: 0;
+		padding: 11px 18px;
+		border-radius: 999px;
+		font-family: $font;
+		font-size: 14px;
+		font-weight: 700;
+		cursor: pointer;
+		transition: background 0.15s ease, border-color 0.15s ease;
+
+		&:focus-visible {
+			outline: none;
+			box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.15);
+		}
+
+		&.primary {
+			border: 1px solid $ink;
+			background: $ink;
+			color: #fff;
+
+			&:hover {
+				background: $hover;
+			}
+		}
+
+		&.ghost {
+			border: 1px solid $line-2;
+			background: #fff;
+			color: $ink;
+
+			&:hover {
+				border-color: $ink;
+			}
+		}
+	}
+}
+
+.auctra-toast-icon,
+.auctra-swal-icon {
+	&,
+	.swal2-icon-content {
+		animation: none !important;
+	}
+}
+
+.auctra-toast-in {
+	animation: auctra-toast-in 0.25s ease;
+}
+
+.auctra-toast-out {
+	animation: auctra-toast-out 0.2s ease-in forwards;
+}
+
+.auctra-swal-in {
+	animation: auctra-pop-in 0.2s ease;
+}
+
+.auctra-swal-out {
+	animation: auctra-pop-out 0.15s ease-in forwards;
+}
+
+@keyframes auctra-toast-in {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+}
+
+@keyframes auctra-toast-out {
+	to {
+		opacity: 0;
+		transform: translateY(-8px);
+	}
+}
+
+@keyframes auctra-pop-in {
+	from {
+		opacity: 0;
+		transform: scale(0.96);
+	}
+}
+
+@keyframes auctra-pop-out {
+	to {
+		opacity: 0;
+		transform: scale(0.97);
+	}
+}

@@ -20,7 +20,7 @@ const Document = (props: DocumentProps & DocumentHeadTagsProps) => {
 				<link rel="icon" href="/favicon.ico" sizes="any" />
 				<link rel="icon" type="image/png" href="/icon-512.png" />
 				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-				<meta name="theme-color" content="#0F2742" />
+				<meta name="theme-color" content="#ffffff" />
 				<meta
 					name="keywords"
 					content={

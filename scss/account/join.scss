@@ -1,25 +1,24 @@
 @use '../variables' as *;
 
 .join-page {
-	padding: 56px 0 96px;
+	padding: 24px 0 96px;
 
 	.main {
 		flex-direction: row;
 		width: 100%;
-		max-width: 1040px;
+		max-width: 1000px;
 		margin: 0 auto;
 		overflow: hidden;
+		border: 1px solid $line;
+		border-radius: 24px;
 		background: #fff;
-		border: 1px solid rgba(15, 39, 66, 0.08);
-		border-radius: 28px;
-		box-shadow: 0 40px 80px -48px rgba(7, 20, 35, 0.5);
 	}
 
 	.left {
 		flex: 1;
 		min-width: 0;
-		gap: 24px;
-		padding: 48px 52px;
+		gap: 22px;
+		padding: 48px;
 
 		@include down(sm) {
 			padding: 28px 20px;
@@ -28,133 +27,102 @@
 		.view-tabs {
 			flex-direction: row;
 			align-self: flex-start;
-			gap: 4px;
-			padding: 4px;
-			border: 1px solid $border;
+			gap: 2px;
+			padding: 3px;
+			border: 1px solid $line-2;
 			border-radius: 999px;
-			background: $bg;
 
 			p {
-				padding: 8px 22px;
+				padding: 7px 20px;
 				border-radius: 999px;
 				font-size: 14px;
-				font-weight: 600;
-				color: $text-secondary;
+				font-weight: 700;
+				color: $muted;
 				cursor: pointer;
-				transition: all 0.25s ease;
+				transition: background 0.15s ease, color 0.15s ease;
 
 				&:hover {
-					color: $primary;
+					color: $ink;
 				}
 
 				&.active {
-					background: $primary;
+					background: $ink;
 					color: #fff;
-					box-shadow: 0 6px 16px -8px rgba(15, 39, 66, 0.6);
 				}
 			}
 		}
 
 		.info {
-			animation: join-fade 0.4s ease both;
-
 			h3 {
-				font-family: $font-heading;
-				font-size: 44px;
-				font-weight: 600;
-				line-height: 1.1;
-				color: $primary;
+				font-size: 32px;
+				font-weight: 800;
+				line-height: 1.15;
+				letter-spacing: -0.03em;
+				color: $ink;
 
 				@include down(sm) {
-					font-size: 34px;
+					font-size: 26px;
 				}
 			}
 
 			p {
-				margin-top: 8px;
-				font-size: 15px;
-				color: $text-secondary;
+				margin-top: 6px;
+				font-size: 14px;
+				color: $muted;
 			}
 		}
 
 		.input-wrap {
 			display: flex;
 			flex-direction: column;
-			gap: 16px;
+			gap: 14px;
 
 			.MuiOutlinedInput-root {
-				border-radius: 14px;
-				background: $bg;
-
-				.MuiOutlinedInput-notchedOutline {
-					border-color: transparent;
-				}
-
-				&:hover .MuiOutlinedInput-notchedOutline {
-					border-color: $border;
-				}
-
-				&.Mui-focused {
-					background: #fff;
-
-					.MuiOutlinedInput-notchedOutline {
-						border-width: 1px;
-						border-color: $accent;
-					}
-
-					.MuiInputAdornment-positionStart svg {
-						color: #8a6f2e;
-					}
-				}
+				border-radius: 12px;
 			}
 
 			.MuiInputAdornment-root svg {
 				font-size: 20px;
-				color: $text-secondary;
-				transition: color 0.2s ease;
+				color: $muted;
 			}
 
+			.Mui-focused .MuiInputAdornment-positionStart svg,
 			.MuiInputLabel-root.Mui-focused {
-				color: #8a6f2e;
-			}
-
-			.phone-field {
-				animation: join-fade 0.35s ease both;
+				color: $ink;
 			}
 
 			button[type='submit'] {
-				height: 54px;
+				height: 50px;
 				margin-top: 6px;
 				border-radius: 999px;
-				background: linear-gradient(135deg, #e6cf8f, $accent);
-				color: $primary;
-				font-size: 16px;
+				background: $ink;
+				color: #fff;
+				font-size: 15px;
 				font-weight: 700;
 				text-transform: none;
 				box-shadow: none;
-				transition: box-shadow 0.25s ease, transform 0.25s ease;
+				transition: background 0.15s ease;
 
 				&:hover {
-					transform: translateY(-1px);
-					box-shadow: 0 16px 32px -14px rgba(194, 163, 90, 0.9);
+					background: $hover;
 				}
 
 				&.Mui-disabled {
-					background: $border;
-					color: $text-secondary;
+					background: $line;
+					color: $faint;
 				}
 			}
 		}
 
 		.social-login {
-			gap: 16px;
+			gap: 14px;
 			align-items: center;
-			margin-bottom: 24px;
+			margin-bottom: 20px;
 
 			.MuiDivider-root {
 				width: 100%;
 				font-size: 13px;
-				color: $text-secondary;
+				color: $muted;
 			}
 
 			.kakao-btn {
@@ -166,7 +134,7 @@
 				background: #fee500;
 				color: rgba(0, 0, 0, 0.85);
 				font-size: 14px;
-				font-weight: 500;
+				font-weight: 600;
 				text-transform: none;
 
 				svg {
@@ -183,115 +151,73 @@
 
 		.ask-info {
 			font-size: 14px;
-			color: $text-secondary;
+			color: $muted;
 
 			b {
 				margin-left: 6px;
-				color: $primary;
+				color: $ink;
 				cursor: pointer;
-				border-bottom: 1px solid rgba(194, 163, 90, 0.6);
-
-				&:hover {
-					color: #8a6f2e;
-				}
+				text-decoration: underline;
+				text-underline-offset: 3px;
 			}
 		}
 	}
 
 	.right {
-		position: relative;
-		flex: 0 0 44%;
+		flex: 0 0 42%;
 		align-items: center;
 		justify-content: center;
 		gap: 10px;
 		padding: 48px 40px;
-		overflow: hidden;
 		text-align: center;
-		background: radial-gradient(
-				420px 260px at 80% 10%,
-				rgba(194, 163, 90, 0.3),
-				transparent 70%
-			),
-			linear-gradient(160deg, $primary, $primary-dark);
-		color: #fff;
-
-		&::before {
-			content: '';
-			position: absolute;
-			left: -120px;
-			bottom: -160px;
-			width: 380px;
-			height: 380px;
-			border-radius: 50%;
-			background: repeating-radial-gradient(
-				circle,
-				rgba(194, 163, 90, 0.16) 0 1px,
-				transparent 1px 24px
-			);
-		}
-
-		> * {
-			position: relative;
-		}
+		background: $soft;
+		color: $ink;
 
 		.logo {
-			font-family: $font-heading;
-			font-size: 40px;
+			font-family: $font-logo;
+			font-size: 36px;
 			font-weight: 600;
 			letter-spacing: 5px;
 
 			em {
 				font-style: normal;
-				color: $accent;
+				color: $brand;
 			}
 		}
 
 		p {
 			max-width: 280px;
 			font-size: 14px;
-			color: rgba(255, 255, 255, 0.65);
+			line-height: 1.6;
+			color: $ink-2;
 		}
 
 		.visual {
-			width: 220px;
+			width: 200px;
 			margin: 8px 0;
 		}
 
 		.perks {
-			gap: 10px;
+			gap: 8px;
 
 			div {
 				display: flex;
 				align-items: center;
 				gap: 8px;
 				font-size: 13px;
-				color: rgba(255, 255, 255, 0.75);
+				font-weight: 600;
+				color: $ink-2;
 			}
 
 			svg {
 				font-size: 18px;
-				color: $accent;
+				color: $ink;
 			}
 		}
 
 		@include down(md) {
 			display: none;
 		}
-	}
-
-	@include down(md) {
-		padding: 32px 0 64px;
-	}
-}
-
-@keyframes join-fade {
-	from {
-		opacity: 0;
-		transform: translateY(8px);
-	}
-	to {
-		opacity: 1;
-		transform: none;
 	}
 }
 

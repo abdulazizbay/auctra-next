@@ -1,14 +1,5 @@
 @use '../variables' as *;
 
-$ink: #111;
-$ink-2: #555;
-$muted: #8a8a8a;
-$line: #ececec;
-$line-2: #e4e4e4;
-$soft: #f6f5f3;
-$soft-2: #f3f2ef;
-$live: #ff4d2e;
-
 .home-hero {
 	padding: 24px 0 8px;
 	background: #fff;
@@ -454,32 +445,6 @@ $live: #ff4d2e;
 		border-radius: 16px;
 	}
 
-	.skeleton-row {
-		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
-		gap: 20px;
-
-		@include down(md) {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-
-			> :nth-child(n + 3) {
-				display: none;
-			}
-		}
-	}
-
-	.lot-card-skeleton {
-		gap: 4px;
-
-		.image {
-			width: 100%;
-			height: auto;
-			aspect-ratio: 1;
-			margin-bottom: 8px;
-			border-radius: 14px;
-		}
-	}
-
 	.home-lots-slide {
 		width: 280px;
 
@@ -497,117 +462,6 @@ $live: #ff4d2e;
 			height: 6px;
 			border-radius: 50%;
 			background: $live;
-		}
-	}
-
-	.lot-card {
-		border: none;
-		border-radius: 0;
-		background: transparent;
-		overflow: visible;
-		transition: none;
-
-		&:hover {
-			transform: none;
-			box-shadow: none;
-		}
-
-		&:hover .top img {
-			transform: scale(1.04);
-		}
-
-		.top {
-			aspect-ratio: 1;
-			overflow: hidden;
-			border-radius: 14px;
-			background: $soft-2;
-
-			img {
-				transition: transform 0.5s ease;
-			}
-
-			.no-image {
-				color: #b0b0b0;
-			}
-
-			.status-badge {
-				top: 10px;
-				left: 10px;
-				padding: 4px 9px;
-				background: #fff;
-				color: $ink;
-				font-size: 10px;
-				font-weight: 800;
-
-				&.live {
-					background: $live;
-					color: #fff;
-
-					.live-dot {
-						background: #fff;
-					}
-				}
-			}
-		}
-
-		.bottom {
-			gap: 2px;
-			padding: 12px 2px 0;
-
-			.name {
-				font-family: $font;
-				font-size: 15px;
-				font-weight: 700;
-				line-height: 1.35;
-				color: $ink;
-			}
-
-			.meta {
-				margin-top: 0;
-				font-size: 12px;
-				color: $muted;
-			}
-
-			.price-row {
-				margin-top: 8px;
-			}
-
-			.price-label {
-				font-size: 11px;
-				letter-spacing: 0;
-				text-transform: none;
-				color: $muted;
-			}
-
-			.price {
-				font-size: 17px;
-				font-weight: 800;
-				color: $ink;
-			}
-
-			.bids {
-				font-size: 12px;
-				font-weight: 600;
-				color: $muted;
-			}
-
-			.footer {
-				margin-top: 8px;
-				padding-top: 8px;
-				border-top: 1px solid $line;
-			}
-
-			.time {
-				color: $muted;
-
-				&.urgent {
-					color: $live;
-				}
-			}
-
-			.buttons .watched {
-				color: $ink;
-			}
 		}
 	}
 

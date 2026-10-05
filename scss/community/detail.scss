@@ -2,54 +2,59 @@
 
 #community-detail-page {
 	min-height: 60vh;
-	padding: 32px 0 80px;
+	padding: 8px 0 96px;
 
 	.container {
-		max-width: 920px;
+		max-width: 860px;
 	}
 
 	.no-data {
-		padding: 80px 16px;
+		padding: 72px 16px;
+		border-radius: 18px;
+		background: $soft;
 		text-align: center;
-		color: $text-secondary;
-		background: #fff;
-		border: 1px dashed $border;
-		border-radius: 16px;
+		font-size: 14px;
 	}
 
 	.write-button,
 	.comment-button {
-		height: 42px;
-		padding: 0 22px;
+		height: 40px;
+		padding: 0 20px;
 		border-radius: 999px;
-		background: $primary;
+		background: $ink;
 		color: #fff;
 		font-weight: 700;
 		text-transform: none;
+		transition: background 0.15s ease;
 
 		&:hover {
-			background: $primary-dark;
+			background: $hover;
 		}
 
 		&.Mui-disabled {
-			background: $border;
-			color: $text-secondary;
+			background: $line;
+			color: $faint;
 		}
 	}
 
 	.ghost-button {
-		height: 40px;
-		padding: 0 16px;
-		border: 1px solid $border;
+		height: 36px;
+		padding: 0 14px;
+		border: 1px solid $line-2;
 		border-radius: 999px;
 		text-transform: none;
-		color: $text;
+		color: $ink;
 		font-weight: 700;
+		transition: border-color 0.15s ease, color 0.15s ease;
+
+		&:hover {
+			border-color: $ink;
+			background: transparent;
+		}
 
 		&.danger:hover {
-			border-color: #f1b5b8;
-			background: #fdf0f0;
-			color: #e5484d;
+			border-color: $danger;
+			color: $danger;
 		}
 	}
 
@@ -61,44 +66,35 @@
 		cursor: pointer;
 
 		.avatar {
-			width: 40px;
-			height: 40px;
-			background: linear-gradient(135deg, $primary, #1f4a78);
-			color: $accent;
-			font-weight: 700;
-			box-shadow: 0 0 0 2px #fff, 0 0 0 3px rgba(194, 163, 90, 0.5);
+			width: 38px;
+			height: 38px;
+			background: $soft-2;
+			color: $ink;
+			font-weight: 800;
 		}
 
 		strong {
 			font-size: 14px;
 			font-weight: 700;
-			color: $text;
+			color: $ink;
 		}
 
 		span {
 			font-size: 12px;
-			color: $text-secondary;
+			color: $muted;
 		}
-	}
 
-	.article-box {
-		overflow: hidden;
-		background: #fff;
-		border: 1px solid $border;
-		border-radius: 28px;
-		box-shadow: 0 30px 60px -36px rgba(15, 39, 66, 0.4);
+		&:hover strong {
+			text-decoration: underline;
+		}
 	}
 
 	.article-head {
 		display: flex;
 		flex-direction: column;
 		gap: 16px;
-		padding: 28px 32px 24px;
-		border-bottom: 1px solid $border;
-
-		@include down(sm) {
-			padding: 20px 16px;
-		}
+		padding-bottom: 22px;
+		border-bottom: 1px solid $line;
 
 		.head-top {
 			display: flex;
@@ -111,30 +107,29 @@
 		.head-actions {
 			display: flex;
 			flex-wrap: wrap;
-			gap: 8px;
+			gap: 6px;
 		}
 
 		.category-chip {
-			padding: 6px 12px;
+			padding: 4px 10px;
 			border-radius: 999px;
-			background: rgba(194, 163, 90, 0.15);
-			color: #8a6f2e;
-			font-size: 12px;
-			font-weight: 700;
-			letter-spacing: 0.8px;
+			background: $soft-2;
+			color: $ink;
+			font-size: 11px;
+			font-weight: 800;
 			text-transform: uppercase;
 		}
 
 		.title {
-			font-family: $font-heading;
-			font-size: 44px;
-			font-weight: 600;
-			line-height: 1.12;
-			color: $primary;
+			font-size: 36px;
+			font-weight: 800;
+			line-height: 1.2;
+			letter-spacing: -0.03em;
+			color: $ink;
 			word-break: break-word;
 
 			@include down(sm) {
-				font-size: 28px;
+				font-size: 26px;
 			}
 		}
 
@@ -149,17 +144,17 @@
 		.counts {
 			display: flex;
 			align-items: center;
-			gap: 14px;
+			gap: 12px;
 
 			> span {
 				display: inline-flex;
 				align-items: center;
 				gap: 4px;
 				font-size: 13px;
-				color: $text-secondary;
+				color: $muted;
 
 				svg {
-					font-size: 18px;
+					font-size: 17px;
 				}
 			}
 		}
@@ -167,72 +162,64 @@
 
 	.like-button {
 		min-width: 0;
-		padding: 6px 14px;
-		border: 1px solid $border;
+		padding: 5px 13px;
+		border: 1px solid $line-2;
 		border-radius: 999px;
-		color: $text-secondary;
+		color: $ink;
 		font-size: 13px;
 		font-weight: 700;
-		transition: all 0.2s ease;
+		transition: border-color 0.15s ease;
 
 		.MuiButton-startIcon {
 			margin-right: 4px;
 		}
 
 		&:hover {
-			border-color: #f1b5b8;
-			background: #fdf0f0;
-			color: #e5484d;
+			border-color: $ink;
+			background: transparent;
 		}
 
 		&.liked {
-			border-color: #e5484d;
-			background: #e5484d;
+			border-color: $live;
+			background: $live;
 			color: #fff;
-
-			&:hover {
-				background: #d63c41;
-			}
 		}
 	}
 
 	.article-viewer {
-		padding: 28px 32px 32px;
+		padding: 28px 0;
 		font-family: $font;
-
-		@include down(sm) {
-			padding: 20px 16px;
-		}
 
 		.toastui-editor-contents {
 			font-family: $font;
 			font-size: 16px;
-			line-height: 1.75;
-			color: $text;
+			line-height: 1.8;
+			color: $ink;
 
 			img {
 				max-width: 100%;
-				border-radius: 16px;
+				border-radius: 14px;
 			}
 
 			h1,
 			h2,
 			h3 {
-				font-family: $font-heading;
-				font-weight: 600;
-				color: $primary;
+				font-weight: 800;
+				letter-spacing: -0.02em;
+				color: $ink;
 				border-bottom: none;
 			}
 
 			blockquote {
-				border-left: 3px solid $accent;
-				background: rgba(194, 163, 90, 0.06);
+				border-left: 3px solid $ink;
+				background: $soft;
 				border-radius: 0 12px 12px 0;
 				padding: 8px 16px;
 			}
 
 			a {
-				color: #8a6f2e;
+				color: $ink;
+				text-decoration: underline;
 			}
 		}
 	}
@@ -241,70 +228,50 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 8px;
-		margin: 0 32px 28px;
-		padding: 10px 16px;
+		margin-bottom: 28px;
+		padding: 9px 16px;
 		width: fit-content;
-		border: 1px solid rgba(194, 163, 90, 0.5);
+		border: 1px solid $line-2;
 		border-radius: 999px;
-		background: rgba(194, 163, 90, 0.08);
-		color: $primary;
+		color: $ink;
 		font-size: 14px;
 		font-weight: 700;
-		transition: background 0.2s ease;
+		transition: border-color 0.15s ease;
 
 		&:hover {
-			background: rgba(194, 163, 90, 0.16);
-		}
-
-		@include down(sm) {
-			margin: 0 16px 20px;
+			border-color: $ink;
 		}
 	}
 
 	.comment-box {
 		gap: 14px;
-		margin-top: 32px;
+		margin-top: 24px;
 
 		.comment-title {
 			display: flex;
 			align-items: center;
-			gap: 10px;
-			font-family: $font-heading;
-			font-size: 32px;
-			font-weight: 600;
-			color: $primary;
+			gap: 8px;
+			padding-bottom: 12px;
+			border-bottom: 1px solid $ink;
+			font-size: 18px;
+			font-weight: 800;
+			color: $ink;
 
 			.count {
-				padding: 2px 10px;
+				padding: 1px 9px;
 				border-radius: 999px;
-				background: rgba(194, 163, 90, 0.15);
-				font-family: $font;
-				font-size: 13px;
+				background: $soft-2;
+				font-size: 12px;
 				font-weight: 700;
-				color: #8a6f2e;
 			}
 		}
 	}
 
 	.leave-comment {
 		gap: 10px;
-		padding: 16px;
-		background: #fff;
-		border: 1px solid $border;
-		border-radius: 20px;
 
 		.MuiOutlinedInput-root {
 			border-radius: 14px;
-			background: $bg;
-		}
-
-		.MuiOutlinedInput-notchedOutline {
-			border-color: transparent;
-		}
-
-		.Mui-focused .MuiOutlinedInput-notchedOutline {
-			border-width: 1px;
-			border-color: $accent;
 		}
 
 		.button-box {
@@ -315,22 +282,15 @@
 
 			span {
 				font-size: 12px;
-				color: $text-secondary;
+				color: $muted;
 			}
 		}
 	}
 
 	.comment-card {
 		gap: 10px;
-		padding: 18px 20px;
-		background: #fff;
-		border: 1px solid $border;
-		border-radius: 18px;
-		transition: border-color 0.2s ease;
-
-		&:hover {
-			border-color: rgba(194, 163, 90, 0.45);
-		}
+		padding: 16px 0;
+		border-bottom: 1px solid $line;
 
 		.comment-head {
 			display: flex;
@@ -345,14 +305,19 @@
 
 			svg {
 				font-size: 18px;
-				color: $text-secondary;
+				color: $muted;
+			}
+
+			.MuiIconButton-root:hover svg {
+				color: $ink;
 			}
 		}
 
 		.comment-text {
+			padding-left: 48px;
 			font-size: 14px;
 			line-height: 1.6;
-			color: $text;
+			color: $ink-2;
 			white-space: pre-wrap;
 			word-break: break-word;
 		}
@@ -367,24 +332,21 @@
 .comment-backdrop {
 	z-index: 1300;
 	padding: 16px;
-	background: rgba(10, 27, 47, 0.55);
-	backdrop-filter: blur(3px);
+	background: rgba(17, 17, 17, 0.4);
 
 	.update-box {
 		width: 100%;
-		max-width: 560px;
+		max-width: 520px;
 		gap: 14px;
 		padding: 24px;
-		background: #fff;
 		border-radius: 20px;
-		box-shadow: 0 30px 60px -20px rgba(10, 27, 47, 0.5);
+		background: #fff;
 	}
 
 	.update-title {
-		font-family: $font-heading;
-		font-size: 26px;
-		font-weight: 700;
-		color: $text;
+		font-size: 18px;
+		font-weight: 800;
+		color: $ink;
 	}
 
 	.update-footer {
@@ -394,7 +356,7 @@
 
 		> span {
 			font-size: 12px;
-			color: $text-secondary;
+			color: $muted;
 		}
 	}
 
@@ -403,28 +365,28 @@
 		gap: 8px;
 
 		button {
-			height: 40px;
+			height: 38px;
 			padding: 0 18px;
-			border-radius: 12px;
+			border-radius: 999px;
 			font-weight: 700;
 		}
 
 		.ghost-button {
-			border: 1px solid $border;
-			color: $text;
+			border: 1px solid $line-2;
+			color: $ink;
 		}
 
 		.comment-button {
-			background: $primary;
+			background: $ink;
 			color: #fff;
 
 			&:hover {
-				background: $primary-dark;
+				background: $hover;
 			}
 
 			&.Mui-disabled {
-				background: $border;
-				color: $text-secondary;
+				background: $line;
+				color: $faint;
 			}
 		}
 	}
