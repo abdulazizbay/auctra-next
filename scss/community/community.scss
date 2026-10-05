@@ -39,64 +39,45 @@
 #community-list-page {
 	padding: 8px 0 96px;
 
-	.board-head {
+	.board-bar {
 		display: flex;
 		align-items: flex-end;
 		justify-content: space-between;
 		gap: 16px;
-		margin-bottom: 20px;
+		margin-bottom: 16px;
+		border-bottom: 1px solid $line;
 
-		.board-title {
-			font-size: 26px;
-			font-weight: 800;
-			line-height: 1.2;
-			letter-spacing: -0.03em;
-			color: $ink;
+		@include down(md) {
+			flex-direction: column;
+			align-items: stretch;
+			gap: 0;
 		}
 
-		.board-desc {
-			font-size: 14px;
-			color: $muted;
-		}
-
-		.write-button {
-			flex-shrink: 0;
-			height: 40px;
-			padding: 0 20px;
-			border-radius: 999px;
-			background: $ink;
-			color: #fff;
-			font-weight: 700;
-			text-transform: none;
-			transition: background 0.15s ease;
-
-			&:hover {
-				background: $hover;
-			}
+		.category-tabs {
+			min-width: 0;
+			margin-bottom: 0;
+			border-bottom: none;
 		}
 	}
 
-	.listing-toolbar {
+	.board-actions {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
 		gap: 12px;
-		margin-bottom: 24px;
-		padding-bottom: 14px;
-		border-bottom: 1px solid $ink;
+		padding-bottom: 8px;
 
-		@include down(sm) {
-			flex-direction: column;
-			align-items: stretch;
+		@include down(md) {
+			padding: 12px 0;
 		}
 
 		.search-input {
-			width: 320px;
+			width: 240px;
 			border-radius: 999px;
 			background: $soft;
 
-			@include down(sm) {
-				width: 100%;
+			@include down(md) {
+				flex: 1;
+				width: auto;
 			}
 
 			.MuiOutlinedInput-input {
@@ -119,6 +100,29 @@
 				color: $muted;
 			}
 		}
+
+		.write-button {
+			flex-shrink: 0;
+			height: 40px;
+			padding: 0 20px;
+			border-radius: 999px;
+			background: $ink;
+			color: #fff;
+			font-weight: 700;
+			text-transform: none;
+			transition: background 0.15s ease;
+
+			&:hover {
+				background: $hover;
+			}
+		}
+	}
+
+	.listing-toolbar {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		margin-bottom: 24px;
 
 		.sort-control {
 			display: flex;
