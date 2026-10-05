@@ -10,6 +10,13 @@ export enum MemberStatus {
 	DELETE = 'DELETE',
 }
 
+export enum MemberAuthType {
+	LOCAL = 'LOCAL',
+	GOOGLE = 'GOOGLE',
+	TELEGRAM = 'TELEGRAM',
+	KAKAO = 'KAKAO',
+}
+
 export enum MemberLocation {
 	SEOUL = 'SEOUL',
 	BUSAN = 'BUSAN',

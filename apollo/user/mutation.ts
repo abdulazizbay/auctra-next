@@ -66,6 +66,37 @@ export const LOGIN = gql`
 	}
 `;
 
+export const SOCIAL_LOGIN = gql`
+	mutation SocialLogin($input: SocialLoginInput!) {
+		socialLogin(input: $input) {
+			accessToken
+			member {
+				_id
+				memberNick
+				memberPhone
+				memberEmail
+				memberType
+				memberStatus
+				memberSellerStatus
+				memberImage
+				memberFullName
+				memberBio
+				memberLocation
+				memberAddress
+				memberAvgRating
+				memberReviewCount
+				memberSalesCount
+				memberFollowers
+				memberFollowings
+				memberLikes
+				memberViews
+				createdAt
+				updatedAt
+			}
+		}
+	}
+`;
+
 export const UPDATE_MEMBER = gql`
 	mutation UpdateMember($input: MemberUpdate!) {
 		updateMember(input: $input) {

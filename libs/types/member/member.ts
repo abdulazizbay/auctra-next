@@ -1,11 +1,16 @@
 import { MeLiked } from '../like/like';
 import { MeFollowed } from '../follow/follow';
-import { MemberLocation, MemberSellerStatus, MemberStatus, MemberType } from '../../enums/member.enum';
+import {
+	MemberLocation,
+	MemberSellerStatus,
+	MemberStatus,
+	MemberType,
+} from '../../enums/member.enum';
 
 export interface Member {
 	_id: string;
 	memberNick: string;
-	memberPhone: string;
+	memberPhone?: string;
 	memberEmail?: string;
 	memberType: MemberType;
 	memberStatus: MemberStatus;

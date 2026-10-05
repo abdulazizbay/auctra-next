@@ -6,6 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import {
 	Box,
 	Button,
+	Divider,
 	IconButton,
 	InputAdornment,
 	Stack,
@@ -20,10 +21,12 @@ import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined
 import VerifiedOutlinedIcon from '@mui/icons-material/VerifiedOutlined';
 import BoltOutlinedIcon from '@mui/icons-material/BoltOutlined';
 import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import HeroWatch from '../../libs/components/homepage/HeroWatch';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
-import { logIn, signUp } from '../../libs/auth';
+import { logIn, signUp, socialLogIn } from '../../libs/auth';
 import { sweetMixinErrorAlert } from '../../libs/sweetAlert';
+import { MemberAuthType } from '../../libs/enums/member.enum';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -66,6 +69,19 @@ const Join: NextPage = () => {
 			await sweetMixinErrorAlert(err.message);
 		}
 	}, [input]);
+
+	const doSocialLogin = async (
+		memberAuthType: MemberAuthType,
+		token?: string,
+	) => {
+		if (!token) return;
+		try {
+			await socialLogIn(memberAuthType, token);
+			await router.push(`${router.query.referrer ?? '/'}`);
+		} catch (err: any) {
+			await sweetMixinErrorAlert(err.message);
+		}
+	};
 
 	const submitHandler = (e: any) => {
 		e.preventDefault();
@@ -172,6 +188,24 @@ const Join: NextPage = () => {
 								{loginView ? t('Login') : t('Create account')}
 							</Button>
 						</Box>
+						{process.env.REACT_APP_GOOGLE_CLIENT_ID && (
+							<Stack className={'social-login'}>
+								<Divider>{t('or')}</Divider>
+								<GoogleOAuthProvider
+									clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+									locale={router.locale === 'kr' ? 'ko' : 'en'}
+								>
+									<GoogleLogin
+										text={'continue_with'}
+										shape={'pill'}
+										width={360}
+										onSuccess={(res) =>
+											doSocialLogin(MemberAuthType.GOOGLE, res.credential)
+										}
+									/>
+								</GoogleOAuthProvider>
+							</Stack>
+						)}
 						<Box className={'ask-info'}>
 							{loginView ? (
 								<p>

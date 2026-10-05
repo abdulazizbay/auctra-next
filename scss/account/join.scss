@@ -146,6 +146,18 @@
 			}
 		}
 
+		.social-login {
+			gap: 16px;
+			align-items: center;
+			margin-bottom: 24px;
+
+			.MuiDivider-root {
+				width: 100%;
+				font-size: 13px;
+				color: $text-secondary;
+			}
+		}
+
 		.ask-info {
 			font-size: 14px;
 			color: $text-secondary;
