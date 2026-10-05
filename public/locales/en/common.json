@@ -352,5 +352,20 @@
 	"Create account": "Create account",
 	"Bid placed: {{price}}": "Bid placed: {{price}}",
 	"You're the highest bidder. We'll notify you if someone outbids you.": "You're the highest bidder. We'll notify you if someone outbids you.",
-	"You reached the ceiling price. The lot closes now and you win it.": "You reached the ceiling price. The lot closes now and you win it."
+	"You reached the ceiling price. The lot closes now and you win it.": "You reached the ceiling price. The lot closes now and you win it.",
+	"How it works": "How it works",
+	"Raise your paddle.": "Raise your paddle.",
+	"Hear it sold.": "Hear it sold.",
+	"Find a lot you love": "Find a lot you love",
+	"Place your bid in real time": "Place your bid in real time",
+	"Win when the gavel falls": "Win when the gavel falls",
+	"SOLD!": "SOLD!",
+	"Going once…": "Going once…",
+	"Going twice…": "Going twice…",
+	"Sold to paddle 27": "Sold to paddle 27",
+	"Sold to you!": "Sold to you!",
+	"Watching this auction": "Watching this auction",
+	"Stopped watching": "Stopped watching",
+	"You'll be notified about this auction.": "You'll be notified about this auction.",
+	"Removed from your watchlist.": "Removed from your watchlist."
 }

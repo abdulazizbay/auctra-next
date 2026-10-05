@@ -352,5 +352,20 @@
 	"Create account": "계정 만들기",
 	"Bid placed: {{price}}": "입찰 완료: {{price}}",
 	"You're the highest bidder. We'll notify you if someone outbids you.": "현재 최고 입찰자입니다. 다른 사람이 더 높게 입찰하면 알려드릴게요.",
-	"You reached the ceiling price. The lot closes now and you win it.": "상한가에 도달했습니다. 경매가 바로 종료되며 낙찰됩니다."
+	"You reached the ceiling price. The lot closes now and you win it.": "상한가에 도달했습니다. 경매가 바로 종료되며 낙찰됩니다.",
+	"How it works": "이용 방법",
+	"Raise your paddle.": "패들을 들고,",
+	"Hear it sold.": "낙찰의 순간을.",
+	"Find a lot you love": "마음에 드는 랏 찾기",
+	"Place your bid in real time": "실시간으로 입찰하기",
+	"Win when the gavel falls": "망치 소리와 함께 낙찰",
+	"SOLD!": "낙찰!",
+	"Going once…": "하나…",
+	"Going twice…": "둘…",
+	"Sold to paddle 27": "27번 패들 낙찰",
+	"Sold to you!": "낙찰되었습니다!",
+	"Watching this auction": "경매 관심 등록",
+	"Stopped watching": "관심 해제됨",
+	"You'll be notified about this auction.": "이 경매 소식을 알려드릴게요.",
+	"Removed from your watchlist.": "관심 목록에서 삭제되었습니다."
 }
