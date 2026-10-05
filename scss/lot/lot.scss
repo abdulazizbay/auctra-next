@@ -1,5 +1,13 @@
 @use '../variables' as *;
 
+#wrap:has(#lot-list-page) .header-basic span {
+	max-width: 248px;
+
+	@include down(md) {
+		max-width: none;
+	}
+}
+
 #lot-list-page {
 	padding: 8px 0 96px;
 
@@ -20,10 +28,24 @@
 		top: 96px;
 		width: 248px;
 		flex-shrink: 0;
+		max-height: calc(100vh - 120px);
+		overflow-y: auto;
+		overscroll-behavior: contain;
+
+		&::-webkit-scrollbar {
+			width: 6px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			border-radius: 6px;
+			background: $line-2;
+		}
 
 		@include down(md) {
 			position: static;
 			width: 100%;
+			max-height: none;
+			overflow-y: visible;
 			display: none;
 
 			&.open {
