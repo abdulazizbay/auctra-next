@@ -30,6 +30,12 @@ const Document = (props: DocumentProps & DocumentHeadTagsProps) => {
 				<meta property="og:site_name" content="Auctra" />
 				<meta property="og:type" content="website" />
 				<meta name="twitter:card" content="summary_large_image" />
+				<script
+					dangerouslySetInnerHTML={{
+						__html:
+							"try{if(sessionStorage.getItem('auctraIntro'))document.documentElement.classList.add('intro-seen')}catch(e){}",
+					}}
+				/>
 			</Head>
 			<body>
 				<Main />

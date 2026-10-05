@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import moment from 'moment';
 import { useTranslation } from 'next-i18next';
 import { useReactiveVar } from '@apollo/client';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
@@ -10,18 +9,7 @@ import EastIcon from '@mui/icons-material/East';
 import { watchToastVar } from '../../apollo/store';
 import { REACT_APP_API_URL } from '../config';
 import { LotStatus } from '../enums/lot.enum';
-
-const countdown = (target: Date, now: number) => {
-	const diff = Math.max(0, moment(target).valueOf() - now);
-	const d = Math.floor(diff / 86400000);
-	const h = Math.floor((diff % 86400000) / 3600000);
-	const m = Math.floor((diff % 3600000) / 60000);
-	const s = Math.floor((diff % 60000) / 1000);
-	const pad = (n: number) => String(n).padStart(2, '0');
-	return d > 0
-		? `${d}d ${pad(h)}h ${pad(m)}m`
-		: `${pad(h)}:${pad(m)}:${pad(s)}`;
-};
+import { countdownText } from '../utils';
 
 const WatchToast = () => {
 	const { t } = useTranslation('common');
@@ -49,9 +37,9 @@ const WatchToast = () => {
 		: `${REACT_APP_API_URL}/${image}`;
 	const timer =
 		lot.lotStatus === LotStatus.OPEN
-			? `${t('Ends in')} ${countdown(lot.lotEndsAt, now)}`
+			? `${t('Ends in')} ${countdownText(lot.lotEndsAt, now)}`
 			: lot.lotStatus === LotStatus.SCHEDULED
-			? `${t('Starts in')} ${countdown(lot.lotStartsAt, now)}`
+			? `${t('Starts in')} ${countdownText(lot.lotStartsAt, now)}`
 			: t(lot.lotStatus);
 
 	return (

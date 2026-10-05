@@ -590,44 +590,6 @@
 	.gavel-scene {
 		width: 180px;
 		margin-bottom: 8px;
-		overflow: visible;
-
-		rect {
-			fill: $ink;
-		}
-
-		.band {
-			fill: #fff;
-		}
-
-		line {
-			stroke: $ink;
-			stroke-width: 7;
-			stroke-linecap: round;
-		}
-
-		.gavel {
-			transform-box: view-box;
-			transform-origin: 138px 38px;
-			animation: gavel-strike 0.9s cubic-bezier(0.5, 0, 0.3, 1) both;
-		}
-
-		.impact line {
-			stroke: $live;
-			stroke-width: 4;
-			opacity: 0;
-			animation: impact 0.6s 0.45s ease-out both;
-		}
-
-		.ripple {
-			fill: none;
-			stroke: $ink;
-			stroke-width: 2;
-			opacity: 0;
-			transform-box: fill-box;
-			transform-origin: center;
-			animation: ripple 0.7s 0.45s ease-out both;
-		}
 	}
 
 	.bid-title {
@@ -662,6 +624,47 @@
 		height: 14px;
 		border-radius: 2px;
 		animation: confetti-fall linear forwards;
+	}
+}
+
+.gavel-scene {
+	overflow: visible;
+
+	rect {
+		fill: $ink;
+	}
+
+	.band {
+		fill: #fff;
+	}
+
+	line {
+		stroke: $ink;
+		stroke-width: 7;
+		stroke-linecap: round;
+	}
+
+	.gavel {
+		transform-box: view-box;
+		transform-origin: 138px 38px;
+		animation: gavel-strike 0.9s cubic-bezier(0.5, 0, 0.3, 1) both;
+	}
+
+	.impact line {
+		stroke: $live;
+		stroke-width: 4;
+		opacity: 0;
+		animation: impact 0.6s 0.45s ease-out both;
+	}
+
+	.ripple {
+		fill: none;
+		stroke: $ink;
+		stroke-width: 2;
+		opacity: 0;
+		transform-box: fill-box;
+		transform-origin: center;
+		animation: ripple 0.7s 0.45s ease-out both;
 	}
 }
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import moment from 'moment';
 import { useTranslation } from 'next-i18next';
 import { useQuery } from '@apollo/client';
 import { Skeleton, Stack, Typography } from '@mui/material';
@@ -12,7 +11,7 @@ import { LotCategory, LotStatus } from '../../enums/lot.enum';
 import { T } from '../../types/common';
 import { Lot } from '../../types/lot/lot';
 import { REACT_APP_API_URL } from '../../config';
-import { formatterStr } from '../../utils';
+import { countdownText, formatterStr } from '../../utils';
 
 const heroCategories = [
 	LotCategory.WATCHES,
@@ -21,18 +20,6 @@ const heroCategories = [
 	LotCategory.COINS,
 	LotCategory.COLLECTIBLES,
 ];
-
-const countdown = (endsAt: Date, now: number) => {
-	const diff = Math.max(0, moment(endsAt).valueOf() - now);
-	const d = Math.floor(diff / 86400000);
-	const h = Math.floor((diff % 86400000) / 3600000);
-	const m = Math.floor((diff % 3600000) / 60000);
-	const s = Math.floor((diff % 60000) / 1000);
-	const pad = (n: number) => String(n).padStart(2, '0');
-	return d > 0
-		? `${d}d ${pad(h)}h ${pad(m)}m`
-		: `${pad(h)}:${pad(m)}:${pad(s)}`;
-};
 
 const HeroBanner = () => {
 	const { t } = useTranslation('common');
@@ -144,7 +131,7 @@ const HeroBanner = () => {
 									</div>
 									<div className={'timer'}>
 										<span>{t('Ends in')}</span>
-										<b>{countdown(featuredLot.lotEndsAt, now)}</b>
+										<b>{countdownText(featuredLot.lotEndsAt, now)}</b>
 									</div>
 								</div>
 							</div>
