@@ -20,7 +20,7 @@ const Document = (props: DocumentProps & DocumentHeadTagsProps) => {
 				<link rel="icon" href="/favicon.ico" sizes="any" />
 				<link rel="icon" type="image/png" href="/icon-512.png" />
 				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-				<meta name="theme-color" content="#0F2742" />
+				<meta name="theme-color" content="#ffffff" />
 				<meta
 					name="keywords"
 					content={
@@ -30,6 +30,12 @@ const Document = (props: DocumentProps & DocumentHeadTagsProps) => {
 				<meta property="og:site_name" content="Auctra" />
 				<meta property="og:type" content="website" />
 				<meta name="twitter:card" content="summary_large_image" />
+				<script
+					dangerouslySetInnerHTML={{
+						__html:
+							"try{if(sessionStorage.getItem('auctraIntro'))document.documentElement.classList.add('intro-seen')}catch(e){}",
+					}}
+				/>
 			</Head>
 			<body>
 				<Main />

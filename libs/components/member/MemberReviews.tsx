@@ -31,7 +31,7 @@ const MemberReviews = (props: MemberReviewsProps) => {
 		data: getReviewsData,
 		error: getReviewsError,
 	} = useQuery(GET_REVIEWS, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'cache-and-network',
 		variables: { input: reviewInquiry },
 		skip: !reviewInquiry.search.sellerId,
 		notifyOnNetworkStatusChange: true,

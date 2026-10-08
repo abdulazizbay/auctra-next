@@ -8,6 +8,8 @@ import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '../apollo/client';
 import { appWithTranslation } from 'next-i18next';
 import Chat from '../libs/components/Chat';
+import WatchToast from '../libs/components/WatchToast';
+import RouteLoader from '../libs/components/RouteLoader';
 import '../scss/app.scss';
 
 const App = (props: AppProps) => {
@@ -22,6 +24,8 @@ const App = (props: AppProps) => {
 					<CssBaseline />
 					<Component {...pageProps} />
 					<Chat />
+					<WatchToast />
+					<RouteLoader />
 				</ThemeProvider>
 			</ApolloProvider>
 		</AppCacheProvider>

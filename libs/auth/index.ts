@@ -1,9 +1,10 @@
 import { initializeApollo } from '../../apollo/client';
 import { userVar } from '../../apollo/store';
-import { LOGIN, SIGN_UP } from '../../apollo/user/mutation';
+import { LOGIN, SIGN_UP, SOCIAL_LOGIN } from '../../apollo/user/mutation';
 import { GET_ME } from '../../apollo/user/query';
 import { Member } from '../types/member/member';
 import { Message } from '../enums/common.enum';
+import { MemberAuthType } from '../enums/member.enum';
 
 export function getJwtToken(): any {
 	if (typeof window !== 'undefined') {
@@ -80,6 +81,40 @@ const requestSignUpJwtToken = async ({
 	});
 
 	const { accessToken, member } = result?.data?.signup;
+	return { jwtToken: accessToken, member };
+};
+
+export const socialLogIn = async (
+	memberAuthType: MemberAuthType,
+	token: string,
+): Promise<void> => {
+	const { jwtToken, member } = await requestSocialJwtToken({
+		memberAuthType,
+		token,
+	});
+
+	if (jwtToken) {
+		updateStorage({ jwtToken });
+		updateUserInfo(member);
+	}
+};
+
+const requestSocialJwtToken = async ({
+	memberAuthType,
+	token,
+}: {
+	memberAuthType: MemberAuthType;
+	token: string;
+}): Promise<{ jwtToken: string; member: Member }> => {
+	const apolloClient = await initializeApollo();
+
+	const result = await apolloClient.mutate({
+		mutation: SOCIAL_LOGIN,
+		variables: { input: { memberAuthType, token } },
+		fetchPolicy: 'network-only',
+	});
+
+	const { accessToken, member } = result?.data?.socialLogin;
 	return { jwtToken: accessToken, member };
 };
 

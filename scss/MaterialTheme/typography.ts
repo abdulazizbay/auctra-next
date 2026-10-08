@@ -1,38 +1,36 @@
 import { TypographyVariantsOptions } from '@mui/material/styles';
 
-const heading = "'Cormorant Garamond', serif";
-
 const typography: TypographyVariantsOptions = {
 	fontFamily: "'Manrope', sans-serif",
 	h1: {
-		fontFamily: heading,
-		fontSize: 44,
-		fontWeight: 600,
+		fontSize: 40,
+		fontWeight: 800,
+		letterSpacing: '-0.02em',
 	},
 	h2: {
-		fontFamily: heading,
-		fontSize: 36,
-		fontWeight: 600,
+		fontSize: 32,
+		fontWeight: 800,
+		letterSpacing: '-0.02em',
 	},
 	h3: {
-		fontFamily: heading,
-		fontSize: 30,
-		fontWeight: 600,
+		fontSize: 28,
+		fontWeight: 800,
+		letterSpacing: '-0.02em',
 	},
 	h4: {
-		fontFamily: heading,
-		fontSize: 26,
-		fontWeight: 600,
+		fontSize: 24,
+		fontWeight: 800,
+		letterSpacing: '-0.02em',
 	},
 	h5: {
-		fontFamily: heading,
-		fontSize: 22,
-		fontWeight: 600,
+		fontSize: 20,
+		fontWeight: 800,
+		letterSpacing: '-0.02em',
 	},
 	h6: {
-		fontFamily: heading,
-		fontSize: 18,
-		fontWeight: 600,
+		fontSize: 17,
+		fontWeight: 800,
+		letterSpacing: '-0.02em',
 	},
 	subtitle1: {
 		fontSize: 16,

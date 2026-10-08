@@ -8,6 +8,7 @@ import NewLots from '../libs/components/homepage/NewLots';
 import CommunityBoards from '../libs/components/homepage/CommunityBoards';
 import TopSellers from '../libs/components/homepage/TopSellers';
 import SellCta from '../libs/components/homepage/SellCta';
+import AuctionScene from '../libs/components/homepage/AuctionScene';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -19,6 +20,7 @@ const Home: NextPage = () => {
 	return (
 		<Stack className={'home-page'}>
 			<EndingSoonLots />
+			<AuctionScene />
 			<HotLots />
 			<NewLots />
 			<CommunityBoards />

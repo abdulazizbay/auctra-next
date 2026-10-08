@@ -2,6 +2,7 @@
 @use 'variables' as *;
 @use 'reset';
 @use 'general';
+@use 'alert';
 @use 'homepage/homepage';
 @use 'account/join';
 @use 'lot/lot';
@@ -22,15 +23,8 @@ a {
 body {
 	font-family: $font;
 	color: $text;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-family: $font-heading;
+	background: $bg;
+	-webkit-font-smoothing: antialiased;
 }
 
 #wrap {

@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import moment from 'moment';
 import { useRouter } from 'next/router';
@@ -47,7 +48,7 @@ const MyLotCard = (props: MyLotCardProps) => {
 			>
 				<Stack className="image-box">
 					{imagePath ? (
-						<img src={imagePath} alt={lot.lotName} />
+						<Image src={imagePath} alt={lot.lotName} width={128} height={128} />
 					) : (
 						<WatchOutlinedIcon />
 					)}

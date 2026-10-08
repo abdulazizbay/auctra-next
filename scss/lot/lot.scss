@@ -1,12 +1,20 @@
 @use '../variables' as *;
 
+#wrap:has(#lot-list-page) .header-basic span {
+	max-width: 248px;
+
+	@include down(md) {
+		max-width: none;
+	}
+}
+
 #lot-list-page {
-	padding: 40px 0 96px;
+	padding: 8px 0 96px;
 
 	.lot-page {
 		flex-direction: row;
 		align-items: flex-start;
-		gap: 32px;
+		gap: 40px;
 
 		@include down(md) {
 			flex-direction: column;
@@ -18,17 +26,30 @@
 	.filter-config {
 		position: sticky;
 		top: 96px;
-		width: 288px;
+		width: 248px;
 		flex-shrink: 0;
+		max-height: calc(100vh - 120px);
+		overflow-y: auto;
+		overscroll-behavior: contain;
+
+		&::-webkit-scrollbar {
+			width: 6px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			border-radius: 6px;
+			background: $line-2;
+		}
 
 		@include down(md) {
 			position: static;
 			width: 100%;
+			max-height: none;
+			overflow-y: visible;
 			display: none;
 
 			&.open {
 				display: flex;
-				animation: filter-in 0.3s ease both;
 			}
 		}
 	}
@@ -44,26 +65,24 @@
 		justify-content: space-between;
 		flex-wrap: wrap;
 		gap: 12px;
-		margin-bottom: 24px;
-		padding: 12px 12px 12px 20px;
-		background: #fff;
-		border: 1px solid $border;
-		border-radius: 18px;
+		margin-bottom: 20px;
+		padding-bottom: 14px;
+		border-bottom: 1px solid $ink;
 
 		.result-count {
 			flex: 1;
 			font-size: 14px;
-			font-weight: 600;
-			color: $text-secondary;
+			font-weight: 700;
+			color: $ink;
 		}
 
 		.filter-toggle {
 			display: none;
-			padding: 7px 14px;
-			border: 1px solid $border;
+			padding: 6px 14px;
+			border: 1px solid $line-2;
 			border-radius: 999px;
-			color: $primary;
-			font-weight: 600;
+			color: $ink;
+			font-weight: 700;
 			text-transform: none;
 
 			@include down(md) {
@@ -74,11 +93,11 @@
 		.sort-control {
 			display: flex;
 			align-items: center;
-			gap: 10px;
+			gap: 8px;
 
 			> p {
 				font-size: 13px;
-				color: $text-secondary;
+				color: $muted;
 
 				@include down(sm) {
 					display: none;
@@ -86,18 +105,18 @@
 			}
 
 			button {
-				min-width: 150px;
+				min-width: 140px;
 				justify-content: space-between;
-				padding: 7px 14px;
-				border: 1px solid $border;
+				padding: 6px 14px;
+				border: 1px solid $line-2;
 				border-radius: 999px;
-				background: $bg;
-				color: $primary;
-				font-weight: 600;
+				background: #fff;
+				color: $ink;
+				font-weight: 700;
 				text-transform: none;
 
 				&:hover {
-					border-color: $primary;
+					border-color: $ink;
 					background: #fff;
 				}
 			}
@@ -107,14 +126,15 @@
 	.list-config {
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 24px;
+		gap: 32px 20px;
 
 		@include down(lg) {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 
 		@include down(sm) {
-			grid-template-columns: minmax(0, 1fr);
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 24px 12px;
 		}
 	}
 
@@ -125,32 +145,31 @@
 		align-items: center;
 		gap: 12px;
 		padding: 72px 24px;
+		border-radius: 18px;
+		background: $soft;
 		text-align: center;
-		background: #fff;
-		border: 1px dashed $border;
-		border-radius: 20px;
 
 		svg {
-			font-size: 48px;
-			color: $accent;
+			font-size: 40px;
+			color: $faint;
 		}
 
 		p {
-			font-size: 16px;
-			font-weight: 600;
-			color: $primary;
+			font-size: 15px;
+			font-weight: 700;
+			color: $ink;
 		}
 
 		button {
-			padding: 8px 20px;
-			border: 1px solid $primary;
+			padding: 7px 18px;
+			border: 1px solid $ink;
 			border-radius: 999px;
-			color: $primary;
-			font-weight: 600;
+			color: $ink;
+			font-weight: 700;
 			text-transform: none;
 
 			&:hover {
-				background: $primary;
+				background: $ink;
 				color: #fff;
 			}
 		}
@@ -158,169 +177,100 @@
 
 	.pagination-config {
 		align-items: center;
-		margin-top: 40px;
+		margin-top: 48px;
 
 		&:empty {
 			display: none;
 		}
-
-		.MuiPaginationItem-root {
-			font-weight: 600;
-			color: $primary;
-			border: 1px solid transparent;
-
-			&:hover {
-				border-color: $border;
-				background: #fff;
-			}
-
-			&.Mui-selected {
-				background: $primary;
-				color: #fff;
-
-				&:hover {
-					background: $primary-dark;
-				}
-			}
-		}
-	}
-}
-
-@keyframes filter-in {
-	from {
-		opacity: 0;
-		transform: translateY(-8px);
-	}
-	to {
-		opacity: 1;
-		transform: none;
 	}
 }
 
 .filter-box {
-	padding: 24px;
-	gap: 28px;
-	background: #fff;
-	border: 1px solid $border;
-	border-radius: 20px;
-	box-shadow: 0 20px 40px -32px rgba(15, 39, 66, 0.35);
+	gap: 24px;
 
 	.filter-title {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		padding-bottom: 16px;
-		margin-bottom: -8px;
-		border-bottom: 1px solid $border;
-		font-family: $font-heading;
-		font-size: 26px;
-		font-weight: 600;
-		color: $primary;
-
-		&::before {
-			content: '';
-			width: 8px;
-			height: 8px;
-			border-radius: 50%;
-			background: $accent;
-		}
+		padding-bottom: 14px;
+		border-bottom: 1px solid $ink;
+		font-size: 15px;
+		font-weight: 800;
+		color: $ink;
 	}
 
 	.section {
-		gap: 4px;
+		gap: 2px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid $line;
+
+		&:last-child {
+			border-bottom: none;
+		}
 
 		.title {
 			margin-bottom: 8px;
-			font-size: 11px;
-			font-weight: 700;
-			letter-spacing: 1.5px;
-			text-transform: uppercase;
-			color: $text-secondary;
+			font-size: 13px;
+			font-weight: 800;
+			color: $ink;
 		}
 	}
 
 	.input-box {
 		flex-direction: row;
 		align-items: center;
-		min-height: 36px;
-
-		&:has(label) {
-			margin: 0 -8px;
-			padding: 0 8px;
-			border-radius: 10px;
-			transition: background 0.2s ease;
-
-			&:hover {
-				background: $bg;
-			}
-		}
+		min-height: 34px;
 
 		label {
 			flex: 1;
 			cursor: pointer;
 			font-size: 14px;
-			color: $text;
+			color: $ink-2;
 		}
 
 		.MuiCheckbox-root {
 			padding: 4px 8px 4px 0;
-			color: #c5cbd3;
+			color: $faint;
 
 			&.Mui-checked {
-				color: $primary;
+				color: $ink;
+
+				+ label {
+					color: $ink;
+					font-weight: 600;
+				}
 			}
 		}
 
 		.search-input {
 			flex: 1;
 			border-radius: 999px;
-			background: $bg;
+			background: $soft;
 
 			.MuiOutlinedInput-input {
-				padding: 11px 16px;
+				padding: 10px 16px;
 				font-size: 14px;
 			}
 
 			.MuiOutlinedInput-notchedOutline {
 				border-color: transparent;
 			}
-
-			&:hover .MuiOutlinedInput-notchedOutline {
-				border-color: $border;
-			}
-
-			&.Mui-focused .MuiOutlinedInput-notchedOutline {
-				border-width: 1px;
-				border-color: $accent;
-			}
 		}
 
 		.cancel-icon {
 			cursor: pointer;
 			font-size: 18px;
-			color: $text-secondary;
+			color: $muted;
 		}
 
 		.MuiIconButton-root {
-			width: 42px;
-			height: 42px;
+			width: 40px;
+			height: 40px;
 			margin-left: 8px;
-			border: 1px solid $border;
-			color: $primary;
-			transition: all 0.25s ease;
-
-			svg {
-				transition: transform 0.4s ease;
-			}
+			border: 1px solid $line-2;
+			color: $ink;
+			transition: border-color 0.15s ease;
 
 			&:hover {
-				background: $primary;
-				border-color: $primary;
-				color: #fff;
-
-				svg {
-					transform: rotate(-180deg);
-				}
+				border-color: $ink;
+				background: transparent;
 			}
 		}
 	}
@@ -328,58 +278,48 @@
 	.chips {
 		flex-direction: row;
 		flex-wrap: wrap;
-		gap: 8px;
+		gap: 6px;
 
 		.MuiChip-root {
-			height: 34px;
-			border: 1px solid $border;
-			border-radius: 999px;
+			height: 32px;
+			border: 1px solid $line-2;
 			background: #fff;
-			color: $text;
+			color: $ink-2;
 			font-size: 12px;
 			font-weight: 600;
-			transition: all 0.2s ease;
+			transition: border-color 0.15s ease, color 0.15s ease;
 
 			&:hover {
-				border-color: $primary;
+				border-color: $ink;
 				background: #fff;
+				color: $ink;
 			}
 		}
 
 		.MuiChip-colorPrimary {
-			border-color: $primary;
-			background: $primary;
+			border-color: $ink;
+			background: $ink;
 			color: #fff;
 
 			&:hover {
-				background: $primary-dark;
+				background: $hover;
+				color: #fff;
 			}
 		}
 	}
 }
 
 .lot-card {
-	background: #fff;
-	border: 1px solid $border;
-	border-radius: 20px;
-	overflow: hidden;
-	transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-
-	&:hover {
-		transform: translateY(-4px);
-		border-color: rgba(194, 163, 90, 0.5);
-		box-shadow: 0 22px 40px -24px rgba(15, 39, 66, 0.45);
-	}
-
 	&:hover .top img {
-		transform: scale(1.06);
+		transform: scale(1.04);
 	}
 
 	.top {
 		position: relative;
-		aspect-ratio: 4 / 3;
-		background: $bg;
+		aspect-ratio: 1;
 		overflow: hidden;
+		border-radius: 14px;
+		background: $soft-2;
 
 		a {
 			display: block;
@@ -390,108 +330,114 @@
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
-			transition: transform 0.35s ease;
+			transition: transform 0.5s ease;
 		}
 
 		.no-image {
 			height: 100%;
 			align-items: center;
 			justify-content: center;
-			color: $text-secondary;
+			color: $faint;
 
 			svg {
-				font-size: 48px;
+				font-size: 44px;
 			}
 		}
 
 		.status-badge {
 			position: absolute;
-			top: 12px;
-			left: 12px;
+			top: 10px;
+			left: 10px;
 			display: inline-flex;
 			align-items: center;
-			gap: 6px;
-			padding: 5px 10px;
+			gap: 5px;
+			padding: 4px 9px;
 			border-radius: 999px;
-			background: rgba(15, 39, 66, 0.9);
-			color: #fff;
-			font-size: 11px;
-			font-weight: 700;
+			background: #fff;
+			color: $ink;
+			font-size: 10px;
+			font-weight: 800;
 			letter-spacing: 0.3px;
 			text-transform: uppercase;
 
-			&.live,
+			&.live {
+				background: $live;
+				color: #fff;
+
+				.live-dot {
+					background: #fff;
+				}
+			}
+
 			&.winning {
-				background: $accent;
-				color: $primary;
+				background: $ink;
+				color: #fff;
 			}
 
 			&.outbid {
-				background: #b3261e;
+				background: $danger;
+				color: #fff;
 			}
 
 			&.won {
-				background: #2e7d32;
+				background: $success;
+				color: #fff;
 			}
 		}
 	}
 
 	.bottom {
-		padding: 18px;
-		gap: 5px;
+		gap: 2px;
+		padding: 12px 2px 0;
 
 		.name {
-			font-family: $font-heading;
-			font-size: 20px;
-			font-weight: 600;
-			line-height: 1.3;
-			white-space: nowrap;
 			overflow: hidden;
+			white-space: nowrap;
 			text-overflow: ellipsis;
+			font-size: 15px;
+			font-weight: 700;
+			line-height: 1.35;
+			color: $ink;
 		}
 
 		.meta {
-			margin-top: 2px;
-			font-size: 13px;
-			color: $text-secondary;
+			font-size: 12px;
+			color: $muted;
 		}
 
 		.price-row {
 			flex-direction: row;
 			justify-content: space-between;
 			align-items: flex-end;
-			margin-top: 14px;
+			margin-top: 8px;
 		}
 
 		.price-label {
 			font-size: 11px;
-			letter-spacing: 0.6px;
-			text-transform: uppercase;
-			color: $text-secondary;
+			color: $muted;
 		}
 
 		.price {
-			margin-top: 2px;
-			font-size: 21px;
-			font-weight: 700;
-			line-height: 1.2;
-			color: $primary;
+			font-size: 17px;
+			font-weight: 800;
+			line-height: 1.3;
+			color: $ink;
 			font-variant-numeric: tabular-nums;
 		}
 
 		.bids {
-			font-size: 13px;
+			font-size: 12px;
 			font-weight: 600;
-			color: $text-secondary;
+			color: $muted;
 		}
 
 		.footer {
 			flex-direction: row;
 			justify-content: space-between;
 			align-items: center;
-			margin-top: 14px;
-			padding-top: 11px;
-			border-top: 1px solid $border;
+			margin-top: 8px;
+			padding-top: 8px;
+			border-top: 1px solid $line;
 		}
 
 		.time {
@@ -499,40 +445,321 @@
 			align-items: center;
 			gap: 4px;
 			font-size: 12px;
-			color: $text-secondary;
+			color: $muted;
 
 			svg {
 				font-size: 14px;
 			}
 
 			&.urgent {
-				color: #d64045;
+				color: $live;
 				font-weight: 700;
 			}
 		}
 
 		.buttons {
-			&.clickable {
-				cursor: pointer;
-				transition: border-color 0.2s ease;
-
-				&:hover {
-					border-color: $accent;
-				}
-			}
-
 			flex-direction: row;
 			align-items: center;
 			gap: 2px;
 
+			&.clickable {
+				cursor: pointer;
+			}
+
+			.MuiIconButton-root {
+				color: $ink;
+			}
+
 			.watch-count {
 				font-size: 12px;
-				color: $text-secondary;
+				color: $muted;
 			}
 
 			.watched {
-				color: $accent;
+				color: $ink;
+			}
+
+			.static {
+				font-size: 20px;
+				color: $faint;
 			}
 		}
+	}
+}
+
+.skeleton-row {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 20px;
+
+	@include down(md) {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+
+		> :nth-child(n + 3) {
+			display: none;
+		}
+	}
+}
+
+.lot-card-skeleton {
+	gap: 4px;
+
+	.image {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 1;
+		margin-bottom: 8px;
+		border-radius: 14px;
+	}
+}
+
+.pop .MuiIconButton-root {
+	position: relative;
+	overflow: visible;
+
+	svg {
+		animation: watch-pop 0.5s ease;
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 4px;
+		height: 4px;
+		margin: -2px 0 0 -2px;
+		border-radius: 50%;
+		box-shadow: 0 -15px 0 $ink, 11px -11px 0 $live, 15px 0 0 $ink,
+			11px 11px 0 $live, 0 15px 0 $ink, -11px 11px 0 $live, -15px 0 0 $ink,
+			-11px -11px 0 $live;
+		animation: watch-burst 0.6s ease-out forwards;
+		pointer-events: none;
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		inset: 3px;
+		border: 2px solid $ink;
+		border-radius: 50%;
+		animation: watch-ring 0.6s ease-out forwards;
+		pointer-events: none;
+	}
+}
+
+@keyframes watch-pop {
+	0% {
+		transform: scale(1);
+	}
+	35% {
+		transform: scale(1.45);
+	}
+	65% {
+		transform: scale(0.9);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes watch-burst {
+	from {
+		opacity: 1;
+		transform: scale(0.4);
+	}
+	to {
+		opacity: 0;
+		transform: scale(1.3);
+	}
+}
+
+@keyframes watch-ring {
+	from {
+		opacity: 0.7;
+		transform: scale(0.6);
+	}
+	to {
+		opacity: 0;
+		transform: scale(1.8);
+	}
+}
+
+.bid-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 1450;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 16px;
+	overflow: hidden;
+	background: rgba(255, 255, 255, 0.82);
+	backdrop-filter: blur(6px);
+	animation: overlay-in 0.2s ease;
+	cursor: pointer;
+
+	.bid-card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 6px;
+		max-width: 360px;
+		text-align: center;
+		animation: bid-card-in 0.35s ease;
+	}
+
+	.gavel-scene {
+		width: 180px;
+		margin-bottom: 8px;
+	}
+
+	.bid-title {
+		font-size: 22px;
+		font-weight: 800;
+		letter-spacing: -0.02em;
+		color: $ink;
+		animation: bid-text-in 0.4s 0.5s ease both;
+	}
+
+	.bid-price {
+		font-size: 44px;
+		font-weight: 800;
+		line-height: 1.1;
+		letter-spacing: -0.04em;
+		color: $ink;
+		font-variant-numeric: tabular-nums;
+		animation: bid-text-in 0.4s 0.6s ease both;
+	}
+
+	.bid-note {
+		font-size: 14px;
+		line-height: 1.5;
+		color: $muted;
+		animation: bid-text-in 0.4s 0.7s ease both;
+	}
+
+	.confetti span {
+		position: absolute;
+		top: -12px;
+		width: 8px;
+		height: 14px;
+		border-radius: 2px;
+		animation: confetti-fall linear forwards;
+	}
+}
+
+.gavel-scene {
+	overflow: visible;
+
+	rect {
+		fill: $ink;
+	}
+
+	.band {
+		fill: #fff;
+	}
+
+	line {
+		stroke: $ink;
+		stroke-width: 7;
+		stroke-linecap: round;
+	}
+
+	.gavel {
+		transform-box: view-box;
+		transform-origin: 138px 38px;
+		animation: gavel-strike 0.9s cubic-bezier(0.5, 0, 0.3, 1) both;
+	}
+
+	.impact line {
+		stroke: $live;
+		stroke-width: 4;
+		opacity: 0;
+		animation: impact 0.6s 0.45s ease-out both;
+	}
+
+	.ripple {
+		fill: none;
+		stroke: $ink;
+		stroke-width: 2;
+		opacity: 0;
+		transform-box: fill-box;
+		transform-origin: center;
+		animation: ripple 0.7s 0.45s ease-out both;
+	}
+}
+
+@keyframes overlay-in {
+	from {
+		opacity: 0;
+	}
+}
+
+@keyframes bid-card-in {
+	from {
+		opacity: 0;
+		transform: scale(0.96);
+	}
+}
+
+@keyframes gavel-strike {
+	0% {
+		transform: rotate(38deg);
+	}
+	50% {
+		transform: rotate(0);
+	}
+	65% {
+		transform: rotate(7deg);
+	}
+	80%,
+	100% {
+		transform: rotate(0);
+	}
+}
+
+@keyframes impact {
+	0% {
+		opacity: 0;
+		transform: scale(0.6);
+	}
+	30% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		transform: scale(1.2);
+	}
+}
+
+@keyframes ripple {
+	0% {
+		opacity: 0.6;
+		transform: scale(0.5);
+	}
+	100% {
+		opacity: 0;
+		transform: scale(1.4);
+	}
+}
+
+@keyframes bid-text-in {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+}
+
+@keyframes confetti-fall {
+	to {
+		transform: translateY(110vh) rotate(720deg);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bid-overlay *,
+	.pop .MuiIconButton-root * {
+		animation: none !important;
 	}
 }

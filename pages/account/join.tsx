@@ -6,6 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import {
 	Box,
 	Button,
+	Divider,
 	IconButton,
 	InputAdornment,
 	Stack,
@@ -20,10 +21,12 @@ import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined
 import VerifiedOutlinedIcon from '@mui/icons-material/VerifiedOutlined';
 import BoltOutlinedIcon from '@mui/icons-material/BoltOutlined';
 import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import HeroWatch from '../../libs/components/homepage/HeroWatch';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
-import { logIn, signUp } from '../../libs/auth';
+import { logIn, signUp, socialLogIn } from '../../libs/auth';
 import { sweetMixinErrorAlert } from '../../libs/sweetAlert';
+import { MemberAuthType } from '../../libs/enums/member.enum';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -66,6 +69,32 @@ const Join: NextPage = () => {
 			await sweetMixinErrorAlert(err.message);
 		}
 	}, [input]);
+
+	const doSocialLogin = async (
+		memberAuthType: MemberAuthType,
+		token?: string,
+	) => {
+		if (!token) return;
+		try {
+			await socialLogIn(memberAuthType, token);
+			await router.push(`${router.query.referrer ?? '/'}`);
+		} catch (err: any) {
+			await sweetMixinErrorAlert(err.message);
+		}
+	};
+
+	const kakaoLoginHandler = () => {
+		const state = crypto.randomUUID();
+		sessionStorage.setItem('kakaoState', state);
+		sessionStorage.setItem('kakaoReferrer', `${router.query.referrer ?? '/'}`);
+		const params = new URLSearchParams({
+			client_id: process.env.REACT_APP_KAKAO_REST_KEY ?? '',
+			redirect_uri: `${window.location.origin}/account/kakao`,
+			response_type: 'code',
+			state,
+		});
+		window.location.href = `https://kauth.kakao.com/oauth/authorize?${params}`;
+	};
 
 	const submitHandler = (e: any) => {
 		e.preventDefault();
@@ -172,6 +201,36 @@ const Join: NextPage = () => {
 								{loginView ? t('Login') : t('Create account')}
 							</Button>
 						</Box>
+						<Stack className={'social-login'}>
+							<Divider>{t('or')}</Divider>
+							{process.env.REACT_APP_GOOGLE_CLIENT_ID && (
+								<GoogleOAuthProvider
+									clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+									locale={router.locale === 'kr' ? 'ko' : 'en'}
+								>
+									<GoogleLogin
+										text={'continue_with'}
+										shape={'pill'}
+										width={360}
+										onSuccess={(res) =>
+											doSocialLogin(MemberAuthType.GOOGLE, res.credential)
+										}
+									/>
+								</GoogleOAuthProvider>
+							)}
+							{process.env.REACT_APP_KAKAO_REST_KEY && (
+								<Button className={'kakao-btn'} onClick={kakaoLoginHandler}>
+									<svg viewBox={'0 0 24 24'}>
+										<path
+											d={
+												'M12 3C6.48 3 2 6.58 2 11c0 2.83 1.86 5.32 4.66 6.73l-.95 3.48c-.08.31.27.56.54.38l4.15-2.75c.52.05 1.06.08 1.6.08 5.52 0 10-3.58 10-8S17.52 3 12 3z'
+											}
+										/>
+									</svg>
+									{t('Continue with Kakao')}
+								</Button>
+							)}
+						</Stack>
 						<Box className={'ask-info'}>
 							{loginView ? (
 								<p>

@@ -82,7 +82,6 @@ const Footer = () => {
 						</div>
 					</Stack>
 				</Stack>
-				<div className={'wordmark'}>AUCTRA</div>
 				<Stack className={'second'}>
 					<span>
 						© Auctra {moment().year()}. {t('All rights reserved.')}

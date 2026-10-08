@@ -27,7 +27,7 @@ const CommunityBoards = () => {
 		error: getNewsArticlesError,
 		refetch: getNewsArticlesRefetch,
 	} = useQuery(GET_ARTICLES, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'cache-and-network',
 		variables: {
 			input: {
 				...searchCommunity,
@@ -47,7 +47,7 @@ const CommunityBoards = () => {
 		error: getMarketTalkArticlesError,
 		refetch: getMarketTalkArticlesRefetch,
 	} = useQuery(GET_ARTICLES, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'cache-and-network',
 		variables: {
 			input: {
 				...searchCommunity,
@@ -62,7 +62,7 @@ const CommunityBoards = () => {
 	});
 
 	return (
-		<Stack className={'community-board reveal'}>
+		<Stack className={'community-board'}>
 			<Stack className={'container'}>
 				<Stack className={'info-box'}>
 					<Box component={'div'} className={'left'}>

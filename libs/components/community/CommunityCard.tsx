@@ -39,7 +39,12 @@ const CommunityCard = (props: CommunityCardProps) => {
 		<Stack className="community-card">
 			<Link href={detailHref} className={'image-box'}>
 				{articleImage ? (
-					<img src={articleImage} alt={article?.articleTitle} />
+					<img
+						src={articleImage}
+						alt={article?.articleTitle}
+						loading="lazy"
+						decoding="async"
+					/>
 				) : (
 					<Box component={'div'} className={'no-image'}>
 						<ArticleOutlinedIcon />

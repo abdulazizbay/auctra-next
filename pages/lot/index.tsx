@@ -19,16 +19,14 @@ import { useMutation, useQuery } from '@apollo/client';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import Filter from '../../libs/components/lot/Filter';
 import LotCard from '../../libs/components/lot/LotCard';
+import LotCardSkeleton from '../../libs/components/lot/LotCardSkeleton';
 import { LotsInquiry } from '../../libs/types/lot/lot.input';
 import { Lot } from '../../libs/types/lot/lot';
 import { T } from '../../libs/types/common';
 import { Direction, Message } from '../../libs/enums/common.enum';
 import { GET_LOTS } from '../../apollo/user/query';
 import { WATCH_TARGET_LOT } from '../../apollo/user/mutation';
-import {
-	sweetMixinErrorAlert,
-	sweetTopSmallSuccessAlert,
-} from '../../libs/sweetAlert';
+import { sweetMixinErrorAlert } from '../../libs/sweetAlert';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -102,7 +100,6 @@ const LotList: NextPage = ({ initialInput, ...props }: any) => {
 
 			await watchTargetLot({ variables: { input: id } });
 			await getLotsRefetch({ input: searchFilter });
-			await sweetTopSmallSuccessAlert('success', 800);
 		} catch (err: any) {
 			console.log('ERROR, watchLotHandler: ', err.message);
 			sweetMixinErrorAlert(err.message).then();
@@ -255,7 +252,9 @@ const LotList: NextPage = ({ initialInput, ...props }: any) => {
 							</Box>
 						</Box>
 						<Stack className={'list-config'}>
-							{lots?.length === 0 ? (
+							{getLotsLoading && lots?.length === 0 ? (
+								[0, 1, 2, 3, 4, 5].map((i) => <LotCardSkeleton key={i} />)
+							) : lots?.length === 0 ? (
 								<div className={'no-data'}>
 									<SearchOffRoundedIcon />
 									<p>{t('No lots found!')}</p>

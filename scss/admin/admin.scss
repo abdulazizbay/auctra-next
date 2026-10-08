@@ -9,26 +9,29 @@ $aside-width: 240px;
 
 	a {
 		padding: 10px 16px;
-		border-radius: 8px;
-		color: $text;
-		font-weight: 500;
+		border-radius: 10px;
+		color: $ink-2;
+		font-weight: 600;
+		transition: background 0.15s ease, color 0.15s ease;
 
 		&:hover {
-			background: $bg;
+			background: $soft;
+			color: $ink;
 		}
 
 		&.active {
-			background: $primary;
+			background: $ink;
 			color: #fff;
 		}
 	}
 
 	.logo {
 		margin-bottom: 16px;
-		font-family: $font-heading;
+		font-family: $font-logo;
 		font-size: 26px;
-		font-weight: 700;
-		color: $primary;
+		font-weight: 600;
+		letter-spacing: 3px;
+		color: $ink;
 
 		&:hover {
 			background: none;
@@ -38,7 +41,7 @@ $aside-width: 240px;
 
 #admin-wrap {
 	min-height: 100vh;
-	background: $bg;
+	background: $soft;
 
 	.admin-aside .MuiDrawer-paper {
 		width: $aside-width;
@@ -63,10 +66,10 @@ $aside-width: 240px;
 
 		.title {
 			flex: 1;
-			font-family: $font-heading;
-			font-size: 24px;
-			font-weight: 700;
-			color: $primary;
+			font-size: 20px;
+			font-weight: 800;
+			letter-spacing: -0.02em;
+			color: $ink;
 		}
 
 		.nick {
@@ -122,8 +125,8 @@ $aside-width: 240px;
 
 	.admin-table {
 		background: #fff;
-		border: 1px solid $border;
-		border-radius: 12px;
+		border: 1px solid $line;
+		border-radius: 16px;
 
 		th {
 			font-weight: 700;
@@ -136,8 +139,9 @@ $aside-width: 240px;
 		}
 
 		td a {
-			color: $primary;
-			font-weight: 600;
+			color: $ink;
+			font-weight: 700;
+			text-decoration: underline;
 		}
 
 		.actions {

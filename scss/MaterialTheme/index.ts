@@ -10,25 +10,33 @@ export const light: ThemeOptions = {
 	palette: {
 		mode: 'light',
 		primary: {
-			main: '#0F2742',
+			main: '#111111',
+			dark: '#2B2B2B',
 			contrastText: '#ffffff',
 		},
 		secondary: {
-			main: '#C2A35A',
-			contrastText: '#14202E',
+			main: '#FF4D2E',
+			contrastText: '#ffffff',
+		},
+		error: {
+			main: '#E5484D',
+		},
+		success: {
+			main: '#1F9D55',
 		},
 		background: {
-			default: '#F6F7F9',
+			default: '#ffffff',
 			paper: '#ffffff',
 		},
 		text: {
-			primary: '#14202E',
-			secondary: '#5B6573',
+			primary: '#111111',
+			secondary: '#555555',
+			disabled: '#8A8A8A',
 		},
-		divider: '#E3E6EA',
+		divider: '#ECECEC',
 	},
 	shape: {
-		borderRadius: 6,
+		borderRadius: 10,
 	},
 	components: {
 		MuiTypography: {
@@ -53,6 +61,17 @@ export const light: ThemeOptions = {
 			styleOverrides: {
 				root: {
 					minWidth: 'auto',
+					borderRadius: 999,
+					fontWeight: 700,
+					transition: 'background-color .15s, border-color .15s, color .15s',
+				},
+				outlined: {
+					borderColor: '#E4E4E4',
+					color: '#111111',
+					'&:hover': {
+						borderColor: '#111111',
+						backgroundColor: 'transparent',
+					},
 				},
 			},
 		},
@@ -88,16 +107,24 @@ export const light: ThemeOptions = {
 			styleOverrides: {
 				root: {
 					backgroundColor: '#ffffff',
+					'&:hover .MuiOutlinedInput-notchedOutline': {
+						borderColor: '#C4C4C4',
+					},
+					'&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+						borderWidth: 1,
+						borderColor: '#111111',
+					},
 				},
 				notchedOutline: {
-					borderColor: '#E3E6EA',
+					borderColor: '#E4E4E4',
 				},
 			},
 		},
 		MuiMenu: {
 			styleOverrides: {
 				paper: {
-					boxShadow: 'rgb(145 158 171 / 24%) 0px 0px 2px 0px, rgb(145 158 171 / 24%) -20px 20px 40px -4px',
+					border: '1px solid #ECECEC',
+					boxShadow: '0 8px 24px rgba(17, 17, 17, 0.08)',
 				},
 			},
 		},
@@ -105,6 +132,20 @@ export const light: ThemeOptions = {
 			styleOverrides: {
 				root: {
 					padding: '6px 8px',
+				},
+			},
+		},
+		MuiDialog: {
+			styleOverrides: {
+				paper: {
+					borderRadius: 20,
+				},
+			},
+		},
+		MuiChip: {
+			styleOverrides: {
+				root: {
+					borderRadius: 999,
 				},
 			},
 		},

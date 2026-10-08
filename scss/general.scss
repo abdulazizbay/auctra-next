@@ -5,12 +5,7 @@
 		position: sticky;
 		top: 0;
 		z-index: 100;
-		height: 80px;
-		pointer-events: none;
-
-		.navbar {
-			pointer-events: auto;
-		}
+		height: 72px;
 	}
 
 	#main {
@@ -23,52 +18,39 @@
 }
 
 .navbar {
-	background: rgba(15, 39, 66, 0.82);
-	backdrop-filter: blur(10px);
-	-webkit-backdrop-filter: blur(10px);
-	border-bottom: 1px solid rgba(194, 163, 90, 0.18);
-	transition: background 0.35s ease, border-color 0.35s ease,
-		box-shadow 0.35s ease;
-
-	&.transparent {
-		background: transparent;
-		backdrop-filter: none;
-		-webkit-backdrop-filter: none;
-		border-bottom-color: transparent;
-	}
+	background: rgba(255, 255, 255, 0.92);
+	backdrop-filter: saturate(180%) blur(12px);
+	-webkit-backdrop-filter: saturate(180%) blur(12px);
+	border-bottom: 1px solid transparent;
+	transition: border-color 0.2s ease;
 
 	&.scrolled {
-		box-shadow: 0 12px 32px -20px rgba(0, 0, 0, 0.7);
-
-		.container {
-			height: 64px;
-		}
+		border-bottom-color: $line;
 	}
 
 	.container {
-		height: 80px;
+		height: 72px;
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
-		transition: height 0.35s ease;
 	}
 
 	.logo-box a {
-		font-family: $font-heading;
+		font-family: $font-logo;
 		font-size: 28px;
 		font-weight: 600;
 		letter-spacing: 4px;
-		color: #fff;
+		color: $ink;
 
 		span {
-			color: $accent;
+			color: $brand;
 		}
 	}
 
 	.router-box {
 		display: flex;
 		flex-direction: row;
-		gap: 32px;
+		gap: 28px;
 
 		a {
 			position: relative;
@@ -77,26 +59,25 @@
 			gap: 6px;
 			padding: 6px 0;
 			font-size: 15px;
-			font-weight: 500;
-			color: rgba(255, 255, 255, 0.72);
-			transition: color 0.25s ease;
+			font-weight: 700;
+			color: $ink-2;
+			transition: color 0.15s ease;
 
 			&::after {
 				content: '';
 				position: absolute;
 				left: 0;
 				right: 0;
-				bottom: 0;
+				bottom: -2px;
 				height: 2px;
-				border-radius: 2px;
-				background: linear-gradient(90deg, transparent, $accent, transparent);
+				background: $ink;
 				transform: scaleX(0);
-				transition: transform 0.3s ease;
+				transition: transform 0.2s ease;
 			}
 
 			&:hover,
 			&.active {
-				color: #fff;
+				color: $ink;
 
 				&::after {
 					transform: scaleX(1);
@@ -118,20 +99,21 @@
 		.join-box {
 			display: flex;
 			align-items: center;
-			gap: 8px;
-			padding: 8px 18px;
-			border: 1px solid transparent;
+			gap: 6px;
+			padding: 8px 16px;
 			border-radius: 999px;
-			background: linear-gradient($primary, $primary) padding-box,
-				linear-gradient(135deg, #e6cf8f, $accent, #8a6f2e) border-box;
-			color: #f1e3bb;
+			background: $ink;
+			color: #fff;
 			font-size: 14px;
-			font-weight: 600;
-			transition: box-shadow 0.25s ease, transform 0.25s ease;
+			font-weight: 700;
+			transition: background 0.15s ease;
+
+			svg {
+				font-size: 20px;
+			}
 
 			&:hover {
-				transform: translateY(-1px);
-				box-shadow: 0 8px 24px -10px rgba(194, 163, 90, 0.8);
+				background: $hover;
 			}
 
 			@include down(sm) {
@@ -144,34 +126,34 @@
 		}
 
 		.icon-btn {
-			color: #fff;
+			color: $ink;
 		}
 
 		.login-user {
-			width: 36px;
-			height: 36px;
-			background: linear-gradient(135deg, #e6cf8f, $accent);
-			color: $primary;
-			font-weight: 700;
-			box-shadow: 0 0 0 2px rgba(194, 163, 90, 0.35);
+			width: 34px;
+			height: 34px;
+			background: $ink;
+			color: #fff;
+			font-size: 15px;
+			font-weight: 800;
 		}
 
 		.btn-lang {
 			min-width: 0;
 			padding: 4px 10px;
 			border-radius: 999px;
-			color: rgba(255, 255, 255, 0.85);
+			color: $ink-2;
 			font-size: 13px;
-			font-weight: 600;
+			font-weight: 700;
 
 			&:hover {
-				background: rgba(255, 255, 255, 0.08);
+				background: $soft-2;
 			}
 		}
 
 		.menu-btn {
 			display: none;
-			color: #fff;
+			color: $ink;
 
 			@include down(md) {
 				display: inline-flex;
@@ -185,7 +167,7 @@
 	width: 6px;
 	height: 6px;
 	border-radius: 50%;
-	background: #ff5a5f;
+	background: $live;
 
 	&::after {
 		content: '';
@@ -210,55 +192,32 @@
 
 .nav-drawer .MuiDrawer-paper {
 	width: 280px;
-	padding: 32px 24px;
-	background: rgba(10, 27, 47, 0.92);
-	backdrop-filter: blur(16px);
-	-webkit-backdrop-filter: blur(16px);
-	border-left: 1px solid rgba(194, 163, 90, 0.2);
+	padding: 24px;
+	background: #fff;
 
 	a {
 		display: flex;
 		align-items: center;
 		gap: 8px;
 		padding: 14px 0;
-		color: rgba(255, 255, 255, 0.8);
-		font-family: $font-heading;
-		font-size: 22px;
-		font-weight: 600;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-		opacity: 0;
-		animation: nav-in 0.45s ease forwards;
+		border-bottom: 1px solid $line;
+		font-size: 17px;
+		font-weight: 700;
+		color: $ink-2;
 
 		&.active {
-			color: $accent;
+			color: $ink;
 		}
-
-		@for $i from 1 through 6 {
-			&:nth-child(#{$i}) {
-				animation-delay: #{0.05 + $i * 0.05}s;
-			}
-		}
-	}
-}
-
-@keyframes nav-in {
-	from {
-		opacity: 0;
-		transform: translateX(16px);
-	}
-	to {
-		opacity: 1;
-		transform: none;
 	}
 }
 
 .navbar .bell-btn {
-	color: #fff;
-	transition: background 0.2s ease;
+	color: $ink;
+	transition: background 0.15s ease;
 
 	&:hover,
 	&.active {
-		background: rgba(255, 255, 255, 0.08);
+		background: $soft-2;
 	}
 
 	&.ringing svg {
@@ -270,8 +229,8 @@
 		min-width: 18px;
 		height: 18px;
 		padding: 0 5px;
-		border: 2px solid $primary;
-		background: #e5484d;
+		border: 2px solid #fff;
+		background: $live;
 		font-size: 10px;
 		font-weight: 700;
 	}
@@ -303,10 +262,10 @@
 	width: 380px;
 	max-width: calc(100vw - 32px);
 	max-height: 520px;
-	margin-top: 10px;
-	border: 1px solid rgba(15, 39, 66, 0.08);
-	border-radius: 22px;
-	box-shadow: 0 30px 60px -24px rgba(7, 20, 35, 0.45) !important;
+	margin-top: 8px;
+	border: 1px solid $line;
+	border-radius: 18px;
+	box-shadow: 0 12px 32px rgba(17, 17, 17, 0.1) !important;
 
 	.MuiList-root {
 		padding: 0;
@@ -320,48 +279,43 @@
 		align-items: center;
 		justify-content: space-between;
 		padding: 16px 18px;
-		background: radial-gradient(
-				220px 110px at 100% 0%,
-				rgba(194, 163, 90, 0.35),
-				transparent 70%
-			),
-			linear-gradient(160deg, $primary, $primary-dark);
-		color: #fff;
+		border-bottom: 1px solid $line;
+		background: #fff;
 
 		.title {
 			display: flex;
 			align-items: center;
 			gap: 8px;
-			font-family: $font-heading;
-			font-size: 22px;
-			font-weight: 600;
+			font-size: 17px;
+			font-weight: 800;
+			color: $ink;
 
 			span {
 				padding: 1px 8px;
 				border-radius: 999px;
-				background: #e5484d;
-				font-family: $font;
+				background: $live;
 				font-size: 11px;
 				font-weight: 700;
+				color: #fff;
 			}
 		}
 
 		button {
 			padding: 4px 12px;
-			border: 1px solid rgba(194, 163, 90, 0.4);
+			border: 1px solid $line-2;
 			border-radius: 999px;
-			color: #f1e3bb;
+			color: $ink;
 			font-size: 12px;
-			font-weight: 600;
+			font-weight: 700;
 			text-transform: none;
 
 			&:hover {
-				background: rgba(194, 163, 90, 0.12);
+				border-color: $ink;
+				background: transparent;
 			}
 
 			&.Mui-disabled {
-				border-color: rgba(255, 255, 255, 0.12);
-				color: rgba(255, 255, 255, 0.35);
+				color: $faint;
 			}
 		}
 	}
@@ -372,11 +326,11 @@
 		align-items: center;
 		gap: 8px;
 		padding: 40px 16px;
-		color: $text-secondary;
+		color: $muted;
 
 		svg {
-			font-size: 40px;
-			color: rgba(194, 163, 90, 0.6);
+			font-size: 36px;
+			color: $faint;
 		}
 	}
 
@@ -386,26 +340,22 @@
 		gap: 12px;
 		padding: 14px 18px;
 		white-space: normal;
-		border-bottom: 1px solid $border;
-		transition: background 0.2s ease;
+		border-bottom: 1px solid $line;
+		transition: background 0.15s ease;
 
 		&:last-child {
 			border-bottom: none;
 		}
 
 		&:hover {
-			background: $bg;
+			background: $soft;
 		}
 
 		&.unread {
-			background: linear-gradient(
-				90deg,
-				rgba(194, 163, 90, 0.12),
-				rgba(194, 163, 90, 0.02)
-			);
+			background: $soft;
 
 			.text {
-				font-weight: 600;
+				font-weight: 700;
 			}
 		}
 
@@ -413,38 +363,23 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			width: 38px;
-			height: 38px;
+			width: 36px;
+			height: 36px;
 			flex-shrink: 0;
-			border-radius: 12px;
+			border-radius: 50%;
+			background: $soft-2;
+			color: $ink;
 
 			svg {
-				font-size: 20px;
-			}
-
-			&.gold {
-				background: rgba(194, 163, 90, 0.16);
-				color: #8a6f2e;
+				font-size: 18px;
 			}
 
 			&.green {
-				background: rgba(46, 125, 50, 0.12);
-				color: #2e7d32;
+				color: $success;
 			}
 
 			&.red {
-				background: rgba(214, 64, 69, 0.1);
-				color: #d64045;
-			}
-
-			&.navy {
-				background: rgba(15, 39, 66, 0.08);
-				color: $primary;
-			}
-
-			&.grey {
-				background: $bg;
-				color: $text-secondary;
+				color: $live;
 			}
 		}
 
@@ -459,112 +394,68 @@
 		.text {
 			font-size: 14px;
 			line-height: 1.4;
-			color: $text;
+			color: $ink;
 		}
 
 		.date {
 			font-size: 12px;
-			color: $text-secondary;
+			color: $muted;
 		}
 
 		.unread-dot {
-			width: 8px;
-			height: 8px;
+			width: 7px;
+			height: 7px;
 			flex-shrink: 0;
 			margin-top: 6px;
 			border-radius: 50%;
-			background: $accent;
+			background: $live;
 		}
 	}
 }
 
 .header-basic {
-	position: relative;
-	overflow: hidden;
-	padding: 64px 0 72px;
-	background: radial-gradient(
-			700px 320px at 85% 0%,
-			rgba(194, 163, 90, 0.22),
-			transparent 70%
-		),
-		linear-gradient(180deg, $primary-dark 0%, $primary 100%);
-	color: #fff;
-
-	&::after {
-		content: '';
-		position: absolute;
-		inset: 0;
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-		opacity: 0.05;
-		pointer-events: none;
-	}
+	padding: 48px 0 28px;
+	background: #fff;
+	color: $ink;
 
 	&.auth {
-		padding: 40px 0;
+		padding: 32px 0 0;
 	}
 
 	.container {
-		position: relative;
-		z-index: 1;
-		gap: 10px;
+		gap: 6px;
 	}
 
 	strong {
-		font-family: $font-heading;
-		font-size: 56px;
-		font-weight: 600;
-		line-height: 1.05;
-		animation: hero-fade-up 0.7s ease both;
+		font-size: 36px;
+		font-weight: 800;
+		line-height: 1.15;
+		letter-spacing: -0.03em;
 	}
 
 	span {
-		font-size: 17px;
-		color: rgba(255, 255, 255, 0.7);
-		animation: hero-fade-up 0.7s 0.1s ease both;
+		font-size: 15px;
+		color: $muted;
 	}
 
 	@include down(md) {
-		padding: 44px 0 48px;
+		padding: 32px 0 20px;
 
 		strong {
-			font-size: 38px;
+			font-size: 28px;
 		}
 
 		span {
-			font-size: 15px;
+			font-size: 14px;
 		}
 	}
 }
 
 .footer-container {
-	position: relative;
-	overflow: hidden;
-	padding: 80px 0 28px;
-	background: linear-gradient(180deg, $primary 0%, $primary-dark 100%);
-	border-top: 1px solid rgba(194, 163, 90, 0.25);
-	color: rgba(255, 255, 255, 0.65);
+	padding: 64px 0 28px;
+	background: $soft;
+	color: $ink-2;
 	font-size: 14px;
-
-	&::before {
-		content: '';
-		position: absolute;
-		top: -260px;
-		left: 50%;
-		width: 760px;
-		height: 520px;
-		translate: -50% 0;
-		border-radius: 50%;
-		background: radial-gradient(
-			closest-side,
-			rgba(194, 163, 90, 0.14),
-			transparent
-		);
-		pointer-events: none;
-	}
-
-	.container {
-		position: relative;
-	}
 
 	.main {
 		flex-direction: row;
@@ -577,19 +468,19 @@
 	}
 
 	.left {
-		max-width: 340px;
-		gap: 18px;
+		max-width: 320px;
+		gap: 16px;
 
 		.logo {
-			font-family: $font-heading;
-			font-size: 32px;
+			font-family: $font-logo;
+			font-size: 28px;
 			font-weight: 600;
 			letter-spacing: 4px;
-			color: #fff;
+			color: $ink;
 
 			em {
 				font-style: normal;
-				color: $accent;
+				color: $brand;
 			}
 		}
 
@@ -601,33 +492,35 @@
 			display: inline-flex;
 			align-items: center;
 			align-self: flex-start;
-			gap: 10px;
-			padding: 7px 14px;
-			border: 1px solid rgba(255, 255, 255, 0.12);
+			gap: 8px;
+			padding: 6px 12px;
 			border-radius: 999px;
+			background: #fff;
 			font-size: 12px;
-			font-weight: 600;
-			color: rgba(255, 255, 255, 0.85);
+			font-weight: 700;
+			color: $ink;
 		}
 
 		.media-box {
 			display: flex;
-			gap: 10px;
+			gap: 8px;
 
 			svg {
-				width: 40px;
-				height: 40px;
-				padding: 10px;
-				border: 1px solid rgba(255, 255, 255, 0.14);
+				width: 36px;
+				height: 36px;
+				padding: 8px;
+				border: 1px solid $line-2;
 				border-radius: 50%;
-				color: #fff;
+				background: #fff;
+				color: $ink;
 				cursor: pointer;
-				transition: all 0.25s ease;
+				transition: background 0.15s ease, border-color 0.15s ease,
+					color 0.15s ease;
 
 				&:hover {
-					background: $accent;
-					border-color: $accent;
-					color: $primary;
+					background: $ink;
+					border-color: $ink;
+					color: #fff;
 				}
 			}
 		}
@@ -650,54 +543,37 @@
 		div {
 			display: flex;
 			flex-direction: column;
-			gap: 12px;
+			gap: 10px;
 		}
 
 		strong {
 			margin-bottom: 4px;
-			font-size: 12px;
-			letter-spacing: 1.5px;
-			text-transform: uppercase;
-			color: #fff;
+			font-size: 13px;
+			font-weight: 800;
+			color: $ink;
 		}
 
 		a {
 			width: fit-content;
-			transition: color 0.2s ease;
+			color: $ink-2;
+			transition: color 0.15s ease;
 
 			&:hover {
-				color: $accent;
+				color: $ink;
+				text-decoration: underline;
 			}
 		}
-	}
-
-	.wordmark {
-		margin-top: 64px;
-		font-family: $font-heading;
-		font-size: clamp(72px, 17vw, 230px);
-		font-weight: 700;
-		line-height: 0.8;
-		letter-spacing: 0.08em;
-		text-align: center;
-		color: transparent;
-		background: linear-gradient(
-			180deg,
-			rgba(194, 163, 90, 0.22),
-			rgba(194, 163, 90, 0) 85%
-		);
-		-webkit-background-clip: text;
-		background-clip: text;
-		user-select: none;
 	}
 
 	.second {
 		flex-direction: row;
 		justify-content: space-between;
 		gap: 8px;
-		margin-top: 20px;
+		margin-top: 48px;
 		padding-top: 20px;
-		border-top: 1px solid rgba(255, 255, 255, 0.08);
-		font-size: 13px;
+		border-top: 1px solid $line-2;
+		font-size: 12px;
+		color: $muted;
 
 		@include down(sm) {
 			flex-direction: column;
@@ -713,31 +589,19 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-	gap: 14px;
+	gap: 12px;
 
 	.chat-button {
 		position: relative;
-		width: 58px;
-		height: 58px;
-		background: linear-gradient(145deg, #1f4a78, $primary);
-		color: $accent;
-		box-shadow: 0 0 0 2px rgba(194, 163, 90, 0.45),
-			0 14px 30px -10px rgba(7, 20, 35, 0.6);
-		transition: transform 0.25s ease, box-shadow 0.25s ease;
+		width: 56px;
+		height: 56px;
+		background: $ink;
+		color: #fff;
+		box-shadow: 0 8px 24px rgba(17, 17, 17, 0.2);
+		transition: background 0.15s ease;
 
 		&:hover {
-			transform: translateY(-2px);
-			background: linear-gradient(145deg, #1f4a78, $primary);
-			box-shadow: 0 0 0 2px $accent, 0 18px 36px -12px rgba(7, 20, 35, 0.7);
-		}
-
-		&.unread::after {
-			content: '';
-			position: absolute;
-			inset: -2px;
-			border-radius: 50%;
-			border: 2px solid $accent;
-			animation: chat-ring 1.6s ease-out infinite;
+			background: $hover;
 		}
 	}
 
@@ -748,58 +612,49 @@
 		max-height: calc(100vh - 120px);
 		overflow: hidden;
 		background: #fff;
-		border: 1px solid rgba(15, 39, 66, 0.08);
-		border-radius: 24px;
-		box-shadow: 0 30px 60px -24px rgba(7, 20, 35, 0.45);
+		border: 1px solid $line;
+		border-radius: 20px;
+		box-shadow: 0 16px 40px rgba(17, 17, 17, 0.12);
 		transform-origin: bottom right;
-		animation: chat-in 0.25s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+		animation: chat-in 0.2s ease both;
 	}
 
 	.chat-head {
-		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 18px 20px;
-		overflow: hidden;
-		background: radial-gradient(
-				240px 120px at 100% 0%,
-				rgba(194, 163, 90, 0.35),
-				transparent 70%
-			),
-			linear-gradient(160deg, $primary, $primary-dark);
-		color: #fff;
+		padding: 16px 18px;
+		border-bottom: 1px solid $line;
+		color: $ink;
 
 		.title {
-			font-family: $font-heading;
-			font-size: 24px;
-			font-weight: 600;
+			font-size: 16px;
+			font-weight: 800;
 		}
 
 		.online {
 			display: inline-flex;
 			align-items: center;
-			gap: 8px;
-			padding: 4px 12px;
-			border: 1px solid rgba(194, 163, 90, 0.35);
+			gap: 6px;
+			padding: 4px 10px;
 			border-radius: 999px;
-			background: rgba(194, 163, 90, 0.1);
+			background: $soft-2;
 			font-size: 12px;
-			font-weight: 600;
-			color: #f1e3bb;
+			font-weight: 700;
+			color: $ink;
 
 			.live-dot {
-				background: #4cd28a;
+				background: $success;
 			}
 		}
 	}
 
 	.chat-list {
 		flex: 1;
-		gap: 10px;
+		gap: 8px;
 		padding: 16px 14px;
 		overflow-y: auto;
-		background: linear-gradient(180deg, #f3f4f7, $bg);
+		background: $soft;
 
 		&::-webkit-scrollbar {
 			width: 6px;
@@ -807,43 +662,40 @@
 
 		&::-webkit-scrollbar-thumb {
 			border-radius: 6px;
-			background: rgba(15, 39, 66, 0.15);
+			background: $line-2;
 		}
 	}
 
 	.chat-empty {
 		margin: auto;
-		color: $text-secondary;
+		color: $muted;
 	}
 
 	.chat-message {
 		align-self: flex-start;
 		max-width: 80%;
 		padding: 8px 14px;
-		border: 1px solid $border;
-		border-radius: 18px 18px 18px 6px;
+		border-radius: 16px 16px 16px 4px;
 		background: #fff;
-		box-shadow: 0 4px 12px -8px rgba(15, 39, 66, 0.25);
 		animation: chat-msg 0.2s ease both;
 
 		.nick {
 			font-size: 11px;
 			font-weight: 700;
-			letter-spacing: 0.3px;
-			color: #8a6f2e;
+			color: $muted;
 		}
 
 		.text {
 			font-size: 14px;
 			line-height: 1.45;
 			word-break: break-word;
+			color: $ink;
 		}
 
 		&.mine {
 			align-self: flex-end;
-			border-color: transparent;
-			border-radius: 18px 18px 6px 18px;
-			background: linear-gradient(160deg, #1f4a78, $primary);
+			border-radius: 16px 16px 4px 16px;
+			background: $ink;
 
 			.text {
 				color: #fff;
@@ -856,20 +708,15 @@
 		align-items: center;
 		gap: 8px;
 		padding: 12px;
-		border-top: 1px solid $border;
+		border-top: 1px solid $line;
 
 		.MuiOutlinedInput-root {
 			border-radius: 999px;
-			background: $bg;
+			background: $soft;
 			font-size: 14px;
 
 			.MuiOutlinedInput-notchedOutline {
 				border-color: transparent;
-			}
-
-			&.Mui-focused .MuiOutlinedInput-notchedOutline {
-				border-width: 1px;
-				border-color: $accent;
 			}
 		}
 
@@ -877,16 +724,20 @@
 			width: 40px;
 			height: 40px;
 			flex-shrink: 0;
-			background: linear-gradient(135deg, #e6cf8f, $accent);
-			color: $primary;
+			background: $ink;
+			color: #fff;
 
 			svg {
 				font-size: 18px;
 			}
 
+			&:hover {
+				background: $hover;
+			}
+
 			&.Mui-disabled {
-				background: $border;
-				color: $text-secondary;
+				background: $line;
+				color: $faint;
 			}
 		}
 	}
@@ -900,7 +751,7 @@
 @keyframes chat-in {
 	from {
 		opacity: 0;
-		transform: translateY(12px) scale(0.96);
+		transform: translateY(8px);
 	}
 	to {
 		opacity: 1;
@@ -911,22 +762,9 @@
 @keyframes chat-msg {
 	from {
 		opacity: 0;
-		transform: translateY(6px);
 	}
 	to {
 		opacity: 1;
-		transform: none;
-	}
-}
-
-@keyframes chat-ring {
-	from {
-		transform: scale(1);
-		opacity: 0.9;
-	}
-	to {
-		transform: scale(1.35);
-		opacity: 0;
 	}
 }
 
@@ -935,25 +773,284 @@
 
 	.container {
 		align-items: center;
-		gap: 16px;
+		gap: 14px;
 		text-align: center;
 	}
 
 	.code {
-		font-family: $font-heading;
 		font-size: 96px;
-		font-weight: 700;
+		font-weight: 800;
 		line-height: 1;
-		color: $primary;
+		letter-spacing: -0.04em;
+		color: $ink;
 	}
 
 	.text {
-		color: $text-secondary;
+		color: $muted;
 	}
 
 	.buttons {
 		flex-direction: row;
-		gap: 12px;
+		gap: 10px;
 		margin-top: 8px;
+	}
+}
+
+.nav-menu {
+	.MuiPaper-root {
+		min-width: 140px;
+		margin-top: 6px;
+		border: 1px solid $line;
+		border-radius: 12px;
+		box-shadow: 0 8px 24px rgba(17, 17, 17, 0.08);
+	}
+
+	.MuiMenuItem-root {
+		padding: 10px 16px;
+		font-size: 14px;
+		font-weight: 600;
+		color: $ink;
+
+		.MuiSvgIcon-root {
+			color: $muted;
+		}
+	}
+}
+
+.pagination-config .MuiPaginationItem-root,
+.pagination-box .MuiPaginationItem-root {
+	font-weight: 700;
+	color: $ink-2;
+
+	&.Mui-selected {
+		background: $ink;
+		color: #fff;
+
+		&:hover {
+			background: $hover;
+		}
+	}
+}
+
+.no-data,
+.empty-list {
+	color: $muted;
+}
+
+.watch-toast {
+	position: fixed;
+	z-index: 1400;
+	top: 84px;
+	right: 24px;
+	width: 340px;
+	max-width: calc(100vw - 32px);
+	overflow: hidden;
+	border: 1px solid $line;
+	border-radius: 16px;
+	background: #fff;
+	box-shadow: 0 16px 40px rgba(17, 17, 17, 0.18);
+	animation: watch-toast-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+	@include down(sm) {
+		top: auto;
+		right: 16px;
+		bottom: 88px;
+		left: 16px;
+		width: auto;
+	}
+
+	.wt-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+		padding: 9px 14px;
+		background: $ink;
+		color: #fff;
+	}
+
+	.wt-label {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 11px;
+		font-weight: 800;
+		letter-spacing: 0.6px;
+		text-transform: uppercase;
+
+		svg {
+			font-size: 16px;
+		}
+	}
+
+	&.added .wt-label svg {
+		animation: watch-eye 0.6s 0.2s ease both;
+	}
+
+	.wt-timer {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 12px;
+		font-weight: 700;
+		color: rgba(255, 255, 255, 0.75);
+		font-variant-numeric: tabular-nums;
+
+		&.live {
+			color: #fff;
+		}
+	}
+
+	.wt-body {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		padding: 12px 14px;
+	}
+
+	.thumb {
+		width: 52px;
+		height: 52px;
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		border-radius: 10px;
+		background: $soft-2;
+		color: $faint;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.text {
+		flex: 1;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 3px;
+
+		strong {
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			font-size: 14px;
+			font-weight: 800;
+			color: $ink;
+		}
+
+		span {
+			font-size: 12px;
+			line-height: 1.4;
+			color: $muted;
+		}
+	}
+
+	.wt-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 32px;
+		height: 32px;
+		flex-shrink: 0;
+		border: 1px solid $line-2;
+		border-radius: 50%;
+		color: $ink;
+		transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+		svg {
+			font-size: 16px;
+		}
+
+		&:hover {
+			border-color: $ink;
+			background: $ink;
+			color: #fff;
+		}
+	}
+
+	.progress {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: 3px;
+		background: $ink;
+		transform-origin: left;
+		animation: watch-progress 4.2s linear forwards;
+	}
+
+	&.removed {
+		.wt-head {
+			background: $soft-2;
+			color: $ink;
+		}
+
+		.progress {
+			background: $faint;
+		}
+	}
+}
+
+@keyframes watch-toast-in {
+	from {
+		opacity: 0;
+		transform: translateX(24px);
+	}
+}
+
+@keyframes watch-eye {
+	0%,
+	100% {
+		transform: scaleY(1);
+	}
+	40% {
+		transform: scaleY(0.1);
+	}
+}
+
+@keyframes watch-progress {
+	to {
+		transform: scaleX(0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.watch-toast,
+	.watch-toast * {
+		animation: none !important;
+	}
+}
+
+.route-loader {
+	position: fixed;
+	inset: 0;
+	z-index: 1350;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.7);
+	backdrop-filter: blur(3px);
+	animation: route-loader-in 0.2s ease;
+
+	.gavel-scene {
+		width: 110px;
+
+		.gavel,
+		.impact line,
+		.ripple {
+			animation-duration: 0.9s;
+			animation-iteration-count: infinite;
+		}
+	}
+}
+
+@keyframes route-loader-in {
+	from {
+		opacity: 0;
 	}
 }

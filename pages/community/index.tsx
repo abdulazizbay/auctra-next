@@ -41,14 +41,6 @@ export const getStaticProps = async ({ locale }: any) => ({
 	},
 });
 
-const categoryDesc: Record<ArticleCategory, string> = {
-	[ArticleCategory.AUTHENTICATION]:
-		'Get help verifying watches and collectibles',
-	[ArticleCategory.MARKET_TALK]: 'Prices, trends and auction talk',
-	[ArticleCategory.SHOWCASE]: 'Show off your collection',
-	[ArticleCategory.NEWS]: 'Updates from Auctra and the market',
-};
-
 const Community: NextPage = ({ initialInput, ...props }: T) => {
 	const router = useRouter();
 	const { t } = useTranslation('common');
@@ -72,7 +64,7 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 		error: getArticlesError,
 		refetch: getArticlesRefetch,
 	} = useQuery(GET_ARTICLES, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'cache-and-network',
 		variables: { input: searchCommunity },
 		skip: !articleCategory,
 		notifyOnNetworkStatusChange: true,
@@ -200,61 +192,55 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 	return (
 		<div id="community-list-page">
 			<Stack className="container">
-				<TabContext value={articleCategory ?? ArticleCategory.MARKET_TALK}>
-					<TabList
-						className={'category-tabs'}
-						onChange={tabChangeHandler}
-						variant={'scrollable'}
-						scrollButtons={false}
-					>
-						{Object.values(ArticleCategory).map((category) => (
-							<Tab
-								key={category}
-								value={category}
-								label={t(category)}
-								disableRipple
-							/>
-						))}
-					</TabList>
-				</TabContext>
-
-				<Box component={'div'} className={'board-head'}>
-					<Stack>
-						<Typography className={'board-title'}>
-							{articleCategory ? t(articleCategory) : ''}
-						</Typography>
-						<Typography className={'board-desc'}>
-							{articleCategory ? t(categoryDesc[articleCategory]) : ''}
-						</Typography>
-					</Stack>
-					{user?._id && (
-						<Button
-							className={'write-button'}
-							startIcon={<EditRoundedIcon />}
-							onClick={writeHandler}
+				<Box component={'div'} className={'board-bar'}>
+					<TabContext value={articleCategory ?? ArticleCategory.MARKET_TALK}>
+						<TabList
+							className={'category-tabs'}
+							onChange={tabChangeHandler}
+							variant={'scrollable'}
+							scrollButtons={false}
 						>
-							{t('Write')}
-						</Button>
-					)}
+							{Object.values(ArticleCategory).map((category) => (
+								<Tab
+									key={category}
+									value={category}
+									label={t(category)}
+									disableRipple
+								/>
+							))}
+						</TabList>
+					</TabContext>
+
+					<Box component={'div'} className={'board-actions'}>
+						<OutlinedInput
+							value={searchText}
+							type={'text'}
+							className={'search-input'}
+							placeholder={t('Search articles')}
+							onChange={(e: any) => setSearchText(e.target.value)}
+							startAdornment={<SearchRoundedIcon className={'search-icon'} />}
+							endAdornment={
+								searchText ? (
+									<CancelRoundedIcon
+										className={'cancel-icon'}
+										onClick={() => setSearchText('')}
+									/>
+								) : null
+							}
+						/>
+						{user?._id && (
+							<Button
+								className={'write-button'}
+								startIcon={<EditRoundedIcon />}
+								onClick={writeHandler}
+							>
+								{t('Write')}
+							</Button>
+						)}
+					</Box>
 				</Box>
 
 				<Box component={'div'} className={'listing-toolbar'}>
-					<OutlinedInput
-						value={searchText}
-						type={'text'}
-						className={'search-input'}
-						placeholder={t('Search articles')}
-						onChange={(e: any) => setSearchText(e.target.value)}
-						startAdornment={<SearchRoundedIcon className={'search-icon'} />}
-						endAdornment={
-							searchText ? (
-								<CancelRoundedIcon
-									className={'cancel-icon'}
-									onClick={() => setSearchText('')}
-								/>
-							) : null
-						}
-					/>
 					<Box component={'div'} className={'sort-control'}>
 						<Typography>{t('Sort by')}</Typography>
 						<Button

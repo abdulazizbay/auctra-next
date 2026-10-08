@@ -9,10 +9,7 @@ import { T } from '../../types/common';
 import { Message } from '../../enums/common.enum';
 import { GET_WATCHED_LOTS } from '../../../apollo/user/query';
 import { WATCH_TARGET_LOT } from '../../../apollo/user/mutation';
-import {
-	sweetMixinErrorAlert,
-	sweetTopSmallSuccessAlert,
-} from '../../sweetAlert';
+import { sweetMixinErrorAlert } from '../../sweetAlert';
 
 const MyWatchlist = ({ initialInput, ...props }: any) => {
 	const { t } = useTranslation('common');
@@ -51,7 +48,6 @@ const MyWatchlist = ({ initialInput, ...props }: any) => {
 
 			await watchTargetLot({ variables: { input: id } });
 			await getWatchedLotsRefetch({ input: searchFilter });
-			await sweetTopSmallSuccessAlert('success', 800);
 		} catch (err: any) {
 			console.log('ERROR, watchLotHandler: ', err.message);
 			sweetMixinErrorAlert(err.message).then();

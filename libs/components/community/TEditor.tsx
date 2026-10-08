@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import axios from 'axios';
@@ -270,7 +271,12 @@ const TEditor = ({ initialInput, ...props }: any) => {
 						className={`${optionProps.className} lot-option`}
 					>
 						{lot.lotImages?.[0] ? (
-							<img src={imagePath(lot.lotImages[0])} alt={lot.lotName} />
+							<Image
+								src={imagePath(lot.lotImages[0])}
+								alt={lot.lotName}
+								width={80}
+								height={64}
+							/>
 						) : (
 							<span className={'no-image'} />
 						)}

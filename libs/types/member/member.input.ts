@@ -1,10 +1,20 @@
 import { Direction } from '../../enums/common.enum';
-import { MemberSellerStatus, MemberStatus, MemberType } from '../../enums/member.enum';
+import {
+	MemberAuthType,
+	MemberSellerStatus,
+	MemberStatus,
+	MemberType,
+} from '../../enums/member.enum';
 
 export interface MemberInput {
 	memberNick: string;
 	memberPassword: string;
 	memberPhone: string;
+}
+
+export interface SocialLoginInput {
+	memberAuthType: MemberAuthType;
+	token: string;
 }
 
 export interface LoginInput {
