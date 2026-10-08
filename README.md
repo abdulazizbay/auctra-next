@@ -1,38 +1,86 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Auctra
+
+Frontend for **Auctra**, a live auction marketplace for pre-owned luxury watches, jewellery, art and collectibles.
+
+- Live: https://217-142-246-228.sslip.io
+- Backend: [auctra](https://github.com/abdulazizbay/auctra) (NestJS + GraphQL)
+
+## Features
+
+- **Lots**: filter, sort and search lots. The filters live in the URL, so a filtered list can be shared.
+- **Live bidding**: the lot page joins a WebSocket room, and the price, bid list and end time update for every viewer as bids come in. The page switches to sold or unsold the moment the lot closes.
+- **Ceiling price**: an optional buy-now price that closes the lot as soon as someone bids it.
+- **Watchlist and My Bids**: the My Bids list shows Winning or Outbid on open lots and Won or Lost on closed ones.
+- **Orders**: buyers pay (simulated), confirm receipt and leave a review. Sellers mark orders as shipped. Each order has a private chat between buyer and seller.
+- **Sellers**: users apply with a document, and admins approve them. Sellers list lots with up to 5 images.
+- **Member profiles**: seller lots and reviews, articles, followers, followings, likes and follows.
+- **Community**: articles with a rich text editor (Toast UI), comments and likes.
+- **Real-time**: notification bell, toasts, and a global chat lobby.
+- **Auth**: email/password, Google and Kakao sign-in.
+- **Admin panel**: members, seller approvals, lots, community, notices and FAQ.
+- **i18n**: English and Korean.
+
+## Tech Stack
+
+| Area | Tech |
+|---|---|
+| Framework | Next.js 14 (Pages Router), React 18, TypeScript |
+| UI | MUI v7, SCSS, Swiper |
+| Data | Apollo Client 3, GraphQL, `apollo-upload-client` |
+| Real-time | Native WebSocket with rooms and auto-reconnect |
+| i18n | `next-i18next` (`en`, `kr`) |
+| Images | `next/image` with `sharp` (resized WebP) |
+
+## Project Structure
+
+```
+pages/              routes (lot, community, seller, member, mypage, cs, _admin, account)
+libs/
+  components/       UI by feature (lot, homepage, mypage, community, member, layout, ...)
+  types/ enums/     mirror backend DTOs and enums
+  socket.ts         WebSocket client (one connection, rooms, backoff reconnect)
+  auth/             login, signup, logout, user info
+apollo/
+  client.ts         Apollo links: error → auth (Bearer) → upload
+  store.ts          reactive vars (userVar, socketVar, ...)
+  user/ admin/      queries and mutations
+scss/               styles by page, MUI-aligned breakpoints
+public/locales/     en / kr translations
+```
+
+- **Data flow**: page → `useQuery` / `useMutation` → GraphQL API. Live updates come in over the WebSocket and patch the page state.
+- **Auth**: the JWT is stored in `localStorage` and sent as `Authorization: Bearer`. The current member is kept in the `userVar` reactive var.
+- **SSR**: the MUI styles are rendered on the server through `@mui/material-nextjs`. Layout HOCs (`withLayoutMain`, `withLayoutBasic`, `withLayoutFull`) wrap each page.
 
 ## Getting Started
 
-First, run the development server:
+Requirements: Node.js, Yarn, and the [backend](https://github.com/abdulazizbay/auctra) running on `http://localhost:3009`.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+yarn
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create `.env.local`:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+REACT_APP_API_URL=http://localhost:3009
+REACT_APP_API_GRAPHQL_URL=http://localhost:3009/graphql
+REACT_APP_API_WS=ws://localhost:3009
+REACT_APP_GOOGLE_CLIENT_ID=
+REACT_APP_KAKAO_REST_KEY=
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+yarn dev
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Open http://localhost:3000.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Scripts
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+| Command | Description |
+|---|---|
+| `yarn dev` | Development server |
+| `yarn build` | Production build (`standalone` output) |
+| `yarn start` | Run the production build |
+| `yarn lint` | ESLint |
