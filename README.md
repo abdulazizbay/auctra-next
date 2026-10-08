@@ -84,3 +84,7 @@ Open http://localhost:3000.
 | `yarn build` | Production build (`standalone` output) |
 | `yarn start` | Run the production build |
 | `yarn lint` | ESLint |
+
+## Author
+
+Abdulaziz Khalilov ([@abdulazizbay](https://github.com/abdulazizbay))
