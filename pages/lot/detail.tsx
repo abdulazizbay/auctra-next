@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -438,7 +439,14 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 						<Stack className={'gallery'}>
 							<Stack className={'main-image'}>
 								{slideImage ? (
-									<img src={imagePath(slideImage)} alt={'main-image'} />
+									<Image
+										src={imagePath(slideImage)}
+										alt={'main-image'}
+										width={800}
+										height={800}
+										sizes="(max-width: 900px) 100vw, 600px"
+										priority
+									/>
 								) : (
 									<Stack className={'no-image'}>
 										<WatchOutlinedIcon />
@@ -469,7 +477,12 @@ const LotDetail: NextPage = ({ initialComment, initialBid, ...props }: any) => {
 												onClick={() => changeImageHandler(subImg)}
 												key={subImg}
 											>
-												<img src={imagePath(subImg)} alt={'sub-image'} />
+												<Image
+													src={imagePath(subImg)}
+													alt={'sub-image'}
+													width={152}
+													height={152}
+												/>
 											</Stack>
 										);
 									})}

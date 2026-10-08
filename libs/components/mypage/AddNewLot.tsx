@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import axios from 'axios';
@@ -334,7 +335,7 @@ const AddNewLot = ({ initialValues, ...props }: any) => {
 								: `${REACT_APP_API_URL}/${image}`;
 							return (
 								<Stack className="image-box" key={image}>
-									<img src={imagePath} alt="" />
+									<Image src={imagePath} alt="" width={240} height={240} />
 								</Stack>
 							);
 						})}

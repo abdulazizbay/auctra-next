@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import moment from 'moment';
 import { useTranslation } from 'next-i18next';
@@ -47,7 +48,12 @@ const OrderCard = (props: OrderCardProps) => {
 			>
 				<Stack className="image-box">
 					{imagePath ? (
-						<img src={imagePath} alt={lot?.lotName} />
+						<Image
+							src={imagePath}
+							alt={lot?.lotName ?? ''}
+							width={128}
+							height={128}
+						/>
 					) : (
 						<WatchOutlinedIcon />
 					)}

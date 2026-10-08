@@ -1,7 +1,21 @@
+const apiUrl = new URL(
+	process.env.REACT_APP_API_URL || 'http://localhost:3009',
+);
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
 	output: 'standalone',
+	images: {
+		remotePatterns: [
+			{
+				protocol: apiUrl.protocol.replace(':', ''),
+				hostname: apiUrl.hostname,
+				port: apiUrl.port,
+				pathname: '/uploads/**',
+			},
+		],
+	},
 	experimental: {
 		esmExternals: false,
 	},

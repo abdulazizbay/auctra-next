@@ -50,7 +50,7 @@ const CommunityCard = (props: CommunityCardProps) => {
 			>
 				<Box component={'div'} className="horizontal-card">
 					{articleImage ? (
-						<img src={articleImage} alt="" />
+						<img src={articleImage} alt="" loading="lazy" decoding="async" />
 					) : (
 						<div className={'no-image-box'}>
 							<ArticleOutlinedIcon />

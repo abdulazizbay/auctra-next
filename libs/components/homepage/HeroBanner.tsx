@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useQuery } from '@apollo/client';
@@ -111,7 +112,14 @@ const HeroBanner = () => {
 							className={'hero-feature'}
 						>
 							{imagePath ? (
-								<img src={imagePath} alt={featuredLot.lotName} />
+								<Image
+									src={imagePath}
+									alt={featuredLot.lotName}
+									width={800}
+									height={800}
+									sizes="(max-width: 900px) 100vw, 50vw"
+									priority
+								/>
 							) : (
 								<div className={'no-image'}>
 									<WatchOutlinedIcon />

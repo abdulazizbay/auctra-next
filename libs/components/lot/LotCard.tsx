@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import moment from 'moment';
 import { useTranslation } from 'next-i18next';
@@ -61,7 +62,13 @@ const LotCard = (props: LotCardType) => {
 			<Stack className="top">
 				<Link href={{ pathname: '/lot/detail', query: { id: lot?._id } }}>
 					{imagePath ? (
-						<img src={imagePath} alt={lot.lotName} />
+						<Image
+							src={imagePath}
+							alt={lot.lotName}
+							width={400}
+							height={400}
+							sizes="(max-width: 600px) 50vw, 320px"
+						/>
 					) : (
 						<Stack className={'no-image'}>
 							<WatchOutlinedIcon />

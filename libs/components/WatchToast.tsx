@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useReactiveVar } from '@apollo/client';
@@ -68,7 +69,7 @@ const WatchToast = () => {
 			<div className={'wt-body'}>
 				<div className={'thumb'}>
 					{imagePath ? (
-						<img src={imagePath} alt={lot.lotName} />
+						<Image src={imagePath} alt={lot.lotName} width={104} height={104} />
 					) : (
 						<WatchOutlinedIcon />
 					)}
