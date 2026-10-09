@@ -2,7 +2,6 @@
 
 Frontend for **Auctra**, a live auction marketplace for pre-owned luxury watches, jewellery, art and collectibles.
 
-- Live: https://217-142-246-228.sslip.io
 - Backend: [auctra](https://github.com/abdulazizbay/auctra) (NestJS + GraphQL)
 
 ## Features
