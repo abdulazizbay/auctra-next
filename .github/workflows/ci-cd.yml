@@ -1,0 +1,28 @@
+name: ci-cd
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_TELEMETRY_DISABLED: 1
+      REACT_APP_API_URL: http://localhost:3009
+      REACT_APP_API_GRAPHQL_URL: http://localhost:3009/graphql
+      REACT_APP_API_WS: ws://localhost:3009
+      REACT_APP_SITE_URL: http://localhost:3000
+      REACT_APP_GOOGLE_CLIENT_ID: ci-placeholder
+      REACT_APP_KAKAO_REST_KEY: ci-placeholder
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      - run: yarn install --frozen-lockfile
+
+      - run: yarn build
